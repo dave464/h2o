@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 02, 2022 at 11:24 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: localhost:3307
+-- Generation Time: Feb 05, 2022 at 03:42 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `h2order`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `number_of_items` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,9 +56,9 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `email`, `contact_number`) VALUES
-(1, 'rangel', 'rangel', 'ivane', 'rangel', 'Brgy. Wawa Nasugbu,Batangas', 'rangelivane@gmail.com', '09051934015'),
-(2, 'rangel', 'rangel', 'ivane', 'rangel', 'Brgy. Wawa Nasugbu,Batangas', 'rangelivane@gmail.com', '09051934015'),
-(3, 'dave', '111', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015');
+(3, 'dave', '111', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015'),
+(4, 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty@gmail.com', '09666473909'),
+(5, 'qwerty2', 'qwerty', 'qwerty2', 'qwerty2', '123 street', 'qwerty2@gmail.com', '12345');
 
 -- --------------------------------------------------------
 
@@ -69,9 +81,9 @@ CREATE TABLE `deliveryman` (
 --
 
 INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`) VALUES
-(3, 1, 'Dave Bryan Sevilla', 'wewe', 'wewe', 'DBS666', '09051934015'),
-(4, 1, 'Dave Bryan Sevilla', 'wawa', 'wawa', 'DBS666', '09051934015'),
-(5, 3, 'Dave Bryan Sevilla', 'driver', 'driver', 'DBS666', '09051934015');
+(5, 3, 'Dave Bryan Sevilla', 'driver', 'driver', 'DBS666', '09051934015'),
+(6, 1, 'qwerty', 'del1', 'del1', '123', '123'),
+(7, 2, 'del3', 'del3', 'del3', '123', '123');
 
 -- --------------------------------------------------------
 
@@ -96,12 +108,26 @@ CREATE TABLE `merchant` (
 --
 
 INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `email`, `contact_number`, `image`) VALUES
-(1, 'merchant', 'merchant', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
-(2, 'merchant', 'merchant', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
-(3, 'seller', 'seller', 'gibuts', 'Kurt Michael Relano', 'Brgy.Bucana Nasugbu, Batangas', 'kurtrelano@gmail.com', '09982334561', 'DM.gif'),
-(4, 'seller', 'seller', 'gibuts', 'Kurt Michael Relano', 'Brgy.Bucana Nasugbu, Batangas', 'kurtrelano@gmail.com', '09982334561', 'DM.gif'),
-(5, 'seller1', '123', 'mineral', 'Ivane Kielle Rangel', 'Brgy.Wawa Nasugbu, Batangas', 'ivanekielle.rangel@g.batstate-u.edu.ph', '09051934015', 'DM.gif'),
-(6, 'seller2', '123', 'TUBIG', 'Dave Bryan Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@gmail.com', '09051934015', 'DM.gif');
+(1, 'merchant', 'merchant', 'test', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
+(2, 'merchant2', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderlist`
+--
+
+CREATE TABLE `orderlist` (
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `merchant_id` int(11) NOT NULL,
+  `deliveryman_id` int(11) DEFAULT NULL,
+  `status` text NOT NULL,
+  `quantity` text NOT NULL,
+  `total` int(11) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -125,13 +151,36 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_type`, `price`, `image`, `description`) VALUES
 (1, 1, 'wineral', 'Mineral Water', 150, 'mineralwater_logo.JPG', '1 liters'),
-(2, 1, 'asf', 'Purified Water', 120, 'DM.gif', 'jakjsdas'),
+(2, 1, 'prod', 'Purified Water', 120, 'DM.gif', 'jakjsdas'),
 (3, 1, 'asf', 'Purified Water', 200, 'DM.gif', 'DSAD'),
-(4, 3, 'wineral', 'Distilled Water', 100, 'DM.gif', 'dkja');
+(4, 2, 'wineral', 'Distilled Water', 100, 'DM.gif', 'dkja');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `merchant_id` int(11) NOT NULL,
+  `deliveryman_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `customer`
@@ -152,26 +201,44 @@ ALTER TABLE `merchant`
   ADD PRIMARY KEY (`merchant_id`);
 
 --
+-- Indexes for table `orderlist`
+--
+ALTER TABLE `orderlist`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`transaction_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `deliveryman`
 --
 ALTER TABLE `deliveryman`
-  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `merchant`
@@ -180,10 +247,22 @@ ALTER TABLE `merchant`
   MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `orderlist`
+--
+ALTER TABLE `orderlist`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
