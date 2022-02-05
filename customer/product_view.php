@@ -45,6 +45,9 @@ require '../connection.php';
               FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product_id = '".$_REQUEST['product_id']."'") or die(mysqli_error());
              
  ?>
+ <form action="addcart.php" method="POST" enctype="multipart/form-data" >
+   <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
+   <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
       <div style="border:1px solid #FFF;width:98%;margin:5px;float:left;background-color:#FFF;padding-bottom:50px"><center>
         <div class="slideshow-container">
           <div class="mySlides fade">  
@@ -59,10 +62,10 @@ require '../connection.php';
             
             <center><br>Ratings:<br><span style="font-size:200%;color:#CCCC00;margin:20px">&starf;</span></center>
             <center><br>Enter Quantity:<br><span style="font-size:200%;color:#CCCC00;margin:20px">
-            <input type="number" name="number" class="email" id="number" style="text-align:center"></span></center>
-            <center><br><a onclick="addcart();" class="myButton" style="color:#000">Add to Cart</a><br><br>
+            <input type="number" name="number_of_items" class="email" id="number" style="text-align:center"></span></center>
+            <center><br><button type="submit" name="submit" onclick="addcart();" class="myButton" style="color:#000">Add to Cart</button><br><br>
 
-              Rate Product<br>
+              <!-- Rate Product<br>
 
           <select name="rate" id="rate" class="email">
             <option></option>
@@ -72,8 +75,8 @@ require '../connection.php';
           <option value="4"><span style="font-size:200%;color:#CCCC00;margin:20px">&starf;&starf;&starf;&starf;</span></option>
           <option value="5"><span style="font-size:200%;color:#CCCC00;margin:20px">&starf;&starf;&starf;&starf;&starf;</span></option>
         </select>
-        <center><br><a onclick="rateproduct();" class="myButton" style="color:#000">Rate Product</a></div>
-  
+        <center><br><a onclick="rateproduct();" class="myButton" style="color:#000">Rate Product</a></div> -->
+</form>
 
        
  
@@ -85,9 +88,8 @@ require '../connection.php';
       
       if(number=="") {
         alert("Please enter quantity first");
-      } else {
-        window.location='addcart.php?product_id=<?php echo $fetch['product_id']?>&number='+number+' &customer_id=<?php echo $_SESSION['customer_id']?>';
       }
+
       
     }
     function addpurchase() {
@@ -307,7 +309,7 @@ body {
   -webkit-filter: blur(5px);    
 }
 
-form input, form button {
+/* form input, form button {
   width: 87%;
   border: 1px solid;
   border-bottom-color: rgba(255,255,255,.5);
@@ -359,7 +361,7 @@ form button {
   border-bottom-color: #1b4849;
   border-right-color: #1e4d4e;
   cursor: pointer;
-}
+} */
 p {
 color:#FFF;
 }
