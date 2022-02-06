@@ -54,7 +54,7 @@ require '../connection.php';
  ?>
 
         <tr>  
-            <td><?php echo $fetch['name']?></td>
+            <td><?php echo $fetch['product_name']?></td>
             <td><?php echo $fetch['business_name']?></td>
             <td><?php echo $fetch['name']?></td>
             <td><?php echo $fetch['quantity']?></td>

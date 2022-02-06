@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Feb 05, 2022 at 03:42 PM
+-- Generation Time: Feb 05, 2022 at 04:33 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -126,7 +126,7 @@ CREATE TABLE `orderlist` (
   `status` text NOT NULL,
   `quantity` text NOT NULL,
   `total` int(11) NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -169,7 +169,7 @@ CREATE TABLE `transactions` (
   `deliveryman_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `total` int(11) NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

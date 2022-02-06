@@ -43,7 +43,7 @@ require '../connection.php';
           <!-- <center>
             <div class="slideshow-container">
               <div class="mySlides fade">  
-                <img src="../photo/<?php echo $fetch['image']?>" style="width:100%;height:350px" onclick="window.location='../photo/<?php echo $fetch['image']?>'">
+                <img src="../photo/<?php echo $fetch['image']?>" style="width:100%;height:350px" ="window.location='../photo/<?php echo $fetch['image']?>'">
             </div>
                 <a class="prev" onclick="plusSlides(-1)" style="left:0">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a></div>
