@@ -117,16 +117,18 @@ INSERT INTO merchant (merchant_id, username, password, business_name, owner, add
 -- Table structure for table orderlist
 --
 
-CREATE TABLE orderlist (
-  order_id int(11) NOT NULL,
-  product_id int(11) NOT NULL,
-  customer_id int(11) NOT NULL,
-  merchant_id int(11) NOT NULL,
-  deliveryman_id int(11) DEFAULT NULL,
-  status text NOT NULL,
-  quantity text NOT NULL,
-  total int(11) NOT NULL,
-  date timestamp NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `orderlist` (
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `merchant_id` int(11) NOT NULL,
+  `deliveryman_id` int(11) DEFAULT NULL,
+  `status` text NOT NULL,
+  `quantity` text NOT NULL,
+  `total` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -161,6 +163,7 @@ INSERT INTO product (product_id, merchant_id, product_name, product_type, price,
 -- Table structure for table transactions
 --
 
+
 CREATE TABLE transactions (
   transaction_id int(11) NOT NULL,
   product_id int(11) NOT NULL,
@@ -170,6 +173,7 @@ CREATE TABLE transactions (
   quantity int(11) NOT NULL,
   total int(11) NOT NULL,
   date timestamp NOT NULL DEFAULT current_timestamp()
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
