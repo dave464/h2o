@@ -21,7 +21,6 @@ require '../connection.php';
        
 
 
-<img src="../../img/man.gif" width="50%">
 
 
 

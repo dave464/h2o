@@ -16,7 +16,7 @@ require '../connection.php';
     </head>
 
 
-    <body style="background-image:url('../img/bg.jpg');background-size:100% 100%;background-repeat:no-repeat;background-attachment:fixed">
+    <body>
         
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
