@@ -20,7 +20,7 @@ require_once '../connection.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
     <body>
     <div class="wrapper">
-    <div class="logo"> <img src="../img/man.gif" alt=""> </div>
+    <div class="logo"> <img src="../img/DM.gif" alt=""> </div>
     <div class="text-center mt-4 name"> Delivery Man </div>
     <form action="login.php" method="POST" class="p-3 mt-3">
         <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span>

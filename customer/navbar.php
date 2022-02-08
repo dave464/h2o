@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="../main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
          <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
@@ -15,10 +15,13 @@
         
         <!-- header -->
         <header class = "header" id = "header">
-            <div class = "head-top">
-                <div class = "site-name">
+<img src="../img/h2logo.PNG"  style="width: 45px;height: 45px;">
+            <div class = "head-top"  style="margin-top: -45px; margin-left: 50px;">
+        
+                <div class = "site-name" >
+
                     <span style="font-size:30px;
-                    font-family: merienda;">H2Order</span>
+                    font-family: merienda;"> H2Order</span>
                 </div>
                 <div class = "site-nav">
                     <span id = "nav-btn"><i class = "fas fa-bars"></i></span>
@@ -39,7 +42,7 @@
                 <li>
                 <a href = "../customer/home.php">
                     <i class='bx bxs-home' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
-                    </i> Home</a>
+                    </i>  Home</a>
                 </li>
 
                  <li>
@@ -89,8 +92,8 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-   font-family: sans-serif;
-   color:white;
+    font-family: "Poppins", sans-serif;
+   
 }
 html{
     scroll-behavior: smooth;
@@ -124,9 +127,9 @@ html{
 .header{
     background: no-repeat;
     min-height: 8vh;
-    color: white;
+   
     
-    padding: 25px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-content: stretch;
@@ -193,7 +196,7 @@ html{
 
 /* side nav */
 .sidenav{
-    background: skyblue ;
+    background: skyblue !important ;
     color: black;
     position: fixed;
     top: 0;
@@ -221,20 +224,23 @@ html{
     opacity: 0.7;
 }
 .navbar{
-    margin-top: 50px;
+    margin-top: 5px;
     list-style: none;
-    padding: 12px;
+    padding: 20px;
+
 }
 .navbar li a{
     color: black;
     text-transform: capitalize;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
     display: block;
-    border-bottom: 0.5px solid rgba(249, 211, 66, 0.3);
+   border-radius: 10px;
     opacity: 0.8;
     letter-spacing: 1.5px;
     transition: var(--transition);
+    width: 200px;
+    font-weight: 500;
 }
 .navbar li a:hover{
     padding-left: 12px;
