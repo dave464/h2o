@@ -41,7 +41,7 @@
             <ul class = "navbar">
                 <li>
                 <a href = "../customer/home.php">
-                    <i class='bx bxs-home' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    <i class='fa fa-home '  style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i>  Home</a>
                 </li>
 
