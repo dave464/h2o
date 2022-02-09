@@ -196,7 +196,8 @@ html{
 
 /* side nav */
 .sidenav{
-    background: skyblue !important ;
+    background: rgb(79,195,247);
+    background: linear-gradient(90deg, rgba(79,195,247,1) 49%, rgba(255,255,255,1) 100%);
     color: black;
     position: fixed;
     top: 0;
