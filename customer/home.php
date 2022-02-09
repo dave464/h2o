@@ -31,7 +31,7 @@ require '../connection.php';
 <div  >
 
 
- <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">Find the best Water Refilling Station near you</p>
+ <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">FIND THE BEST WATER REFILLING STATION NEAR YOU</p>
 
 <div class="container">
     <div class="row height d-flex justify-content-center align-items-center">
