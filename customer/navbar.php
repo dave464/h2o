@@ -15,7 +15,7 @@
         
         <!-- header -->
         <header class = "header" id = "header">
-<img src="../img/h2logo.PNG"  style="width: 45px;height: 45px;">
+<img src="../img/h2logo.png"  style="width: 45px;height: 45px;">
             <div class = "head-top"  style="margin-top: -45px; margin-left: 50px;">
         
                 <div class = "site-name" >
