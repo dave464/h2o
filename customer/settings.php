@@ -104,15 +104,16 @@ require '../connection.php';
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button style="width:250px;" type="submit" name="editProfile" class="btn btn-primary btn-lg">Save Changes</button>
                   </div>
-
+                  </form>
 <hr style="color:black;">
 <p class="text-left h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">Change Password</p>
 
+            <form class="mx-1 mx-md-4" action="change-pass.php?customer_id=<?php echo $_SESSION['customer_id']?>" method="POST" enctype="multipart/form-data">
                   <label class="labels" style=" font-size: 11px; margin-left:50px;">Current Password</label>
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Current Password"/>
+                      <input type="password" name="op" id="form3Example4c" class="form-control" placeholder="Current Password"/>
 
                     </div>
                   </div>
@@ -121,7 +122,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="New Password"/>
+                      <input type="password" name="np" id="form3Example4c" class="form-control" placeholder="New Password"/>
 
                     </div>
                   </div>
@@ -130,13 +131,13 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Confirm Password"/>
+                      <input type="password" name="c_np" id="form3Example4c" class="form-control" placeholder="Confirm Password"/>
 
                     </div>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="width:250px;" type="submit" name="" class="btn btn-primary btn-lg">Update Password</button>
+                    <button style="width:250px;" type="upPass" name="" class="btn btn-primary btn-lg">Update Password</button>
                   </div>
                 </form>
 
