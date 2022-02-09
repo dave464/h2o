@@ -45,7 +45,7 @@ require '../connection.php';
 
                 <p class="text-left h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">Personal Information</p>
 
-                <form class="mx-1 mx-md-4" action="" method="POST" enctype="multipart/form-data">
+                <form class="mx-1 mx-md-4" action="settings_query.php?customer_id=<?php echo $fetch['customer_id']?>" method="POST" enctype="multipart/form-data">
 
                   <label class="labels" style=" font-size: 11px; margin-left:50px;">Username</label>
                 <div class="d-flex flex-row align-items-center mb-2">
@@ -69,7 +69,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="first_name" value="<?php echo $fetch['firstname']?>" id="form3Example3c" class="form-control" placeholder="First Name"/>
+                      <input type="text" name="firstname" value="<?php echo $fetch['firstname']?>" id="form3Example3c" class="form-control" placeholder="First Name"/>
 
                     </div>
                   </div>
@@ -78,7 +78,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="last_name" value="<?php echo $fetch['lastname']?>" id="form3Example3c" class="form-control" placeholder="Last Name"/>
+                      <input type="text" name="lastname" value="<?php echo $fetch['lastname']?>" id="form3Example3c" class="form-control" placeholder="Last Name"/>
 
                     </div>
                   </div>
@@ -102,7 +102,7 @@ require '../connection.php';
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="width:250px;" type="submit" name="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                    <button style="width:250px;" type="submit" name="editProfile" class="btn btn-primary btn-lg">Save Changes</button>
                   </div>
 
 <hr style="color:black;">
@@ -136,7 +136,7 @@ require '../connection.php';
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="width:250px;" type="submit" name="submit" class="btn btn-primary btn-lg">Update Password</button>
+                    <button style="width:250px;" type="submit" name="" class="btn btn-primary btn-lg">Update Password</button>
                   </div>
                 </form>
 

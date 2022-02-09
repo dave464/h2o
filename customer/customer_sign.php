@@ -62,7 +62,7 @@ require_once '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="first_name" id="form3Example3c" class="form-control" placeholder="First Name"/>
+                      <input type="text" name="firstname" id="form3Example3c" class="form-control" placeholder="First Name"/>
 
                     </div>
                   </div>
@@ -71,7 +71,7 @@ require_once '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="last_name" id="form3Example3c" class="form-control" placeholder="Last Name"/>
+                      <input type="text" name="lastname" id="form3Example3c" class="form-control" placeholder="Last Name"/>
 
                     </div>
                   </div>
