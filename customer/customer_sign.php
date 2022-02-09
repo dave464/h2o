@@ -20,7 +20,7 @@ require_once '../connection.php';
 
 <body>
 
-<div class="vh-100" style="background-color: #eee;">
+<div class="vh-200" style="background-color: #eee;">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">

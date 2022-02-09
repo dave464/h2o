@@ -18,8 +18,10 @@ require_once '../connection.php';
     <body >
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <?php include 'navbar.php' ?>
-      <center>
-      <h1 style="color:#000;margin:5px;margin-left:15px">Payment</h1>
+      <center> 
+      <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PAYMENT
+      </p>
         <div class="container">
         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
