@@ -97,7 +97,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Password"/>
+                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Old Password"/>
 
                     </div>
                   </div>
@@ -105,7 +105,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Password"/>
+                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="New Password"/>
 
                     </div>
                   </div>
@@ -113,7 +113,7 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Password"/>
+                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Confirm Password"/>
 
                     </div>
                   </div>
