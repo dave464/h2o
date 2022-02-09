@@ -14,7 +14,7 @@ require '../connection.php';
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
-    <body>
+    <body  style="background-image:url('../img/bg.jpg');background-size:100% 100%;background-repeat:no-repeat;background-attachment:fixed">
         
       <!-- Navbar-->
       <?php include 'navbar.php' ?>

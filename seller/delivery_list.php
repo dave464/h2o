@@ -9,20 +9,37 @@ require '../connection.php';
     <head>
         <meta charset="utf-8">
         <title>Delivery List</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
 
     <body  style="background-image:url('../img/bg.jpg');background-size:100% 100%;background-repeat:no-repeat;background-attachment:fixed" >
-        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
        
       <center>
       <h1 style="color:#FFF;margin:5px;margin-left:15px">Delivery List</h1>
-  <div class="container" >    
+  <div class="container" >   
+  <div class="table-responsive">
+
+<table class="table">
+<thead>
+<tr id="tr">
+    <!-- <th  scope="col">#</th> -->
+    <th class="col" scope="col">PRODUCT NAME</th>
+    <th scope="col">DELIVERY MAN</th>
+    <th scope="col">PRICE</th>
+    <th scope="col">QUANTITY</th>
+    <th scope="col">TOTAL TO PAY</th>
+    <th scope="col">STATUS</th>
+    <th scope="col">DATE</th>
+  </tr>
+</thead> 
+<tbody> 
 <?php
   $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
   product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, 
@@ -34,28 +51,24 @@ require '../connection.php';
   ") or die(mysqli_error());
   while($fetch = $queryy->fetch_array()){
 ?>
-    <form action="action.php" method="POST" enctype="multipart/form-data" >
-      <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
-      <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-      <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
-      <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
-      <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
-      <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
-              <div class="list">
+      <tr id="tr2">
+      <!-- <th class="align-middle" scope="row">1</th> -->
+      <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
+      <td class="align-middle"><?php echo strtoupper($fetch['delname'])?></td>
+      <td class="align-middle"> &#8369;<?php echo $fetch['price']?>.00</td>
+      <td class="align-middle"><?php echo $fetch['quantity']?></td>
+      <td class="align-middle">&#8369; <?php echo $fetch['quantity'] * $fetch['price']?>.00</td>
+      <td class="align-middle"><?php echo strtoupper($fetch['status'])?></td>
+      <td class="align-middle"><?php echo $fetch['date']?></td>
+    </tr>
 
-                <h5>Product: <?php echo strtoupper($fetch['product_name'])?></h5>
-                <h5>Delivery Man: <?php echo strtoupper($fetch['delname'])?></h5>
-                <h5>Price:  &#8369; <?php echo $fetch['price']?></h5>
-                <h5>Quantity: <?php echo $fetch['quantity']?></h5>
-                <h5>Total To Pay: &#8369; <?php echo $fetch['quantity'] * $fetch['price']?></h5>
-                <h5>Status: <?php echo strtoupper($fetch['status'])?></h5>
-                <h5>Date: <?php echo strtoupper($fetch['date'])?></h5>
-            </div>
-    </form>
 <?php
        }
     ?>
+     </tbody>
+</table>
 
+</div>
 </div>
 
 
