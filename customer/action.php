@@ -19,11 +19,28 @@ require '../connection.php';
         $merchant_id = $_POST['merchant_id'];
         $quantity = $_POST['quantity'];
         $total = $_POST['total'];
+        $type = $_POST['type'];
+
+        // echo ("<script>
+        // alert('$product_id');
+        // </script>");
 
 
-        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total) 
-        VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total' )") 
+        if($_FILES) {
+        $image = addslashes(file_get_contents($_FILES['photos']['tmp_name']));
+		$photo_name = addslashes($_FILES['photos']['name']);
+		$photo_size = getimagesize($_FILES['photos']['tmp_name']);
+		move_uploaded_file($_FILES['photos']['tmp_name'],"upload/" . $_FILES['photos']['name']);
+
+        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo) 
+        VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type','$photo_name' )") 
         or die(mysqli_error());
+
+        } else {
+            $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type) 
+            VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type')") 
+            or die(mysqli_error());
+        }
 
         $conn->query("DELETE FROM `cart` WHERE `product_id`= $product_id  && `customer_id` = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         echo ("<script>

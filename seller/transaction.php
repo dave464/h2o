@@ -9,39 +9,37 @@ require '../connection.php';
     <head>
         <meta charset="utf-8">
         <title>Transactions</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
     <body style="background-image:url('../img/bg.jpg');background-size:100% 100%;background-repeat:no-repeat;background-attachment:fixed">
-        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
 
 
        <center>
-       <div class="content">
-          
-<h2>Transactions</h2>
-<br>
-<center>
-<!-- <input type="button" value="Add Delivery Man" class="myButton" onclick="window.location='add_deliveryman.php'"> -->
-    <br><br>
-    <div class="datagrid">
-    <table>
-    <thead>
-      <tr>
-        <th><center>Product Name</th>
-        <th><center>Seller</th>
-        <th><center>Delivery Man</th>
-        <th><center>Quantity</th>
-        <th><center>Unit Price</th>
-        <th><center>Total</th>
-        <th><center>Date</th>
-      </tr>
-      </thead>
-      <tbody>
+       <h1 style="color:#FFF;margin:5px;margin-left:15px">TRANSACTIONS</h1>
+       <div class="container" > 
+  <div class="table-responsive">
+
+<table class="table">
+<thead>
+  <tr id="tr">
+    <!-- <th  scope="col">#</th> -->
+    <th class="col" scope="col">PRODUCT NAME</th>
+    <th scope="col">SELLER</th>
+    <th scope="col">DELIVERY MAN</th>
+    <th scope="col">QUANTITY</th>
+    <th scope="col">UNIT PRICE</th>
+    <th scope="col">TOTAL</th>
+    <th scope="col">DATE</th>
+  </tr>
+</thead> 
+<tbody>   
 
    <?php  
    $query = $conn->query("SELECT product.product_name, product.price, merchant.business_name,deliveryman.name,
@@ -54,13 +52,13 @@ require '../connection.php';
  ?>
 
         <tr>  
-            <td><?php echo $fetch['product_name']?></td>
-            <td><?php echo $fetch['business_name']?></td>
-            <td><?php echo $fetch['name']?></td>
-            <td><?php echo $fetch['quantity']?></td>
-            <td><?php echo $fetch['price']?></td>
-            <td><?php echo $fetch['total']?></td>
-            <td><?php echo $fetch['date']?></td>
+            <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
+            <td class="align-middle"><?php echo strtoupper($fetch['business_name'])?></td>
+            <td class="align-middle"><?php echo strtoupper($fetch['name'])?></td>
+            <td class="align-middle"><?php echo $fetch['quantity']?></td>
+            <td class="align-middle"> &#8369; <?php echo $fetch['price']?>.00</td>
+            <td class="align-middle"> &#8369; <?php echo $fetch['total']?>.00</td>
+            <td class="align-middle"><?php echo $fetch['date']?></td>
 
            </tr> 
 
@@ -78,10 +76,20 @@ require '../connection.php';
 
 
 <style>
-*{
-  color:white;
+
+.container {
+  background-color: white;
+  color:black;
 }
 
+td{
+    //font-size: 10px;
+    white-space: nowrap;
+  }
+  th {
+    //font-size: 10px;
+    white-space: nowrap;
+  }
 h2 {
     background-color: #ADD8E6;
     padding:13px;

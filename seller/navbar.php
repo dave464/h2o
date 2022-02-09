@@ -93,7 +93,10 @@
     padding: 0;
     margin: 0;
    font-family: sans-serif;
-   color:black;
+
+}
+body {
+    color:white;
 }
 html{
     scroll-behavior: smooth;
