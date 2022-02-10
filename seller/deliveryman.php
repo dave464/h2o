@@ -25,57 +25,17 @@ require '../connection.php';
       style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">DELIVERY MAN
       </p>
 
-      <!-- <center>
-       <div class="content">
-          
-
-<br>
-<center>
-<input type="button" value="Add Delivery Man" class="myButton" onclick="window.location='add_deliveryman.php'">
-    <br><br>
-    <div class="datagrid">
-    <table>
-    <thead>
-      <tr>
-        <th><center>Name</th>
-        <th><center>Contact Number</th>
-        <th><center>Plate Number</th>
-        <th><center>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-
-   <?php  
-   $query = $conn->query("SELECT deliveryman.deliveryman_id, deliveryman.name,deliveryman.contact_number,
-   deliveryman.plate_number, merchant.merchant_id
-              FROM merchant RIGHT JOIN deliveryman ON merchant.merchant_id = deliveryman.merchant_id WHERE  deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
-              while($fetch = $query->fetch_array()){
- ?>
-
-        <tr>  
-          
-            <td><?php echo $fetch['name']?></td>
-            <td><?php echo $fetch['contact_number']?></td>
-            <td><?php echo $fetch['plate_number']?></td>
-            <td><center><a style="color:red;" href="deleteman.php?">Delete</a></td>
-
-           </tr> 
-
-        <?php
-            }
-          ?>  
-
-      </tbody>
-    </table>
-      </div>-->
-  
+      
+  <!---- SECTION Start---->
       <section style="margin-top:-30px;" >
   <div class="container py-5">
   
-  <button class="btn btn-primary" style="float:left; width:200px;">Add Delivery man</button>
+  <button class="btn btn-primary" style="float:left; width:200px;" 
+  onclick="window.location='add_deliveryman.php'">Add Delivery man
+  </button>
   
 
-    <table class="table " style="width:100%">
+    <table class="table " >
   <thead class="table-dark">
   <tr>
         <th>Name</th>
