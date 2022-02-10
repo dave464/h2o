@@ -11,7 +11,10 @@ require '../connection.php';
 		
 
 	$conn->query("INSERT INTO `deliveryman`(merchant_id, name, contact_number, plate_number, username, password) VALUES('$merchant_id','$name','$contact_number','$plate_number','$username','$password')") or die(mysqli_error());
-		header("location:deliveryman.php");
+	echo ("<script>
+	alert('Deliverman's Account Created Successfully');
+	document.location.href = 'deliveryman.php';
+	</script>");
 	}
 
 
