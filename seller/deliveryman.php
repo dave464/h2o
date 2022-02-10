@@ -75,7 +75,7 @@ require '../connection.php';
   <button class="btn btn-primary" style="float:left; width:200px;">Add Delivery man</button>
   
 
-    <table class="table ">
+    <table class="table " style="width:100%">
   <thead class="table-dark">
   <tr>
         <th>Name</th>
@@ -96,8 +96,10 @@ require '../connection.php';
             <td><?php echo $fetch['name']?></td>
             <td><?php echo $fetch['contact_number']?></td>
             <td><?php echo $fetch['plate_number']?></td>
-            <td><i class="material-icons" type="submit" name="delDel" style="color:red"
-            href="add_query_deliveryman.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>">delete</i></td>
+            <td><a href="add_query_deliveryman.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" onclick = "confirmationDelete(this); return false;"><input type="submit" style="background-color:red; border:none;border-radius: 25px;
+            box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff; color:white; height: 25px; width:70px;"
+              value="Delete"></a>
+            </td>
 
            </tr> 
 
@@ -115,6 +117,14 @@ require '../connection.php';
 </section>
 <!--------- SECTION END-------->
   
+<script type = "text/javascript">
+	function confirmationDelete(anchor){
+		var conf = confirm("Are you sure you want to delete this record?");
+		if(conf){
+			window.location = anchor.attr("href");
+		}
+	} 
+</script>
 
     </body>
 </html>
