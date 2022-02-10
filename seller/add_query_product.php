@@ -13,6 +13,9 @@ require '../connection.php';
 		$photo_size = getimagesize($_FILES['photo']['tmp_name']);
 		move_uploaded_file($_FILES['photo']['tmp_name'],"../photo/" . $_FILES['photo']['name']);
 		$conn->query("INSERT INTO `product` (merchant_id,product_name,product_type,description,price,image) VALUES('$merchant_id','$product_name','$product_type','$description','$price','$photo_name')") or die(mysqli_error());
-		header("location:product_list.php");
+		echo ("<script>
+		alert('Product Added Successfully');
+		document.location.href = 'product_list.php';
+		</script>");
 	}
 ?>
