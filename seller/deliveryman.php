@@ -56,7 +56,7 @@ require '../connection.php';
             <td><?php echo $fetch['name']?></td>
             <td><?php echo $fetch['contact_number']?></td>
             <td><?php echo $fetch['plate_number']?></td>
-            <td><a href="add_query_deliveryman.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" onclick = "confirmationDelete(this); return false;"><input type="submit" style="background-color:red; border:none;border-radius: 25px;
+            <td><a href="del_deliveryman.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" onclick = "confirmationDelete(this); return false;"><input type="submit" name="del" style="background-color:red; border:none;border-radius: 25px;
             box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff; color:white; height: 25px; width:70px;"
               value="Delete"></a>
             </td>
