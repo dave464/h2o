@@ -20,4 +20,29 @@ require '../connection.php';
         document.location.href = 'home.php';
         </script>");
 	}
+
+
+///////////-------------EDIT DELIVERYMAN'S ACCOUNT ------------/////
+  if(ISSET($_POST['editProfile'])){
+
+    $name= $_POST['name'];
+		$contact_number = $_POST['contact_number'];
+		$plate_number = $_POST['plate_number'];
+		$username = $_POST['username'];
+  
+
+$conn->query("UPDATE `deliveryman` SET `username` = '$username', `name` = '$name', `contact_number` = '$contact_number'
+  , `plate_number` = '$plate_number' WHERE `deliveryman_id` = '".$_REQUEST['deliveryman_id']."'") or die(mysqli_error());
+  
+  echo ("<script>
+    alert('Your Personal Information has been Update successfully');
+    document.location.href = 'settings.php';
+    </script>");
+  }
+
+
+
+
+
+
 ?>
