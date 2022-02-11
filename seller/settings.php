@@ -28,7 +28,7 @@ require '../connection.php';
 
       
       <?php
-            $query = $conn->query("SELECT * FROM `merchant`") or die(mysqli_error());
+            $query = $conn->query("SELECT * FROM `merchant` WHERE `merchant_id` = '$_SESSION[merchant_id]'") or die(mysqli_error());
             $fetch = $query->fetch_array();
           ?>  
 
@@ -46,7 +46,7 @@ require '../connection.php';
                 <p class="text-left h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">Personal Information</p>
 
                 <form class="mx-1 mx-md-4" action="settings_merchant_query.php?merchant_id=<?php echo $fetch['merchant_id']?>" method="POST" enctype="multipart/form-data">
-
+                  <inputz>
                   <label class="labels" style=" font-size: 11px; margin-left:50px;">Username</label>
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>

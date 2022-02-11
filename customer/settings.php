@@ -28,7 +28,7 @@ require '../connection.php';
 
       
       <?php
-            $query = $conn->query("SELECT * FROM `customer`") or die(mysqli_error());
+            $query = $conn->query("SELECT * FROM `customer` WHERE `customer_id` = '$_SESSION[customer_id]'") or die(mysqli_error());
             $fetch = $query->fetch_array();
           ?>  
 

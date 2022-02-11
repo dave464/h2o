@@ -29,7 +29,7 @@ require '../connection.php';
        
 
       <?php
-            $query = $conn->query("SELECT * FROM `deliveryman`") or die(mysqli_error());
+            $query = $conn->query("SELECT * FROM `deliveryman` WHERE `deliveryman_id` = '$_SESSION[deliveryman_id]'") or die(mysqli_error());
             $fetch = $query->fetch_array();
           ?>  
 
