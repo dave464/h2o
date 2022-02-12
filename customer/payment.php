@@ -39,7 +39,7 @@ require_once '../connection.php';
             <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <input type="hidden" value="<?php echo $fetch['number_of_items']?>" name="quantity">
             <input type="hidden" value="<?php echo $fetch['number_of_items'] * $fetch['price']?>" name="total">
-        <img src="../photo/DM.gif" class="card-img-top" alt="...">
+        <img src="../img/pay.png" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title fw-bold"><?php echo strtoupper($fetch['product_name'])?> </h5>
             <p class="card-text">Price: &#8369; <?php echo $fetch['price']?>.00</p>
