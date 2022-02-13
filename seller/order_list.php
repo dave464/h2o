@@ -29,7 +29,6 @@ require '../connection.php';
   <table class="table">
   <thead>
     <tr id="tr">
-      <!-- <th  scope="col">#</th> -->
       <th class="col" scope="col">PRODUCT NAME</th>
       <th scope="col">NAME</th>
       <th scope="col">PRICE</th>
@@ -37,8 +36,6 @@ require '../connection.php';
       <th scope="col">TOTAL TO PAY</th>
       <th scope="col">STATUS</th>
       <th scope="col">TYPE</th>
-      <th scope="col">DATE</th>
-      <th scope="col">DELIVERY MAN</th>
       <th scope="col">ACTION</th>
     </tr>
   </thead> 
@@ -54,15 +51,10 @@ require '../connection.php';
   while($fetch = $queryy->fetch_array()){
 ?>
   <form action="action.php" method="POST" enctype="multipart/form-data" > 
-      <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
-      <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-      <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
-      <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
-      <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
-      <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
+
 
       <tr id="tr2">
-      <!-- <th class="align-middle" scope="row">1</th> -->
+
       <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
       <td class="align-middle"><?php echo strtoupper($fetch['firstname'])?></td>
       <td class="align-middle"> &#8369;<?php echo $fetch['price']?>.00</td>
@@ -70,26 +62,10 @@ require '../connection.php';
       <td class="align-middle">&#8369; <?php echo $fetch['quantity'] * $fetch['price']?>.00</td>
       <td class="align-middle"><?php echo strtoupper($fetch['status'])?></td>
       <td class="align-middle"><?php echo strtoupper($fetch['type'])?></td>
-      <td class="align-middle"><?php echo $fetch['date']?></td>
       <td class="align-middle">
-      <div class="select-container">
-                      <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
-                      <?php
-                            $query = $conn->query("SELECT * FROM deliveryman 
-                            WHERE deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") 
-                            or die(mysqli_error());
-                            while($fetch = $query->fetch_array()){
-                          ?>
-                        
-                              <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
-                          <?php
-                            }
-                          ?>
-                      </select>
-                </div>
-      </td>
-      <td class="align-middle">
-          <button type="submit" name="submitApprove"  class="myButton" style="color:#000;margin:5px;">Approve</button>
+          <a onclick="window.location='orderlist_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">
+          View
+        </a>
       </td>
 
     </tr>
