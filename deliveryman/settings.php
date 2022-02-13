@@ -1,6 +1,19 @@
 <?php
 require 'validate.php';
 require '../connection.php';
+
+if (count($_POST) > 0) {
+  $np= $_POST['np'];
+  $result = mysqli_query($conn, "SELECT *from deliveryman WHERE `deliveryman_id` = '".$_SESSION['deliveryman_id']."'");
+  $row = mysqli_fetch_array($result);
+  if ($_POST["op"] == $row["password"]) {
+      $conn->query("UPDATE `deliveryman` SET `password` = '$np' WHERE `deliveryman_id` = '".$_SESSION['deliveryman_id']."'" ) or die(mysqli_error());
+                  echo ("<script>
+                    alert('Password Changed');
+                    </script>");
+  } else
+      $message = "Current Password is not correct";
+}
 ?>
 
 
@@ -91,13 +104,14 @@ require '../connection.php';
 <hr style="color:black;">
 <p class="text-left h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">Change Password</p>
 
-            <form class="mx-1 mx-md-4" action="" method="POST" enctype="multipart/form-data">
+<form name="frmChange" class="mx-1 mx-md-4" method="POST" onSubmit="return validatePassword()" enctype="multipart/form-data">
+            <div class="message" style="color: red;"><?php if(isset($message)) { echo $message; } ?></div>
                   <label class="labels" style=" font-size: 11px; margin-left:50px;">Current Password</label>
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="op" id="form3Example4c" class="form-control" placeholder="Current Password"/>
-
+                      <input required type="password" name="op" class="form-control" placeholder="Current Password"/>
+                      <span id="currentPassword"  id="op" class="required"></span>
                     </div>
                   </div>
 
@@ -105,8 +119,8 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="np" id="form3Example4c" class="form-control" placeholder="New Password"/>
-
+                      <input required type="password" name="np"  class="form-control" placeholder="New Password"/>
+                      <span id="currentPassword" id="np" class="required"></span>
                     </div>
                   </div>
 
@@ -114,13 +128,13 @@ require '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="c_np" id="form3Example4c" class="form-control" placeholder="Confirm Password"/>
-
+                      <input required type="password"  id="c_np" class="form-control" placeholder="Confirm Password"/>
+                      <span id="currentPassword" name="c_np" class="required"></span>
                     </div>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="width:250px;" type="upPass" name="" class="btn btn-primary btn-lg">Update Password</button>
+                    <button style="width:250px;" type="submit" name="submit" class="btn btn-primary btn-lg">Update Password</button>
                   </div>
                 </form>
 
@@ -143,3 +157,37 @@ require '../connection.php';
 
     </body>
 </html>
+
+<script>
+    function validatePassword() {
+    var currentPassword,newPassword,confirmPassword,output = true;
+
+    currentPassword = document.frmChange.op;
+    newPassword = document.frmChange.np;
+    confirmPassword = document.frmChange.c_np;
+
+    if(!currentPassword.value) {
+    currentPassword.focus();
+    document.getElementById("op").innerHTML = "required";
+    output = false;
+    }
+    else if(!newPassword.value) {
+    newPassword.focus();
+    document.getElementById("np").innerHTML = "required";
+    output = false;
+    }
+    else if(!confirmPassword.value) {
+    confirmPassword.focus();
+    document.getElementById("c_np").innerHTML = "required";
+    output = false;
+    }
+    if(newPassword.value != confirmPassword.value) {
+    newPassword.value="";
+    confirmPassword.value="";
+    newPassword.focus();
+    document.getElementById("c_np").innerHTML = "not same";
+    output = false;
+    } 	
+    return output;
+    }
+</script>
