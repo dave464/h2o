@@ -9,10 +9,13 @@ if (count($_POST) > 0) {
   if ($_POST["op"] == $row["password"]) {
       $conn->query("UPDATE `deliveryman` SET `password` = '$np' WHERE `deliveryman_id` = '".$_SESSION['deliveryman_id']."'" ) or die(mysqli_error());
                   echo ("<script>
-                    alert('Password Changed');
+                    alert('Your password has been changed successfully');
                     </script>");
   } else
-      $message = "Current Password is not correct";
+          echo ("<script>
+                alert('Current Password is not correct');
+                </script>");
+      //$message = "Current Password is not correct";
 }
 ?>
 
@@ -187,6 +190,7 @@ if (count($_POST) > 0) {
     newPassword.focus();
     document.getElementById("c_np").innerHTML = "not same";
     output = false;
+    alert('The confirmation password does not match');
     } 	
     return output;
     }
