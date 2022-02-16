@@ -8,12 +8,12 @@ require '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Delivery List</title>
+        <title>Purchase</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="main.css">
+        <!-- <link rel="stylesheet" href="main.css"> -->
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
-        <link rel = "icon" href = "images/logo.png" type = "image/png">
+        <!-- <link rel = "icon" href = "images/logo.png" type = "image/png"> -->
     </head>
 
     <body  >
@@ -22,94 +22,107 @@ require '../connection.php';
       <?php include 'navbar.php' ?>
        
       <center>
-       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">DELIVERY LIST
+      <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PURCHASE
       </p>
-<!--  <div class="container" > 
+       </center>
+ <!-- <div class="container" > 
   <div class="table-responsive">
 
 <table class="table">
 <thead>
   <tr id="tr">
-    
+   
     <th class="col" scope="col">PRODUCT NAME</th>
-    <th scope="col">DELIVERY MAN</th>
+    <th scope="col">SELLER</th>
     <th scope="col">PRICE</th>
     <th scope="col">QUANTITY</th>
     <th scope="col">TOTAL TO PAY</th>
     <th scope="col">STATUS</th>
-    <th scope="col">TYPE</th>
     <th scope="col">DATE</th>
-    <th scope="col"></th>
   </tr>
 </thead> 
 <tbody>   
 <?php
-  $delquery = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname FROM orderlist 
+  $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
+  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.date, merchant.business_name FROM orderlist 
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
-  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-  RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
-  WHERE orderlist.status = 'ready' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
-  ") or die(mysqli_error());
-  while($fetch = $delquery->fetch_array()){
+  RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
+  WHERE orderlist.customer_id = '".$_SESSION['customer_id']."'
+  ") 
+  or die(mysqli_error());
+  while($fetch = $query->fetch_array()){
 ?>
-    <form action="action.php" method="POST" enctype="multipart/form-data" >
-    <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
-      <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-      <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
-      <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
-      <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
-      <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
-     
 
       <tr id="tr2">
-    
+      
       <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
-      <td class="align-middle"><?php echo strtoupper($fetch['name'])?></td>
+      <td class="align-middle"><?php echo strtoupper($fetch['business_name'])?></td>
       <td class="align-middle"> &#8369;<?php echo $fetch['price']?>.00</td>
       <td class="align-middle"><?php echo $fetch['quantity']?></td>
       <td class="align-middle">&#8369; <?php echo $fetch['quantity'] * $fetch['price']?>.00</td>
       <td class="align-middle"><?php echo strtoupper($fetch['status'])?></td>
-      <td class="align-middle"><?php echo strtoupper($fetch['type'])?></td>
       <td class="align-middle"><?php echo $fetch['date']?></td>
-
-      <td class="align-middle">
-          <button type="submit" name="submitDeliver"  class="myButton" style="color:#000;margin:5px;">Set as Delivered</button>
-      </td>
-
     </tr>
-    </form>
+
 <?php
        }
     ?>
-              </tbody>
+     </tbody>
 </table>
 
 </div>
 
-</div>  -->
-
+</div> -->
 
 
 
 <!--------- SECTION Start-------->
 <section >
   <div class="container py-5">
+
+    <?php
+        $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE `status` = 'pending'") or die(mysqli_error());
+        $f_p = $q_p->fetch_array();
+
+        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE `status` = 'ready'") or die(mysqli_error());
+        $f_s = $q_s->fetch_array();
+      ?>
+
+
+
+  <div>
+    <button type="button" class="btn btn-primary" onclick="window.location='purchase.php'" style="background-color: white; border:red; color:black; margin-left:-1px; width:100px;">
+      <i style="font-size:25px;" class="fas fa-history"></i>
+      <span class="badge bg-danger"><?php echo $f_p['total']?></span>
+      Pending 
+    </button>
+
+     <button type="button" class="btn btn-primary" onclick="window.location='shipping_orders.php'" style="background: rgb(0,115,174);background: linear-gradient(90deg, rgba(0,115,174,1) 0%, rgba(3,169,244,1) 80%); color:black; margin-left:120px; margin-top:-88px;width:100px;">
+      <i style="font-size:25px;" class="fas fa-truck"></i>
+      <span class="badge bg-danger"><?php echo $f_s['total']?></span>
+      Ready 
+    </button>
+
+     <button type="button" class="btn btn-primary" onclick="window.location='received_orders.php'" style="background-color: white; color:black; margin-left:240px; margin-top:-88px;width:100px;">
+      <i style="font-size:25px;" class="fas fa-box-open"></i>
+      Received 
+    </button>    
+  </div>
+
+
     <div class="row">
 
 
  <?php
- $delquery = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname FROM orderlist 
-  RIGHT JOIN product ON orderlist.product_id = product.product_id 
-  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-  RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
-  WHERE orderlist.status = 'ready' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
+      $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
+      product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
+      orderlist.date, customer.firstname, customer.lastname, customer.customer_id FROM orderlist 
+      RIGHT JOIN product ON orderlist.product_id = product.product_id 
+      RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
+      WHERE orderlist.status = 'ready' && orderlist.customer_id = '".$_SESSION['customer_id']."'
   ") or die(mysqli_error());
-  while($fetch = $delquery->fetch_array()){
+      while($fetch = $queryy->fetch_array()){
 ?>
 
     
@@ -126,8 +139,9 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
-                     <p style="font-size:14px;margin-top:-18px;">Total:  &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
-                     <a onclick="window.location='delivery_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">More Details</a>
+                     <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
+                      <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
+                     <a onclick="window.location='shipping_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">More Details</a>
                     </div>
                  </td>
                 </tr> 
@@ -146,13 +160,6 @@ require '../connection.php';
       </div>
 </section>
 <!--------- SECTION END-------->
-
-
-
-
-
-    </body>
-</html>
 
 
 <style>
@@ -193,19 +200,13 @@ require '../connection.php';
 
 
 
-
     </body>
 </html>
 
 
-
 <!--
 <style>
-  * {
-        color: black;
-  }
-  .container {
-
+  .container   {
     /* display: flex;
     flex-direction: column; */
     background-color:#FFF;
@@ -223,18 +224,10 @@ require '../connection.php';
     //font-size: 10px;
     white-space: nowrap;
   }
-.select-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
   .list {
     display: flex; 
     width: 100%;
     border:2px solid #000;
-  }
-  label {
-    font-size: 12px;
   }
 .myButton {
   box-shadow:inset 0px 1px 0px 0px #fff6af;

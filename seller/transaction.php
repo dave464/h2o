@@ -34,8 +34,6 @@ require '../connection.php';
   <tr id="tr">
     <!-- <th  scope="col">#</th> -->
     <th class="col" scope="col">PRODUCT NAME</th>
-    <th scope="col">SELLER</th>
-    <th scope="col">DELIVERY MAN</th>
     <th scope="col">QUANTITY</th>
     <th scope="col">UNIT PRICE</th>
     <th scope="col">TOTAL</th>
@@ -57,8 +55,6 @@ require '../connection.php';
 
         <tr>  
             <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
-            <td class="align-middle"><?php echo strtoupper($fetch['business_name'])?></td>
-            <td class="align-middle"><?php echo strtoupper($fetch['name'])?></td>
             <td class="align-middle"><?php echo $fetch['quantity']?></td>
             <td class="align-middle"> &#8369; <?php echo $fetch['price']?>.00</td>
             <td class="align-middle"> &#8369; <?php echo $fetch['total']?>.00</td>

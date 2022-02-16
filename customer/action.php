@@ -30,7 +30,7 @@ require '../connection.php';
         $image = addslashes(file_get_contents($_FILES['photos']['tmp_name']));
 		$photo_name = addslashes($_FILES['photos']['name']);
 		$photo_size = getimagesize($_FILES['photos']['tmp_name']);
-		move_uploaded_file($_FILES['photos']['tmp_name'],"upload/" . $_FILES['photos']['name']);
+		move_uploaded_file($_FILES['photos']['tmp_name'],"../photo/" . $_FILES['photos']['name']);
 
         $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo) 
         VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type','$photo_name' )") 

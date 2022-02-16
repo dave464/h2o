@@ -20,7 +20,7 @@ require_once '../connection.php';
       <?php include 'navbar.php' ?>
       <center> 
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">Order Details
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">Delivery Details
       </p>
        <!-- <div class="container">
         <?php
@@ -205,26 +205,29 @@ require_once '../connection.php';
             }
             ?>   
             <br>
-            <h5 class="card-title fw-bold">Select Driver</h5>
-            
-            <div class="select-container">
-                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
-                          <?php
-                                $query = $conn->query("SELECT * FROM deliveryman 
-                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
-                                or die(mysqli_error());
-                                while($fetch = $query->fetch_array()){
-                              ?>
-                            
-                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
-                              <?php
-                                }
-                              ?>
-                          </select>
-          </div>
-
-            <button type="submit" name="submitApprove" class="btn btn-primary">Approve</button>
-           
+            <!------------- DELIVERYMAN DETAILS ---------------->
+               <div class="d-flex justify-content-center mb-3">
+              <h4 class="mb-0" style="font-weight: 550">DELIVERYMAN DETAILS</h4>
+              </div>
+               <?php
+                    $query = $conn->query("SELECT * FROM deliveryman 
+                            WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
+                            or die(mysqli_error());
+                           $fetch = $query->fetch_array();
+                ?>
+             <hr>
+            <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight: 550">Name: </p>
+              <p class="card-text"><?php echo $fetch['name']?></p>        
+             </div>
+             <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
+              <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
+             </div>
+             <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Plate Number: </p>
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['plate_number']?></p> </div> 
+                      
           </div>
         </div>
       </div>

@@ -180,14 +180,14 @@ require_once '../connection.php';
              <hr>
             <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight: 550">Price: </p>
-              <p class="card-text">&#8369; <?php echo $fetch['price']?>.00</p>        
+              <p class="card-text">&#8369;<?php echo $fetch['price']?>.00</p>        
              </div>
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Quantity: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['quantity']?></p>     </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Total:</p>
-              <p class="card-text"style="margin-top:-10px;">&#8369; <?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
+              <p class="card-text"style="margin-top:-10px;">&#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
              </div>
               <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Status:</p>
@@ -205,25 +205,7 @@ require_once '../connection.php';
             }
             ?>   
             <br>
-            <h5 class="card-title fw-bold">Select Driver</h5>
             
-            <div class="select-container">
-                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
-                          <?php
-                                $query = $conn->query("SELECT * FROM deliveryman 
-                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
-                                or die(mysqli_error());
-                                while($fetch = $query->fetch_array()){
-                              ?>
-                            
-                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
-                              <?php
-                                }
-                              ?>
-                          </select>
-          </div>
-
-            <button type="submit" name="submitApprove" class="btn btn-primary">Approve</button>
            
           </div>
         </div>
