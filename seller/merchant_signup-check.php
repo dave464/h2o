@@ -4,6 +4,7 @@ require '../connection.php';
 
 		$username= $_POST['username'];
 		$password= $_POST['password'];
+		$c_password= $_POST['c_password'];
 		$business_name= $_POST['business_name'];
 		$owner = $_POST['owner'];
 		$address = $_POST['address'];
@@ -15,11 +16,41 @@ require '../connection.php';
 		$photo_size = getimagesize($_FILES['photo']['tmp_name']);
 		move_uploaded_file($_FILES['photo']['tmp_name'],"../photo/" . $_FILES['photo']['name']);
 
-	$conn->query("INSERT INTO `merchant`(username, password, business_name, owner, address, email,contact_number,image) VALUES('$username','$password','$business_name','$owner','$address','$email','$contact_number','$photo_name')") or die(mysqli_error());
+		$user_data = 'username='. $username. '&business_name='. $business_name. '&owner='. $owner. '&address='. $address. '&email='. $email. '&contact_number='. $contact_number;
+
+	if($password !== $c_password){
+	    echo ("<script>
+			alert('The confirmation password  does not match');
+			document.location.href = 'merchant_signup.php?error=The confirmation password  does not match&$user_data';
+			</script>");
+	}
+
+	else{
+
+		$sql = "SELECT * FROM merchant WHERE username='$username' ";
+		$result = mysqli_query($conn, $sql);
+
+		if (mysqli_num_rows($result) > 0) {
+	         echo ("<script>
+			alert('The username is taken try another');
+			document.location.href = 'merchant_signup.php?error=The username is taken try another&$user_data';
+			</script>");
+		}else{
+
+		$conn->query("INSERT INTO `merchant`(username, password, business_name, owner, address, email,contact_number,image) VALUES('$username','$password','$business_name','$owner','$address','$email','$contact_number','$photo_name')") or die(mysqli_error());
 		
 		echo ("<script>
 			alert('Your account has been created successfully');
 			document.location.href = 'index.php';
 			</script>");
+		}
 	}
+
+	/*$conn->query("INSERT INTO `merchant`(username, password, business_name, owner, address, email,contact_number,image) VALUES('$username','$password','$business_name','$owner','$address','$email','$contact_number','$photo_name')") or die(mysqli_error());
+		
+		echo ("<script>
+			alert('Your account has been created successfully');
+			document.location.href = 'index.php';
+			</script>"); */
+}
 ?>

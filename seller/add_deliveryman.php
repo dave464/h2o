@@ -50,8 +50,11 @@ require '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="name" id="form3Example3c" class="form-control" placeholder="Fullname"
-                       required = "required"/>
+                        <?php if (isset($_GET['name'])) { ?>
+                      <input type="text" name="name" id="form3Example3c" class="form-control" placeholder="Fullname" value="<?php echo $_GET['name']; ?>" required = "required"/>
+                      <?php }else{ ?>
+                     <input type="text" name="name" id="form3Example1c" class="form-control" placeholder="Fullname">
+                      <?php }?>
                     </div>
                   </div>
 
@@ -59,16 +62,22 @@ require '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control"
-                       placeholder="Phone" required = "required" />     
+                       <?php if (isset($_GET['contact_number'])) { ?>
+                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" value="<?php echo $_GET['contact_number']; ?>" required = "required" />
+                       <?php }else{ ?>
+                      <input type="text" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone">
+                      <?php }?>    
                     </div>
                 </div>
 
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="plate_number" id="form3Example3c" class="form-control" 
-                      placeholder="Plate Number" required = "required"/>
+                       <?php if (isset($_GET['plate_number'])) { ?>
+                      <input type="text" name="plate_number" id="form3Example3c" class="form-control" placeholder="Plate Number" value="<?php echo $_GET['plate_number']; ?>" required = "required"/>
+                        <?php }else{ ?>
+                      <input type="text" name="plate_number" id="form3Example1c" class="form-control" placeholder="Plate Number">
+                      <?php }?>  
                     </div>
                   </div>
 
@@ -76,8 +85,11 @@ require '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="username" id="form3Example1c" class="form-control" 
-                      placeholder="Username" required = "required"/> 
+                        <?php if (isset($_GET['username'])) { ?>
+                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" value="<?php echo $_GET['username']; ?>" required = "required"/> 
+                       <?php }else{ ?>
+                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username">
+                      <?php }?>
                     </div>
                   </div>
 
@@ -93,7 +105,7 @@ require '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="cpassword" id="form3Example4c" class="form-control" 
+                      <input type="password" name="c_password" id="form3Example4c" class="form-control" 
                       placeholder="Confirm Password" required = "required"/>
                     </div>
                 </div>

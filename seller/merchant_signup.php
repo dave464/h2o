@@ -19,7 +19,7 @@ require_once '../connection.php';
    
 <body>
 
-<div class="vh-100" style="background-color: #eee;">
+<div class="vh-200" style="background-color: #eee;">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -36,8 +36,11 @@ require_once '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" />
-  
+                        <?php if (isset($_GET['username'])) { ?>
+                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" value="<?php echo $_GET['username']; ?>" required = "required" />
+                         <?php }else{ ?>
+                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username">
+                      <?php }?>
                     </div>
                   </div>
 
@@ -50,19 +53,34 @@ require_once '../connection.php';
                     </div>
                   </div>
 
+                 <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" name="c_password" id="form3Example4c" class="form-control" placeholder="Confirm Password"/>
+
+                    </div>
+                  </div>
+
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" name="email" id="form3Example3c" class="form-control" placeholder="Email"/>
-
+                       <?php if (isset($_GET['email'])) { ?>
+                      <input type="email" name="email" id="form3Example3c" class="form-control" placeholder="Email"  value="<?php echo $_GET['email']; ?>" required = "required"/>
+                       <?php }else{ ?>
+                      <input type="email" name="email" id="form3Example1c" class="form-control"
+                      placeholder="Email">
+                      <?php }?>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="business_name" id="form3Example3c" class="form-control" placeholder="Business Name"/>
-
+                       <?php if (isset($_GET['business_name'])) { ?>
+                      <input type="text" name="business_name" id="form3Example3c" class="form-control" placeholder="Business Name" value="<?php echo $_GET['business_name']; ?>" required = "required"/>
+                        <?php }else{ ?>
+                      <input type="text" name="business_name" id="form3Example1c" class="form-control" placeholder="Business Name">
+                      <?php }?>
                     </div>
                   </div>
 
@@ -70,31 +88,40 @@ require_once '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="owner" id="form3Example3c" class="form-control" placeholder="Owner"/>
-
+                        <?php if (isset($_GET['owner'])) { ?>
+                      <input type="text" name="owner" id="form3Example3c" class="form-control" placeholder="Owner" value="<?php echo $_GET['owner']; ?>" required = "required"/>
+                        <?php }else{ ?>
+                      <input type="text" name="owner" id="form3Example1c" class="form-control" placeholder="Owner">
+                      <?php }?>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="address" id="form3Example3c" class="form-control" placeholder="Address"/>
-          
+                       <?php if (isset($_GET['address'])) { ?>
+                      <input type="text" name="address" id="form3Example3c" class="form-control" placeholder="Address" value="<?php echo $_GET['address']; ?>" required = "required"/>
+                       <?php }else{ ?>
+                      <input type="text" name="address" id="form3Example1c" class="form-control" placeholder="Address">
+                      <?php }?>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" required/>
-      
+                       <?php if (isset($_GET['contact_number'])) { ?>
+                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" value="<?php echo $_GET['contact_number']; ?>" required = "required"/>
+                       <?php }else{ ?>
+                      <input type="text" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone">
+                      <?php }?>
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-camera fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                    <input type="file" name="photo" class="email" required>
+                    <input type="file" name="photo" class="email" required = "required">
       
                     </div>
                   </div>
