@@ -124,8 +124,43 @@ require_once '../connection.php';
                     </div>
                   </div>
 
+<!--- Terms of Agreement -->
+  <input type="checkbox" name="checkbox" value="check" id="agree"  value="1"  onclick="terms_changed(this)"/>
+  I have read and agree to the 
+<!-- Button to Open the Modal -->
+<a href="login.php" data-bs-toggle="modal" data-bs-target="#myModal">
+  terms and conditions
+</a><br><br>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Terms and Conditions</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg"  id=submit_button disabled>Register</button>
                   </div>
                   <div class="text-center fs-6"> <h5 href="#">Already have an account?</h5><a href="index.php">Log in</a> </div>
                 </form>
@@ -145,3 +180,16 @@ require_once '../connection.php';
 </div>
                  
 
+
+<script>
+function terms_changed(termsCheckBox){
+    //If the checkbox has been checked
+    if(termsCheckBox.checked){
+        //Set the disabled property to FALSE and enable the button.
+        document.getElementById("submit_button").disabled = false;
+    } else{
+        //Otherwise, disable the submit button.
+        document.getElementById("submit_button").disabled = true;
+    }
+}
+</script>
