@@ -11,9 +11,13 @@ require '../connection.php';
         <title>Transactions</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href=".../main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         
+
+
+  <link rel='stylesheet' href='https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css'>
+<link rel='stylesheet' href='https://cdn.datatables.net/datetime/1.0.3/css/dataTables.dateTime.min.css'>
     </head>
     <body >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -26,10 +30,22 @@ require '../connection.php';
       style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">TRANSACTIONS
       </p>
       
-       <div class="container" > 
+<div class="container" > 
   <div class="table-responsive">
 
-<table class="table">
+<!-- partial:index.partial.html -->
+<table border="0" cellspacing="5" cellpadding="5" style="margin-left: 15px; margin-bottom:30px;">
+        <tbody><tr>
+            <td>Minimum date:</td>
+            <td><input type="text" id="min" name="min"></td>
+        </tr>
+        <tr>
+            <td>Maximum date:</td>
+            <td><input type="text" id="max" name="max"></td>
+        </tr>
+    </tbody></table>
+
+<table id="table" class="table">
 <thead>
   <tr id="tr">
     <!-- <th  scope="col">#</th> -->
@@ -71,8 +87,163 @@ require '../connection.php';
           ?>  
 
       </tbody>
-    </table>
+     <tfoot>
+            <tr>
+                <th colspan="3" style="text-align:right">Total:</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table><br><br>
       </div>
+</div><br><br><br>
+
+<!-----------------------------------SCRIPTS-------------------------------------------->  
+ <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src='https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
+<script src='https://cdn.datatables.net/datetime/1.0.3/js/dataTables.dateTime.min.js'></script>
+<script src='https://cdn.datatables.net/plug-ins/1.11.4/api/sum().js'></script>
+
+ 
+<script type = "text/javascript">
+ 
+ var minDate, maxDate;
+// Custom filtering function which will search data in column four between two values
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = minDate.val();
+        var max = maxDate.val();
+        var date = new Date( data[4] );
+ 
+        if (
+            ( min === null && max === null ) ||
+            ( min === null && date <= max ) ||
+            ( min <= date   && max === null ) ||
+            ( min <= date   && date <= max )
+        ) {
+            return true;
+        }
+        return false;
+    }
+);
+
+
+  $(document).ready(function(){
+     // Create date inputs
+    minDate = new DateTime($('#min'), {
+        format: 'MMMM Do YYYY'
+    });
+    maxDate = new DateTime($('#max'), {
+        format: 'MMMM Do YYYY'
+    });
+
+    // DataTables initialisation
+  var table = $('#table').DataTable(
+    {   
+      pageLength: 10,
+        lengthMenu: [[10, 20, 30, 40, 50 - 1], [10, 20, 30, 40, 50, 'all']],
+       
+        "columnDefs": [ {
+            "searchable": false,
+
+            "orderable": false,
+           
+            type:'title-string', targets: 0,
+        } ],
+
+        "dom": 'Blfrtip',
+                "buttons": [  
+                  
+                  {  
+                        extend: 'copy',  
+                        className: 'btn btn-primary rounded-0',  
+                        text: '<i class="far fa-file-excel"></i> Copy',
+                        title:'Alpha Lab Test',
+                        exportOptions: {
+                            columns: ':visible:not(:last-child)'
+                        }  
+                    }, 
+                    {  
+                        extend: 'excel',  
+                        className: 'btn btn-primary rounded-0',  
+                        text: '<i class="far fa-file-excel"></i> Excel',
+                        title:'Alpha Lab Test',
+                        exportOptions: {
+                            columns: ':visible:not(:last-child)'
+                        }  
+                    },  
+                   
+                    {  
+                        extend: 'pdf',  
+                        className: 'btn btn-primary rounded-0',  
+                        text: '<i class="far fa-file-pdf"></i> Pdf',
+                        title:'Alpha Lab Test',
+                        exportOptions: {
+                            columns: ':visible:not(:last-child)'
+                        }  
+                    },  
+                    
+                    {  
+                        extend: 'print',  
+                        className: 'btn btn-primary rounded-0',  
+                        text: '<i class="fas fa-print"></i> Print' ,
+                        title:'Alpha Lab Test',
+                        exportOptions: {
+                            columns: ':visible:not(:last-child)'
+                            
+                        } 
+                    },
+                   
+                ]  ,
+
+                "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api();
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\₱,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+           /* total = api
+                .column( 3 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 ); */
+ 
+            // Total over this page
+            pageTotal = api
+                .column( 3, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 3 ).footer() ).html(
+              '&#8369;'+pageTotal +'.00'
+               /* ' &#8369;'+pageTotal +' (  &#8369;'+ total +' total)'*/
+            );
+        }  
+              
+    }
+  );
+
+                // Refilter the table
+              $('#min, #max').on('change', function () {
+                table.draw();
+                });
+
+  });
+
+
+</script> 
+
+
 
     </body>
 </html>
