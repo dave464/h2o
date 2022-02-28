@@ -1,20 +1,17 @@
 <?php
 	require_once 'connect.php';
-if(ISSET($_POST['edit_badge'])){
 
-        $badge_id = $_POST['badge_id'];
 		$time = date('Y-m-d H:i:s');
-		$status = $_POST['status'];
-
-		$conn->query("UPDATE `badge` SET `date` = '$time', 'status' = '$status' 
-		WHERE `badge_id` = '$badge_id'") or die(mysqli_error());
+		
+		$conn->query("UPDATE `badge` SET `date` = '$time' 
+		WHERE `badge_id` = '$_REQUEST[badge_id]'") or die(mysqli_error());
 		echo
 		"<script>
 		alert('Data Updated Successfully');
 		document.location.href = 'badge.php';
 		</script>"
 		;
-}
+
 
 /*
            <div class = "form-group">

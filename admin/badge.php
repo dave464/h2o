@@ -212,7 +212,7 @@
                                     }
                                   ?> </td> 
     <td class=" border-primary">
-     <a class = "btn btn-warning" name="edit_badge" href="edit_badge.php?badge_id=<?php echo $fetch['badge_id']?>" style="color:white;" ><i class = "glyphicon glyphicon-remove">
+     <a class = "btn btn-warning"  href="edit_query_badge.php?badge_id=<?php echo $fetch['badge_id']?>" style="color:white;" ><i class = "glyphicon glyphicon-remove">
      </i>Update</a>
 
      <a class = "btn btn-danger" name="del_badge" href="delete_badge.php?badge_id=<?php echo $fetch['badge_id']?>" onclick = "confirmationDelete(this); return false;" ><i class = "" ></i> Delete</a>
