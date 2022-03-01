@@ -116,7 +116,8 @@ body {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: .1875rem
+    border-radius: .1875rem;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 
 @media (min-width: 576px) {
