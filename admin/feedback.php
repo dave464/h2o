@@ -104,6 +104,7 @@
       <th scope="col" class=" border-primary" style="background:#1E90FF;color:white;">ID</th>
       <th scope="col" class=" border-primary" style="background:#1E90FF;color:white;">NAME</th>
       <th scope="col" class=" border-primary" style="background:#1E90FF;color:white;">ADDRESS</th>
+      <th scope="col" class=" border-primary" style="background:#1E90FF;color:white;">Contact Number</th>
       <th scope="col" class=" border-primary" style="background:#1E90FF;color:white;">ACTION</th>
     </tr>
   </thead>
@@ -114,9 +115,10 @@
 		 ?>
 
     <tr>
-      <td scope="row" class="border-primary"><?php echo $fetch['merchant_id']?></th>
+      <td scope="row" class="border-primary"><?php echo $fetch['merchant_id']?></td>
       <td class="border-primary"><?php echo $fetch['business_name']?></td> 
-      <td scope="row" class="border-primary"><?php echo $fetch['address']?></th>
+      <td class="border-primary"><?php echo $fetch['address']?></td>
+      <td class="border-primary"><?php echo $fetch['contact_number']?></td> 
       <td class=" border-primary">
        <a class = "btn btn-success"
        href="feedback_view.php?merchant_id=<?php echo $fetch['merchant_id']?>"
