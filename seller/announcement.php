@@ -38,32 +38,30 @@ require '../connection.php';
               while($fetch = $query->fetch_array()){
  ?>
 
-        <div class="col-md-12">
-            
+        <div class="col-md-12">         
             <div class="card blog-horizontal mt-4">
                 <div class="card-body">
-                    <div class="card-img-actions mr-sm-3 mb-3"> <a href="#course_preview" data-toggle="modal" data-abc="true"> <img src="https://i.imgur.com/OJHNsX9.jpg" class="img-fluid card-img" alt=""> </a> </div>
-                    <div class="mb-3">
-                        <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">Advanced Java Course</a> <span class="text-danger-400 ml-auto">Free</span> </h5>
+                    <div class="card-img-actions mr-sm-3 mb-3"> <a href="#course_preview" data-toggle="modal" data-abc="true"> <img src="../img/megaphone.png" class="img-fluid card-img" alt=""> </a> </div>
+                    <div class="mb-3" >
+                        <h5 class="d-flex font-weight-semibold flex-nowrap my-1"> <a href="#" class="text-default mr-2" data-abc="true">Announcement</a>  </h5>
                         <ul class="list-inline list-inline-dotted text-muted mb-0">
                             <li class="list-inline-item">By <a href="#" class="text-muted" data-abc="true">Admin</a></li>
                             <li class="list-inline-item"><?php echo date("M d, Y", strtotime($fetch['date']))?></li>
                         </ul>
                     </div>
-                   
-
 <?php
    $string = $fetch['message'];
    if (strlen($string) > 150) {
        $stringCut = substr($string, 0, 100);// change 15 top what ever text length you want to show.
        $endPoint = strrpos($stringCut, ' ');
        $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
-       $string .= '... <a style="cursor: pointer;" >Read More</a>';
+       $string .= '... <a style="cursor: pointer;"></a>';
    }
    echo $string;
 ?>
-                </div>
-               
+
+<a style="cursor: pointer;" href="announce_read_more.php?announcement_id=<?php echo $fetch['announcement_id']?>">Read More</a>
+                </div>          
             </div>
         </div>
                    
