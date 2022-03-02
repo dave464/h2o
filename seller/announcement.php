@@ -55,12 +55,10 @@ require '../connection.php';
        $stringCut = substr($string, 0, 100);// change 15 top what ever text length you want to show.
        $endPoint = strrpos($stringCut, ' ');
        $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
-       $string .= '... <a style="cursor: pointer;"></a>';
+       $string .= '... <a style="cursor: pointer;"  href="announce_read_more.php?announcement_id= '.$fetch['announcement_id'].'">Read More</a>';
    }
    echo $string;
 ?>
-
-<a style="cursor: pointer;" href="announce_read_more.php?announcement_id=<?php echo $fetch['announcement_id']?>">Read More</a>
                 </div>          
             </div>
         </div>
