@@ -49,4 +49,22 @@ require '../connection.php';
         </script>");
 
 	}
+
+    /*===== PRODUCT RATE ===== */
+
+    if(ISSET($_POST['submitRate'])){
+       
+        $product_id= $_POST['product_id'];
+         $customer_id = $_POST['customer_id'];
+         $merchant_id = $_POST['merchant_id'];
+         $rating = $_POST['rating'];
+ 
+         $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating) VALUES ('$customer_id','$product_id','$merchant_id','$rating')") or die(mysqli_error());
+         echo ("<script>
+         alert('Rate Successfully');
+         document.location.href = 'received_orders.php';
+         </script>");
+ 
+     }
+
 ?>

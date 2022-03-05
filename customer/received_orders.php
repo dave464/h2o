@@ -142,6 +142,7 @@ require '../connection.php';
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
                      <a onclick="window.location='received_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">More Details</a>
+                     <a onclick="window.location='rate_product.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">Rate Product</a>
                     </div>
                  </td>
                 </tr> 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2022 at 04:19 AM
+-- Generation Time: Mar 05, 2022 at 09:50 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -51,35 +51,18 @@ INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`, `photo`) VALUES
 
 CREATE TABLE `announcement` (
   `announcement_id` int(11) NOT NULL,
-  `message` varchar(50) NOT NULL
+  `message` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `announcement`
 --
 
-INSERT INTO `announcement` (`announcement_id`, `message`) VALUES
-(1, 'dasdsada'),
-(2, 'dasdsada'),
-(3, 'sdsds'),
-(4, 'xsxsxsxs'),
-(5, 'zazaza'),
-(6, 'xsxsxsxssss ssdd'),
-(7, ' pre-oral'),
-(8, ''),
-(9, ''),
-(10, ''),
-(11, 'nvcvv cfxfcf fg yg gh ghgh ghv gu '),
-(12, 'jjj'),
-(13, ' Announcement: INC muna tayo ngayon'),
-(14, 'hghg'),
-(15, 'hghg'),
-(16, 'yuyu'),
-(17, ''),
-(18, ''),
-(19, 'dbfnsnfsndfnsdfnds'),
-(20, ''),
-(21, '  dasd');
+INSERT INTO `announcement` (`announcement_id`, `message`, `date`) VALUES
+(1, 'sadasdhua dahsdhasdas dashudhasuda bdhasdhas dbshadbhsa dsahduhas dhsahdsad sbdhasbdha dhabdhas bdhsabhdsabhdsa bsahdbhabdhsabd bdhasbdhasbhda bdhasbdhabdhabdhas bdhsabdhasbhdasbdsa bdhasbdhasbdhasbdhsa dbhsabdhasbdhasb bdhsabdhsabdhsabhda bdhsabdhabdhas ', '2022-03-01 14:19:04'),
+(2, '  dasYes, I am not sure how to build the link string that would pass the prop_id=[current_id_value] variable. I typed the prop_id=5 as an example, technically it could be any number. I am guessing there is a way to get the variable from the MySQL database, but once I get it, how do it build the link. Thanks again :)vsadsabdhsabhdashdvasvdgavda dgashsdghag dgashgdha d ghasgdhaj d', '2022-03-02 10:37:10'),
+(3, '  hi', '2022-03-01 12:26:57');
 
 -- --------------------------------------------------------
 
@@ -99,7 +82,8 @@ CREATE TABLE `badge` (
 --
 
 INSERT INTO `badge` (`badge_id`, `merchant_id`, `status`, `date`) VALUES
-(1, 1, 'Passed', '2022-02-28 03:16:16');
+(1, 1, 'Passed', '2022-02-28 05:20:10'),
+(2, 2, 'Passed', '2022-02-28 12:47:06');
 
 -- --------------------------------------------------------
 
@@ -236,6 +220,7 @@ CREATE TABLE `merchant` (
   `business_name` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
+  `coordinates` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact_number` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL
@@ -245,9 +230,10 @@ CREATE TABLE `merchant` (
 -- Dumping data for table `merchant`
 --
 
-INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `email`, `contact_number`, `image`) VALUES
-(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
-(2, 'merchant1', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif');
+INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `coordinates`, `email`, `contact_number`, `image`) VALUES
+(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', '', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
+(2, 'merchant1', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', '', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
+(3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', '14.6760413,121.0437003', 'davebryan.sevilla@yahoo.com', '09051934015', 'water.png');
 
 -- --------------------------------------------------------
 
@@ -285,7 +271,8 @@ INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`,
 (9, 1, 3, 1, NULL, 'pending', '5', 125, 'gcash', 'a1.jfif', '2022-02-15 03:53:31'),
 (10, 1, 3, 1, 6, 'ready', '2', 50, 'cod', NULL, '2022-02-16 09:20:41'),
 (11, 1, 3, 1, 6, 'delivered', '2', 50, 'gcash', 'a2.jpg', '2022-02-16 14:45:56'),
-(12, 1, 3, 1, NULL, 'pending', '10', 250, 'cod', NULL, '2022-02-22 02:09:04');
+(12, 1, 3, 1, NULL, 'pending', '10', 250, 'cod', NULL, '2022-02-22 02:09:04'),
+(13, 2, 3, 2, 7, 'delivered', '22', 440, 'cod', NULL, '2022-03-04 03:31:42');
 
 -- --------------------------------------------------------
 
@@ -308,7 +295,35 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_type`, `price`, `image`, `description`) VALUES
-(1, 1, 'Aquabest 25 liters', 'Purified Water', 25, 'images (4).jpeg', '25 liters');
+(1, 1, 'Aquabest 25 liters', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
+(2, 2, 'WAWA', 'WAWA', 20, '', 'FJDHJF'),
+(3, 2, 'WAWA', 'WAWA', 20, '', 'FJDHJF'),
+(4, 1, 'Round Container', 'Mineral Water', 30, 'roundgal.png', '5 gallons');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_rating`
+--
+
+CREATE TABLE `product_rating` (
+  `rate_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `merchant_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_rating`
+--
+
+INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_id`, `rating`) VALUES
+(7, 3, 1, 1, '3'),
+(9, 3, 2, 2, '4'),
+(11, 3, 1, 1, '3'),
+(12, 3, 1, 1, '2'),
+(13, 3, 1, 1, '3');
 
 -- --------------------------------------------------------
 
@@ -337,7 +352,8 @@ INSERT INTO `transactions` (`transaction_id`, `product_id`, `customer_id`, `merc
 (3, 1, 3, 1, 6, 2, 50, '2022-02-14 13:17:38'),
 (4, 1, 0, 1, 6, 9, 225, '2022-02-16 03:21:54'),
 (5, 1, 0, 1, 6, 3, 75, '2022-02-16 03:22:02'),
-(6, 1, 3, 1, 6, 2, 50, '2022-02-16 14:46:58');
+(6, 1, 3, 1, 6, 2, 50, '2022-02-16 14:46:58'),
+(7, 2, 3, 2, 7, 22, 440, '2022-03-04 03:33:52');
 
 --
 -- Indexes for dumped tables
@@ -410,6 +426,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `product_rating`
+--
+ALTER TABLE `product_rating`
+  ADD PRIMARY KEY (`rate_id`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -429,13 +451,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `badge`
 --
 ALTER TABLE `badge`
-  MODIFY `badge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `badge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -471,25 +493,31 @@ ALTER TABLE `inspection`
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `product_rating`
+--
+ALTER TABLE `product_rating`
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
