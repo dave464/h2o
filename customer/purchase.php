@@ -82,10 +82,10 @@ require '../connection.php';
   <div class="container py-5">
 
     <?php
-        $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE `status` = 'pending'") or die(mysqli_error());
+        $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'pending' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
         $f_p = $q_p->fetch_array();
 
-        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE `status` = 'ready'") or die(mysqli_error());
+        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'ready' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         $f_s = $q_s->fetch_array();
       ?>
 
