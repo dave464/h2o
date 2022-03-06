@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2022 at 09:50 AM
+-- Generation Time: Mar 06, 2022 at 02:41 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -220,20 +220,21 @@ CREATE TABLE `merchant` (
   `business_name` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `coordinates` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact_number` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `longitude` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `merchant`
 --
 
-INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `coordinates`, `email`, `contact_number`, `image`) VALUES
-(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', '', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
-(2, 'merchant1', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', '', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif'),
-(3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', '14.6760413,121.0437003', 'davebryan.sevilla@yahoo.com', '09051934015', 'water.png');
+INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `email`, `contact_number`, `image`, `latitude`, `longitude`) VALUES
+(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '', ''),
+(2, 'merchant1', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '', ''),
+(3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', 'davebryan.sevilla@yahoo.com', '09051934015', 'water.png', '14.6760413', '121.0437003');
 
 -- --------------------------------------------------------
 
