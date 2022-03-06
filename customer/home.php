@@ -121,7 +121,7 @@ function search_store() {
   padding: 40px 30px 30px 30px;
   background-color: #ecf0f3;
   border-radius: 15px;
-  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #039be5;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
   
 }
 
