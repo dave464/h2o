@@ -183,9 +183,8 @@
          
          /* side nav */
          .sidenav{
-             background: rgb(79,195,247);
-             background: linear-gradient(90deg, rgba(79,195,247,1) 49%, rgba(255,255,255,1) 100%);
-             color: black;
+             background: #ecf0f3;
+             color: #666;
              position: fixed;
              top: 0;
              bottom: 0;
@@ -232,7 +231,7 @@
          }
          .navbar li a:hover{
              padding-left: 12px;
-             background-color: white;
+             box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
          }
          
          @media(max-width: 400px){
