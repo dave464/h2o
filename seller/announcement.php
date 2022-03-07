@@ -34,7 +34,7 @@ require '../connection.php';
 
             
 <?php  
-   $query = $conn->query("SELECT * FROM announcement") or die(mysqli_error());
+   $query = $conn->query("SELECT * FROM announcement ORDER BY date DESC") or die(mysqli_error());
               while($fetch = $query->fetch_array()){
  ?>
 
