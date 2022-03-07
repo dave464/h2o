@@ -16,11 +16,11 @@ require '../connection.php';
     </head>
 
     <body   >
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
-       
-      <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+
+      <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"
       style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PRODUCT LIST
       </p>
 
@@ -30,11 +30,31 @@ require '../connection.php';
     <div class="row">
 
 
-      <?php  
+      <?php
        $query = $conn->query("SELECT product.product_id,product.image,product.product_name,
         product.price,product.product_type, merchant.merchant_id, merchant.business_name
           FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product.merchant_id = '".$_REQUEST['merchant_id']."'") or die(mysqli_error());
+
               while($fetch = $query->fetch_array()){
+                  $std_num= 0;
+                  $counter =0;
+                $productId = $fetch['product_id'];
+                $query2 = $conn->query("SELECT product_rating.rating
+                FROM product_rating WHERE product_rating.product_id = $productId");
+
+                while($fetch2 = $query2->fetch_array()){
+
+                  $std_num += $fetch2['rating'];
+                  $counter++;
+                }
+                if($std_num > 0) {
+                  $average = $std_num / $counter;
+
+                }
+                else {
+                  $average = 0;
+                }
+
       ?>
 
             <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -55,44 +75,43 @@ require '../connection.php';
               </div>
             </a>
           </div>
-          
-          <img src = "../photo/<?php echo $fetch['image']?>" 
+
+          <img src = "../photo/<?php echo $fetch['image']?>"
           onclick="window.location='product_view.php?product_id=<?php echo $fetch['product_id']?>'"
            class="card-img-top"/>
-           
+
           <div class="card-body">
-          
+
             <div class="d-flex justify-content-between">
               <p class="small"><?php echo $fetch['product_type']?></p>
-             
+
             </div>
-                
+
 
             <div class="d-flex justify-content-between mb-3">
               <h5 class="mb-0"><?php echo $fetch['product_name']?></h5>
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
-
             <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Rating: </p>
-             <!-- <div class="ms-auto text-warning">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>-->
-            </div>
+              <p class="text-muted mb-0">Rating:  <h5 class="text-dark mb-0">
+                <?php if($average==0) {
+                echo 'No Rating';
+              } else{
+                echo $average;
+                } ?></h5> 
+              </p>
 
+
+        </div>
           </div>
         </div>
       </div>
-            
+
  <?php
        }
     ?>
 
-     
+
         </div>
       </div>
     </div>
