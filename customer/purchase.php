@@ -167,7 +167,8 @@ require '../connection.php';
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 .myButton {
-  background-color:	#0d6edf;
+  box-shadow:inset 0px 1px 0px 0px #fff6af;
+  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
   display:inline-block;
   cursor:pointer;
@@ -182,6 +183,7 @@ require '../connection.php';
 }
 .myButton:hover {
   background-color: $blue-500;
+  background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 
 

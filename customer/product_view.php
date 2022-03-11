@@ -163,6 +163,10 @@ require '../connection.php';
   border-radius: 6px;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
   margin-top:30px;
+  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
+}
+.btn:hover {
+  background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 
 </style>

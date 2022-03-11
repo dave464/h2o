@@ -172,8 +172,9 @@ require '../connection.php';
     width: 100%;
     border:2px solid #000;
   }
-.myButton {
-  background-color:	#0d6edf;
+  .myButton {
+  box-shadow:inset 0px 1px 0px 0px #fff6af;
+  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
   display:inline-block;
   cursor:pointer;
@@ -185,6 +186,10 @@ require '../connection.php';
   text-decoration:none;
   border-color:	#0d6edf;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
+.myButton:hover {
+  background-color: $blue-500;
+  background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 
 h5 {

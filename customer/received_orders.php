@@ -142,8 +142,8 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
-                     <a onclick="window.location='received_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="margin:5px;">More Details</a>
-                     <a onclick="window.location='rate_product.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="margin:5px;">Rate Product</a>
+                     <a onclick="window.location='received_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
+                     <a onclick="window.location='rate_product.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">Rate Product</a>
                     </div>
                  </td>
                 </tr> 
@@ -169,7 +169,8 @@ require '../connection.php';
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 .myButton {
-  background-color:	#0d6edf;
+  box-shadow:inset 0px 1px 0px 0px #fff6af;
+  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
   display:inline-block;
   cursor:pointer;
@@ -184,7 +185,9 @@ require '../connection.php';
 }
 .myButton:hover {
   background-color: $blue-500;
+  background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
+
 
 /*h5 {
   width: 150px;
