@@ -30,16 +30,35 @@ include '../connection.php';
   <div class="container py-5">
     <div class="row">
 
-        
-<?php  
-   $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-   product.price, merchant.merchant_id , merchant.business_name
-              FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
+
+      <?php
+       $query = $conn->query("SELECT product.product_id,product.image,product.product_name,
+        product.price,product.product_type, merchant.merchant_id, merchant.business_name
+          FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
+
               while($fetch = $query->fetch_array()){
- ?>
+                  $std_num= 0;
+                  $counter =0;
+                $productId = $fetch['product_id'];
+                $query2 = $conn->query("SELECT product_rating.rating
+                FROM product_rating WHERE product_rating.product_id = $productId");
 
+                while($fetch2 = $query2->fetch_array()){
 
-      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+                  $std_num += $fetch2['rating'];
+                  $counter++;
+                }
+                if($std_num > 0) {
+                  $average = $std_num / $counter;
+
+                }
+                else {
+                  $average = 0;
+                }
+
+      ?>
+
+            <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
           <div class="d-flex justify-content-between p-3">
             <p class="lead mb-0"><?php echo $fetch['business_name']?>'s Offer</p>
@@ -57,41 +76,102 @@ include '../connection.php';
               </div>
             </a>
           </div>
-          
-          <img src = "../photo/<?php echo $fetch['image']?>"  class="card-img-top"/>
+
+          <img src = "../photo/<?php echo $fetch['image']?>" 
+          onclick="window.location='product_view.php?product_id=<?php echo $fetch['product_id']?>'"
+           class="card-img-top"/>
+
           <div class="card-body">
-          
+
             <div class="d-flex justify-content-between">
               <p class="small"><?php echo $fetch['product_type']?></p>
-             
+
             </div>
-                
+
 
             <div class="d-flex justify-content-between mb-3">
               <h5 class="mb-0"><?php echo $fetch['product_name']?></h5>
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
-
             <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Rating: </p>
-             <!-- <div class="ms-auto text-warning">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>-->
-            </div>
+              <p class="text-muted mb-0">Rating:  <p class="text-dark mb-0">
+                <?php if($average==0) {
+                echo 'No Rating';
+              } else{
+                echo round($average,2);
+                echo ' out of 5.00 &nbsp';
+                
+                      if($average == 5){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                      }else if($average <5  && $average >4 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star-half-alt" style="color:yellow;"></i>';
+                      }else if($average == 4 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                      }else if($average <4  && $average >3 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star-half-alt" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';       
+                      }else if($average == 3 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                      }else if($average <3  && $average >2 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star-half-alt" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';       
+                      }else if($average == 2 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                      }else if($average <2  && $average >1 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star-half-alt" style="color:yellow;"></i>';                    
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';       
+                      }else if($average == 1 ){
+                        echo '<i class="fa fa-star" style="color:yellow;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                        echo '<i class="fa fa-star" style="color:#cbced1;"></i>';
+                      }
 
+
+                } ?></p> 
+              </p>
+              
+
+        </div>
           </div>
         </div>
       </div>
-            
+
  <?php
        }
     ?>
 
-     
+
         </div>
       </div>
     </div>
