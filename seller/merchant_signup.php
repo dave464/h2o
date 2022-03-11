@@ -108,6 +108,27 @@ require_once '../connection.php';
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">                  
+                      <input type="text" name="coordinates" id="coordinates" class="form-control" placeholder="Coordinates" required = "required"/>
+                    </div>
+                  </div>
+
+                    <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">                  
+                      <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude" required = "required"/>
+                    </div>
+                  </div>
+
+                   <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">                  
+                      <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude" required = "required"/>
+                    </div>
+                  </div>
+
+                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                        <?php if (isset($_GET['contact_number'])) { ?>
@@ -115,6 +136,24 @@ require_once '../connection.php';
                        <?php }else{ ?>
                       <input type="text" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone">
                       <?php }?>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-clock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                       <?php if (isset($_GET['opening'])) { ?>
+                           <input type="time" name="opening" id="form3Example1c" />
+                       <?php }else{ ?>
+                           Opens hours <input type="time" name="opening" id="form3Example1c"   />
+                      <?php }?>to 
+
+                         <?php if (isset($_GET['closing'])) { ?>
+                           <input type="time" name="closing" id="form3Example1c" />
+                       <?php }else{ ?>
+                           <input type="time" name="closing" id="form3Example1c"   />
+                      <?php }?>
+
                     </div>
                   </div>
 
@@ -149,6 +188,23 @@ require_once '../connection.php';
 </body>
 </html>
 
+<script type="text/javascript">
+     function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
 
+function showPosition(position) {
+  //x.innerHTML = "Latitude: " + position.coords.latitude + 
+
+  document.getElementById("coordinates").value = position.coords.latitude+","+position.coords.longitude;
+   document.getElementById("latitude").value = position.coords.latitude;
+    document.getElementById("longitude").value = position.coords.longitude;
+}
+getLocation();
+ </script>
 
        
