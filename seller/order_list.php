@@ -124,7 +124,7 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
-                     <a onclick="window.location='orderlist_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">More Details</a>
+                     <a onclick="window.location='orderlist_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
                  </td>
                 </tr> 
@@ -153,26 +153,24 @@ require '../connection.php';
 .card{
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
-
 .myButton {
   box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-  background-color:#ffec64;
+  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
-  border:1px solid #ffaa22;
   display:inline-block;
   cursor:pointer;
-  color:#333333;
+  color:#fff;
   font-family:Arial;
   font-size:15px;
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
-  text-shadow:0px 1px 0px #ffee66;
+  border-color:	#0d6edf;
+  box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
 .myButton:hover {
-  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
+  background-color: $blue-500;
+  background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 /*h5 {
   width: 150px;
