@@ -11,7 +11,7 @@ require '../connection.php';
         <title>Purchase</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="main.css"> -->
+        <link rel="stylesheet" href="../main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <!-- <link rel = "icon" href = "images/logo.png" type = "image/png"> -->
     </head>
@@ -20,7 +20,7 @@ require '../connection.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
-       
+   
       <center>
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
       style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PURCHASE
@@ -141,7 +141,7 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
-                     <a onclick="window.location='pending_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">More Details</a>
+                     <a onclick="window.location='pending_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
                     </div>
                  </td>
                 </tr> 
@@ -166,36 +166,31 @@ require '../connection.php';
 .card{
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
-
 .myButton {
-  box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-  background-color:#ffec64;
+  background-color:	#0d6edf;
   border-radius:6px;
-  border:1px solid #ffaa22;
   display:inline-block;
   cursor:pointer;
-  color:#333333;
+  color:#fff;
   font-family:Arial;
   font-size:15px;
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
-  text-shadow:0px 1px 0px #ffee66;
+  border-color:	#0d6edf;
+  box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
 .myButton:hover {
-  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
+  background-color: $blue-500;
 }
+
+
 /*h5 {
   width: 150px;
   color:#000;
   padding:20px 0px;
 }*/
-.myButton:active {
-  position:relative;
-  top:1px;
-}
+
 </style>
 
 

@@ -79,10 +79,10 @@ require '../connection.php';
       <!-- <td class="align-middle"><input type="file" name="photoss" class="file" required></td> -->
       <td class="align-middle">
           <!-- <button type="submit" name="submitPurchase"  class="myButton" style="color:#000;margin:5px;">Purchase</button> -->
-          <a onclick="window.location='payment.php?cart_id=<?php echo $fetch['cart_id']?>'" class="myButton" style="color:#000;margin:5px;">
+          <a onclick="window.location='payment.php?cart_id=<?php echo $fetch['cart_id']?>'" class="myButton" style="color:#fff;margin:5px;">
             Checkout
           </a>
-          <button type="submit" name="submitRemove"  class="myButton" style="color:#000;margin:5px;">
+          <button type="submit" name="submitRemove"  class="myButton" style="color:#fff;margin:5px;">
             <i class="fas fa-trash-alt fa-sm fa-fw"></i>
           </button>
       </td>
@@ -173,32 +173,24 @@ require '../connection.php';
     border:2px solid #000;
   }
 .myButton {
-  box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-  background-color:#ffec64;
+  background-color:	#0d6edf;
   border-radius:6px;
-  border:1px solid #ffaa22;
   display:inline-block;
   cursor:pointer;
-  color:#333333;
+  color:#fff;
   font-family:Arial;
   font-size:15px;
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
-  text-shadow:0px 1px 0px #ffee66;
+  border-color:	#0d6edf;
+  box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
-.myButton:hover {
-  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
-}
+
 h5 {
   width: 150px;
   color:#000;
   padding:20px 0px;
 }
-.myButton:active {
-  position:relative;
-  top:1px;
-}
+
 </style>

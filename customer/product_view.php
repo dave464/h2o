@@ -94,8 +94,8 @@ require '../connection.php';
               
             </div>
             
-            <center><br><button type="submit" name="submit" onclick="addcart();" class="myButton" 
-            style="color:#000"><i class="fas fa-cart-plus"></i> Add to Cart</button><br><br>
+            <center><button type="submit" name="submit" onclick="addcart();" class="btn btn-primary btn-lg ">
+            <i class="fas fa-cart-plus"></i> Add to Cart</button><br>
           
           </div>
         </div>
@@ -144,34 +144,6 @@ require '../connection.php';
       }
     }
     </script>
-    <br><br><script>
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
     
     
 
@@ -186,28 +158,11 @@ function showSlides(n) {
 
 }
 
-.myButton {
-  box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-  background-color:#ffec64;
-  border-radius:6px;
-  border:1px solid #ffaa22;
-  display:inline-block;
-  cursor:pointer;
-  color:#333333;
-  font-family:Arial;
-  font-size:15px;
-  font-weight:bold;
-  padding:6px 24px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #ffee66;
+.btn {
+  width: 200px;
+  border-radius: 6px;
+  box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+  margin-top:30px;
 }
-.myButton:hover {
-  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
-}
-.myButton:active {
-  position:relative;
-  top:1px;
-}
+
 </style>
