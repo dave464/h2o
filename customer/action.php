@@ -58,10 +58,11 @@ require '../connection.php';
          $customer_id = $_POST['customer_id'];
          $merchant_id = $_POST['merchant_id'];
          $rating = $_POST['rating'];
- 
-         $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating) VALUES ('$customer_id','$product_id','$merchant_id','$rating')") or die(mysqli_error());
+         $comment = $_POST['comment'];
+
+         $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating,comment) VALUES ('$customer_id','$product_id','$merchant_id','$rating','$comment')") or die(mysqli_error());
          echo ("<script>
-         alert('Rate Successfully');
+         alert('You Have Successfully Rate This Product');
          document.location.href = 'received_orders.php';
          </script>");
  

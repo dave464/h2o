@@ -49,7 +49,7 @@ require_once '../connection.php';
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0" style="font-weight: 550">Order ID: <?php echo $fetch['order_id']?></p>
+            <p class="lead mb-0" style="font-weight: 550"> <?php echo $fetch['product_name']?></p>
             </div>
           
          
@@ -158,6 +158,15 @@ require_once '../connection.php';
     </div>
   </div>
 </div>
+
+<div class="form-floating">
+  <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">Describe your experience.</label>
+</div>
+
+
+
+
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button style="width:250px;" type="submitRate" name="submitRate" class="btn btn-primary btn-lg">Save Changes</button>
                   </div>
