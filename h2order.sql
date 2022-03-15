@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2022 at 02:41 PM
+-- Generation Time: Mar 15, 2022 at 03:37 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -103,7 +103,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `customer_id`, `product_id`, `number_of_items`) VALUES
-(2, 3, 3, 1);
+(4, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -119,25 +119,30 @@ CREATE TABLE `customer` (
   `lastname` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `contact_number` varchar(255) NOT NULL
+  `contact_number` varchar(255) NOT NULL,
+  `c_latitude` varchar(255) NOT NULL,
+  `c_longitude` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `email`, `contact_number`) VALUES
-(3, 'dave', '111', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015'),
-(4, 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty@gmail.com', '09666473909'),
-(5, 'qwerty2', 'qwerty', 'qwerty2', 'qwerty2', '123 street', 'qwerty2@gmail.com', '12345'),
-(8, 'Bryan', '123', '', '', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09051934015'),
-(9, 'Bryan123', '123', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015'),
-(10, 'dave', '', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '905193401'),
-(11, 'dave', 'dave', 'Kurt', 'Relano', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '0905193401'),
-(12, 'dave', '2222', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '905193401'),
-(13, '', '', '', '', '', '', ''),
-(14, 'dave', '', 'Dave', 'Bryan', 'Brgy.4 Nasugbu, Batangas', 'admin@gmail.com', '0905193401'),
-(15, 'dave123', '123', 'Dave', 'Bryan', 'Brgy.4 Nasugbu, Batangas', 'admin@gmail.com', '09051934015');
+INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `email`, `contact_number`, `c_latitude`, `c_longitude`) VALUES
+(3, 'dave', '111', 'Dave', 'Sevilla', 'Brgy.Talangan Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '14.082560', '120.633840'),
+(4, 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty', 'qwerty@gmail.com', '09666473909', '', ''),
+(5, 'qwerty2', 'qwerty', 'qwerty2', 'qwerty2', '123 street', 'qwerty2@gmail.com', '12345', '', ''),
+(8, 'Bryan', '123', '', '', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09051934015', '', ''),
+(9, 'Bryan123', '123', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '', ''),
+(10, 'dave', '', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '905193401', '', ''),
+(11, 'dave', 'dave', 'Kurt', 'Relano', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '0905193401', '', ''),
+(12, 'dave', '2222', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '905193401', '', ''),
+(13, '', '', '', '', '', '', '', '', ''),
+(14, 'dave', '', 'Dave', 'Bryan', 'Brgy.4 Nasugbu, Batangas', 'admin@gmail.com', '0905193401', '', ''),
+(15, 'dave123', '123', 'Dave', 'Bryan', 'Brgy.4 Nasugbu, Batangas', 'admin@gmail.com', '09051934015', '', ''),
+(16, 'lala', '123', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryansevilla34@gmail.com', '09051934015', '', ''),
+(17, 'dave321', '123', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryansevilla34@gmail.com', '09051934015', '', '120.976715'),
+(18, 'lololo', '123', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934014', '14.58534', '120.976715');
 
 -- --------------------------------------------------------
 
@@ -224,17 +229,20 @@ CREATE TABLE `merchant` (
   `contact_number` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `latitude` varchar(255) NOT NULL,
-  `longitude` varchar(255) NOT NULL
+  `longitude` varchar(255) NOT NULL,
+  `opening` time NOT NULL,
+  `closing` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `merchant`
 --
 
-INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `email`, `contact_number`, `image`, `latitude`, `longitude`) VALUES
-(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '', ''),
-(2, 'merchant1', 'merchant2', 'gibuts', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '', ''),
-(3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', 'davebryan.sevilla@yahoo.com', '09051934015', 'water.png', '14.6760413', '121.0437003');
+INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, `owner`, `address`, `email`, `contact_number`, `image`, `latitude`, `longitude`, `opening`, `closing`) VALUES
+(1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '14.040672893673618', '120.6573486328125', '08:00:00', '17:00:00'),
+(2, 'merchant1', 'merchant2', 'Triple S Water Refilling Station', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'DM.gif', '14.6760413', '121.0437003', '00:00:00', '00:00:00'),
+(3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', 'davebryan.sevilla@yahoo.com', '09051934015', 'water.png', '14.073133', '120.63533', '00:00:00', '00:00:00'),
+(8, 'br', '1', 'Batangas State University ARASOF', 'Ivane Kielle Rangel', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934315', 'h2logo.png', '14.073165', '120.635223', '08:00:00', '17:00:00');
 
 -- --------------------------------------------------------
 
@@ -272,8 +280,10 @@ INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`,
 (9, 1, 3, 1, NULL, 'pending', '5', 125, 'gcash', 'a1.jfif', '2022-02-15 03:53:31'),
 (10, 1, 3, 1, 6, 'ready', '2', 50, 'cod', NULL, '2022-02-16 09:20:41'),
 (11, 1, 3, 1, 6, 'delivered', '2', 50, 'gcash', 'a2.jpg', '2022-02-16 14:45:56'),
-(12, 1, 3, 1, NULL, 'pending', '10', 250, 'cod', NULL, '2022-02-22 02:09:04'),
-(13, 2, 3, 2, 7, 'delivered', '22', 440, 'cod', NULL, '2022-03-04 03:31:42');
+(12, 1, 2, 1, NULL, 'pending', '10', 250, 'cod', NULL, '2022-02-22 02:09:04'),
+(13, 2, 3, 2, 7, 'delivered', '22', 440, 'cod', NULL, '2022-03-04 03:31:42'),
+(14, 1, 3, 1, NULL, 'pending', '9', 225, 'cod', NULL, '2022-03-09 09:39:47'),
+(15, 1, 3, 1, NULL, 'pending', '1', 25, 'cod', NULL, '2022-03-11 08:18:10');
 
 -- --------------------------------------------------------
 
@@ -312,19 +322,21 @@ CREATE TABLE `product_rating` (
   `customer_id` int(11) NOT NULL,
   `merchant_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `rating` varchar(11) NOT NULL
+  `rating` varchar(11) NOT NULL,
+  `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product_rating`
 --
 
-INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_id`, `rating`) VALUES
-(7, 3, 1, 1, '3'),
-(9, 3, 2, 2, '4'),
-(11, 3, 1, 1, '3'),
-(12, 3, 1, 1, '2'),
-(13, 3, 1, 1, '3');
+INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_id`, `rating`, `comment`) VALUES
+(1, 3, 1, 1, '1', ''),
+(2, 3, 1, 1, '1', ''),
+(3, 3, 1, 1, '2', ''),
+(4, 3, 1, 1, '3', ''),
+(5, 3, 1, 1, '4', ''),
+(6, 3, 1, 1, '4', 'Great ');
 
 -- --------------------------------------------------------
 
@@ -464,13 +476,13 @@ ALTER TABLE `badge`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `deliveryman`
@@ -494,13 +506,13 @@ ALTER TABLE `inspection`
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -512,7 +524,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_rating`
 --
 ALTER TABLE `product_rating`
-  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `transactions`
