@@ -44,8 +44,8 @@ require '../connection.php';
                   $std_num= 0;
                   $counter =0;
                 $productId = $fetch['product_id'];
-                $query2 = $conn->query("SELECT product_rating.rating, product_rating.comment
-                FROM product_rating WHERE  product_rating.product_id = $productId ");
+                $query2 = $conn->query("SELECT product_rating.rating
+                FROM product_rating WHERE product_rating.product_id = $productId");
 
                 while($fetch2 = $query2->fetch_array()){
 
@@ -59,11 +59,6 @@ require '../connection.php';
                 else {
                   $average = 0;
                 }
-
-
-
-
-
 
       ?>
 
@@ -240,7 +235,7 @@ require '../connection.php';
                         </div>
                     </div>
                     <div class="mt-2">
-                        <p class="comment-text"><?php echo $fetch['product_name']?></p>
+                        <p class="comment-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                     </div>
                 </div>
                
