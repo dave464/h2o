@@ -164,7 +164,7 @@ require '../connection.php';
         </div>
 
         <a href="review.php?product_id=<?php echo $fetch['product_id']?>'" 
-          style="width: 60%; margin-top: 50px"
+          style="width: 65%; margin-top: 50px"
           class="btn btn-primary">Ratings and Reviews</a>
           
           </div>
