@@ -59,8 +59,12 @@ require '../connection.php';
          $merchant_id = $_POST['merchant_id'];
          $rating = $_POST['rating'];
          $comment = $_POST['comment'];
+         $w_facemask = $_POST['w_facemask'];
+         $c_uniform = $_POST['c_uniform'];
+         $on_time = $_POST['on_time'];
+         
 
-         $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating,comment) VALUES ('$customer_id','$product_id','$merchant_id','$rating','$comment')") or die(mysqli_error());
+         $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating,comment,w_facemask,c_uniform,on_time) VALUES ('$customer_id','$product_id','$merchant_id','$rating','$comment','$w_facemask','$c_uniform','$on_time')") or die(mysqli_error());
          echo ("<script>
          alert('You Have Successfully Rate This Product');
          document.location.href = 'received_orders.php';

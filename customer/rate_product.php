@@ -24,8 +24,13 @@ require_once '../connection.php';
       </p>
     
 
-      <div class="container">
-        <?php
+
+ <form action="action.php" method="POST" enctype="multipart/form-data" class="form">    
+    
+      <!-- Steps -->
+      <div class="form-step form-step-active">
+        
+          <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
@@ -36,7 +41,7 @@ require_once '../connection.php';
              WHERE orderlist.order_id = '".$_REQUEST['order_id']."'") or die(mysqli_error());
             while($fetch = $query->fetch_array()){  
           ?>  
-          <form action="action.php" method="POST" enctype="multipart/form-data" > 
+         
 
             <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
             <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
@@ -44,20 +49,27 @@ require_once '../connection.php';
             <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
 
        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-        <div class="card">
+       
           <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-            <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0" style="font-weight: 550"> <?php echo $fetch['product_name']?></p>
+            
+             <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height:200px"
+           class="card-img-top"/>
+
+            <div class="d-flex justify-content-center p-3">
+            
             </div>
           
          
            <div class="card-body">
              
            <div class="container1">
+            <p class="lead mb-0" style="font-weight: 550;"> <?php echo $fetch['product_name']?></p>
+
   <div class="feedback">
-    <div class="rating">
+     <p class="lead mb-0" style="margin-left:-63px;margin-top:30px;font-size:15px">How satisfied are you with this product?</p>
+    <div class="rating" style="margin-top:10px">
       <input type="radio" name="rating" value="5" id="rating-5">
       <label for="rating-5"></label>
       <input type="radio" name="rating" value="4" id="rating-4">
@@ -93,8 +105,8 @@ require_once '../connection.php';
           <path d="M155 189.5c-25.8 0-47-7.1-63.7-18.7-10 14.6-17 32.1-18.7 51.6-4 49.6 26.1 89.7 67.5 89.7 41.6 0 78.4-40.1 82.5-89.7A95 95 0 0 0 214 174c-16 9.7-35.6 15.5-59 15.5z" fill="#fff"/>
           <path d="M115.8 246.1a38.5 38.5 0 0 0 38.7 38.6 38.5 38.5 0 0 0 38.6-38.6 38.6 38.6 0 1 0-77.3 0z" fill="#3e4347"/>
           <path d="M131.6 241.1c3.2 3.2 9.9 1.7 14.9-3.2 4.8-4.8 6.2-11.5 3-14.7-3.3-3.4-10-2-14.9 2.9-4.9 5-6.4 11.7-3 15z" fill="#fff"/>
-        </svg>
-          <svg class="rating-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        </svg><p style="margin-top:-15px; font-size: 12px">Very Unsatisfied</p>
+          <svg class="rating-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="margin-top:-0px;">
           <circle cx="256" cy="256" r="256" fill="#ffd93b"/>
           <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534"/>
           <path d="M336.6 403.2c-6.5 8-16 10-25.5 5.2a117.6 117.6 0 0 0-110.2 0c-9.4 4.9-19 3.3-25.6-4.6-6.5-7.7-4.7-21.1 8.4-28 45.1-24 99.5-24 144.6 0 13 7 14.8 19.7 8.3 27.4z" fill="#3e4347"/>
@@ -106,8 +118,8 @@ require_once '../connection.php';
           </g>
           <circle cx="168.5" cy="260.4" r="36.2" fill="#3e4347"/>
           <ellipse transform="rotate(-135 182.1 246.7)" cx="182.1" cy="246.7" rx="10" ry="6.5" fill="#fff"/>
-        </svg>
-          <svg class="rating-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        </svg><p style="margin-top:-15px; font-size: 12px">Unsatisfied</p>
+          <svg class="rating-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="margin-top:7px;">
     <circle cx="256" cy="256" r="256" fill="#ffd93b"/>
     <path d="M407.7 352.8a163.9 163.9 0 0 1-303.5 0c-2.3-5.5 1.5-12 7.5-13.2a780.8 780.8 0 0 1 288.4 0c6 1.2 9.9 7.7 7.6 13.2z" fill="#3e4347"/>
     <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534"/>
@@ -122,8 +134,8 @@ require_once '../connection.php';
     </g>
     <ellipse cx="155.6" cy="205.3" rx="44.2" ry="44.2" fill="#3e4347"/>
     <ellipse transform="scale(-1) rotate(45 454 -421.3)" cx="174.5" cy="188" rx="12" ry="8.1" fill="#fff"/>
-  </svg>
-          <svg class="rating-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  </svg><p style="margin-top:-15px; font-size: 12px">Neutral</p>
+          <svg class="rating-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="margin-top:7px;">
           <circle cx="256" cy="256" r="256" fill="#ffd93b"/>
           <path d="M512 256A256 256 0 0 1 56.7 416.7a256 256 0 0 0 360-360c58.1 47 95.3 118.8 95.3 199.3z" fill="#f4c534"/>
           <path d="M232.3 201.3c0 49.2-74.3 94.2-74.3 94.2s-74.4-45-74.4-94.2a38 38 0 0 1 74.4-11.1 38 38 0 0 1 74.3 11.1z" fill="#e24b4b"/>
@@ -134,8 +146,8 @@ require_once '../connection.php';
           <path d="M411.3 200c-3.6 3-9.8 1-13.8-4.1-4.2-5.2-4.6-11.5-1.2-14.1 3.6-2.8 9.7-.7 13.9 4.4 4 5.2 4.6 11.4 1.1 13.8z" fill="#fff"/>
           <path d="M381.7 374.1c-30.2 35.9-75.3 64.4-125.7 64.4s-95.4-28.5-125.8-64.2a17.6 17.6 0 0 1 16.5-28.7 627.7 627.7 0 0 0 218.7-.1c16.2-2.7 27 16.1 16.3 28.6z" fill="#3e4347"/>
           <path d="M256 438.5c25.7 0 50-7.5 71.7-19.5-9-33.7-40.7-43.3-62.6-31.7-29.7 15.8-62.8-4.7-75.6 34.3 20.3 10.4 42.8 17 66.5 17z" fill="#e24b4b"/>
-        </svg>
-          <svg class="rating-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        </svg><p style="margin-top:-15px; font-size: 12px">Satisfied</p>
+          <svg class="rating-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="margin-top:6px;">
           <g fill="#ffd93b">
             <circle cx="256" cy="256" r="256"/>
             <path d="M512 256A256 256 0 0 1 56.8 416.7a256 256 0 0 0 360-360c58 47 95.2 118.8 95.2 199.3z"/>
@@ -152,7 +164,7 @@ require_once '../connection.php';
           <path d="M329.5 395.2c0 44.7-33 81-73.4 81-40.7 0-73.5-36.3-73.5-81s32.8-81 73.5-81c40.5 0 73.4 36.3 73.4 81z" fill="#3e4347"/>
           <path d="M256 476.2a70 70 0 0 0 53.3-25.5 34.6 34.6 0 0 0-58-25 34.4 34.4 0 0 0-47.8 26 69.9 69.9 0 0 0 52.6 24.5z" fill="#e24b4b"/>
           <path d="M290.3 434.8c-1 3.4-5.8 5.2-11 3.9s-8.4-5.1-7.4-8.7c.8-3.3 5.7-5 10.7-3.8 5.1 1.4 8.5 5.3 7.7 8.6z" fill="#fff" opacity=".2"/>
-        </svg>
+        </svg><p style="margin-top:-15px; font-size: 12px">Very Satisfied</p>
         </div>
       </div>
     </div>
@@ -162,30 +174,86 @@ require_once '../connection.php';
 <div class="form-floating">
   <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Describe your experience.</label>
-</div>
-
-
-
-
-            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="width:250px;" type="submitRate" name="submitRate" class="btn btn-primary btn-lg">Save Changes</button>
-                  </div>
-          </div>
-        </div>
+</div>   
+          </div>       
       </div>
-        
-            </form>
+                 
         <?php
         }
         ?>
 
+        <div class="btns-group" style="margin-left: 230px;">
+          <a href="#" class="btn btn-next">Next</a>
+        </div>
+
       </div>
+<!----- Deliver man Feedback ---->
+ <div class="form-step">
+ <div class="logo"> <img src="../img/dPic.jpg" alt=""> </div>
+  <b><div class="text-center mt-4 name"> Delivery Man </div></b>
+ <table style=" margin-top: 80px">
+    <tr> 
+      <td valign="top" style="padding-left:20px;"> 
+  
+<div style="margin-top:5px">
+  Wearing facemask
+
+<div class="form-check form-check-inline" style="margin-left: 90px">
+  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio1" value="Yes" />
+  <label class="form-check-label" for="inlineRadio1">Yes</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio2" value="No" />
+  <label class="form-check-label" for="inlineRadio2">No</label>
+</div>
+</div>
+
+<div style="margin-top:10px">
+ Complete Uniform
+
+<div class="form-check form-check-inline" style="margin-left: 93px">
+  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio1" value="Yes" />
+  <label class="form-check-label" for="inlineRadio1">Yes</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio2" value="No" />
+  <label class="form-check-label" for="inlineRadio2">No</label>
+</div>
+</div>
+
+<div style="margin-top:10px">
+ Arrived on time
+
+<div class="form-check form-check-inline" style="margin-left: 115px">
+  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio1" value="Yes" />
+  <label class="form-check-label" for="inlineRadio1">Yes</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio2" value="No" />
+  <label class="form-check-label" for="inlineRadio2">No</label>
+</div>
+</div>
+  </td>
+    </tr> 
+      </table>
+
+        <div class="btns-group" style="margin-top: 60px;">
+          <a href="#" class="btn btn-prev">Previous</a>
+          <input type="submit" name="submitRate" value="Submit" class="btn" />
+        </div>
+      </div>
+    </form>
+<br>
 
     </body>
 </html>
 
 
 
+<!--========= CSS FOR STAR =======-->
 <style>
 .card{
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
@@ -195,10 +263,10 @@ require_once '../connection.php';
   background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png");
   display: flex;
   flex-wrap: wrap;
- 
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+  margin-top: -50px;
 }
 
 .rating {
@@ -207,7 +275,7 @@ require_once '../connection.php';
   justify-content: center;
   overflow: hidden;
   flex-direction: row-reverse;
-  height: 150px;
+  height: 140px;
   position: relative;
 }
 
@@ -280,9 +348,9 @@ require_once '../connection.php';
 }
 
 .emoji > svg {
-  margin: 15px 0; 
+  margin: 20px 0; 
   width: 70px;
-  height: 70px;
+  height: 55px;
   flex-shrink: 0;
 }
 
@@ -306,3 +374,116 @@ require_once '../connection.php';
 }
 
 </style>
+
+
+<!--========= CSS FOR MULTI SUBMIT FORM =======-->
+<style type="text/css">
+
+/* Progressbar */
+.progressbar {
+  position: relative;
+  display: flex;
+  counter-reset: step;
+  
+}
+
+.progressbar::before,
+.progress {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 10%;
+  background-color: #dcdcdc;
+  z-index: -1;
+}
+
+.progress {
+  background-color: var(--primary-color);
+  width: 0%;
+  transition: 0.3s;
+}
+
+.progress-step {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-step::before {
+  counter-increment: step;
+  content: counter(step);
+}
+
+
+.progress-step-active {
+  background-color: var(--primary-color);
+  color: #f3f3f3;
+}
+
+/* Form */
+.form {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+  padding: 1.5rem;
+   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+
+.form-step {
+  display: none;
+  transform-origin: top;
+  animation: animate 0.5s;
+}
+
+.form-step-active {
+  display: block;
+}
+
+.input-group {
+  margin: 2rem 0;
+}
+
+@keyframes animate {
+  from {
+    transform: scale(1, 0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+/* Button */
+.btns-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.btn {
+  padding: 0.50rem;
+  display: block;
+  text-decoration: none;
+  background-color: #0d6edf ;
+  color: #f3f3f3;
+  text-align: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+  color:white;
+}
+</style>
+
+<script src="rateForm.js"></script>
