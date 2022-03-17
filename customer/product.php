@@ -162,6 +162,9 @@ require '../connection.php';
               
 
         </div>
+
+        <a  href="review.php?product_id=<?php echo $fetch['product_id']?>">sa </a>
+
           </div>
         </div>
       </div>

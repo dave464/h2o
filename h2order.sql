@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 03:37 PM
+-- Generation Time: Mar 17, 2022 at 11:48 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -323,20 +323,27 @@ CREATE TABLE `product_rating` (
   `merchant_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `rating` varchar(11) NOT NULL,
-  `comment` text NOT NULL
+  `comment` text NOT NULL,
+  `w_facemask` varchar(255) NOT NULL,
+  `c_uniform` varchar(255) NOT NULL,
+  `on_time` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product_rating`
 --
 
-INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_id`, `rating`, `comment`) VALUES
-(1, 3, 1, 1, '1', ''),
-(2, 3, 1, 1, '1', ''),
-(3, 3, 1, 1, '2', ''),
-(4, 3, 1, 1, '3', ''),
-(5, 3, 1, 1, '4', ''),
-(6, 3, 1, 1, '4', 'Great ');
+INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_id`, `rating`, `comment`, `w_facemask`, `c_uniform`, `on_time`) VALUES
+(1, 3, 1, 1, '1', '', '', '', ''),
+(2, 3, 1, 1, '1', '', '', '', ''),
+(3, 3, 1, 1, '2', '', '', '', ''),
+(4, 3, 1, 1, '3', '', '', '', ''),
+(5, 3, 1, 1, '4', '', '', '', ''),
+(6, 3, 1, 1, '4', 'Great ', '', '', ''),
+(8, 3, 1, 1, '4', '', '', '', ''),
+(9, 3, 1, 1, '2', 'kkpk', '', '', ''),
+(10, 3, 1, 1, '3', 'Nice', 'Yes', 'No', 'Yes'),
+(11, 3, 1, 1, '3', 'dada', 'Yes', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -524,7 +531,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_rating`
 --
 ALTER TABLE `product_rating`
-  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transactions`
