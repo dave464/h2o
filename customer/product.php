@@ -93,7 +93,7 @@ require '../connection.php';
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Rating:  <p class="text-dark mb-0">
+              <p class="text-muted mb-0">Rating:</p>  <p class="text-dark mb-0">
                 <?php if($average==0) {
                 echo 'No Rating';
               } else{
@@ -158,7 +158,7 @@ require '../connection.php';
 
 
                 } ?></p> 
-              </p>
+              
               
 
         </div>
