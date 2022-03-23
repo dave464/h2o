@@ -49,7 +49,7 @@ $saveJson["properties"]=[
                     "image"=>$row['image'],
                     "opening"=>date('h:i A', strtotime($row['opening'])),
                     "closing"=>date('h:i A', strtotime($row['closing'])),
-                    "link"=>['Buy Now'],
+                    "link"=>['Order Now'],
                     "merchant_id"=>$row['merchant_id']            
                 ];
 
