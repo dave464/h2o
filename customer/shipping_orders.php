@@ -85,31 +85,13 @@ require '../connection.php';
         $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'pending' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
         $f_p = $q_p->fetch_array();
 
-        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'ready' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
+        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'accepted' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         $f_s = $q_s->fetch_array();
+
+        $q_d = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
+        $f_d = $q_d->fetch_array();
       ?>
 
-
-
-
-  <div>
-    <button type="button" class="btn btn-primary" onclick="window.location='purchase.php'" style="background-color: white; border:red; color:black; margin-left:-1px; width:100px;">
-      <i style="font-size:25px;" class="fas fa-history"></i>
-      <span class="badge bg-danger"><?php echo $f_p['total']?></span>
-      Pending 
-    </button>
-
-     <button type="button" class="btn btn-primary" onclick="window.location='shipping_orders.php'" style="background: rgb(0,115,174);background: linear-gradient(90deg, rgba(0,115,174,1) 0%, rgba(3,169,244,1) 80%); color:black; margin-left:120px; margin-top:-88px;width:100px;">
-      <i style="font-size:25px;" class="fas fa-truck"></i>
-      <span class="badge bg-danger"><?php echo $f_s['total']?></span>
-      Ready 
-    </button>
-
-     <button type="button" class="btn btn-primary" onclick="window.location='received_orders.php'" style="background-color: white; color:black; margin-left:240px; margin-top:-88px;width:100px;">
-      <i style="font-size:25px;" class="fas fa-box-open"></i>
-      Received 
-    </button>    
-  </div>
 
 
     <div class="row">
@@ -118,10 +100,12 @@ require '../connection.php';
  <?php
       $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
       product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-      orderlist.date, customer.firstname, customer.lastname, customer.customer_id FROM orderlist 
+      orderlist.date, customer.firstname, customer.lastname, customer.customer_id,  merchant.business_name,merchant.merchant_id 
+      FROM orderlist 
       RIGHT JOIN product ON orderlist.product_id = product.product_id 
       RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-      WHERE orderlist.status = 'ready' && orderlist.customer_id = '".$_SESSION['customer_id']."'
+      RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
+      WHERE orderlist.status =  'accepted' && orderlist.customer_id = '".$_SESSION['customer_id']."'
   ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
 ?>
@@ -129,19 +113,24 @@ require '../connection.php';
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
+            <h5 style="font-weight: 550;margin-top: 15px; margin-left: 15px" >
+            <i class="fas fa-store" style=""></i>
+              &nbsp<?php echo $fetch['business_name']?>
+            </h5>
           <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height: 200px; margin-bottom: 5px;" />          
             
              <div>
                 <table>
                   <tr> 
                   <td valign="top" style="padding-left:20px;"> 
-                    <div style=" margin-top:-180px; margin-left: 150px;">
-                      <h5 class="text-dark mb-0" style="font-weight: 550" >Order ID: <?php echo $fetch['order_id']?></h5>
+                    <div style=" margin-top:-200px; margin-left: 150px;">
+                     
                       <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
+                      <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
                      <a onclick="window.location='shipping_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
                     </div>
                  </td>
@@ -159,6 +148,29 @@ require '../connection.php';
 
         </div>
       </div>
+
+  <nav class="nav">
+  <a href="purchase.php" class="nav__link " >
+      <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_p['total']?></span>
+        <i class="fa fa-history" style="font-size: 18px"></i>
+    <span class="nav__text">Pending</span>
+  </a>
+  <a href="shipping_orders.php" class="nav__link nav__link--active">
+    <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_s['total']?></span>
+    <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
+    <span class="nav__text">Accepted</span>
+  </a>
+  <a href="dispatched_order.php" class="nav__link">
+   <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_d['total']?></span>
+    <i class="fas fa-truck" style="font-size: 18px"></i>
+    <span class="nav__text">Dispatched</span>
+  </a>
+  <a href="received_orders.php" class="nav__link">
+    <i class="fas fa-star" style="font-size: 18px"></i>
+    <span class="nav__text">To rate</span>
+  </a>
+</nav>
+
 </section>
 <!--------- SECTION END-------->
 
@@ -197,6 +209,56 @@ require '../connection.php';
   position:relative;
   top:1px;
 }
+
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    display: flex;
+    overflow-x: auto;
+}
+
+.nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+
+}
+
+.nav__link:hover {
+    background-color: #eeeeee;
+}
+
+.nav__link--active {
+    color: #0d6edf;
+}
+
+.nav__icon {
+    font-size: 18px;
+}
+
+.badge {
+  font-size: 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
 </style>
 
 

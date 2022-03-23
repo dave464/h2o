@@ -173,12 +173,7 @@ require_once '../connection.php';
                <div class="d-flex justify-content-center mb-3">
               <h4 class="mb-0" style="font-weight: 550">DELIVERYMAN DETAILS</h4>
               </div>
-               <?php
-                    $query = $conn->query("SELECT * FROM deliveryman 
-                            WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
-                            or die(mysqli_error());
-                           $fetch = $query->fetch_array();
-                ?>
+              
              <hr>
             <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight: 550">Name: </p>

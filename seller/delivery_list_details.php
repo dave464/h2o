@@ -102,8 +102,7 @@ require_once '../connection.php';
         ?>
 
  </div> -->
-
-      <div class="container">
+ <div class="container">
         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
@@ -130,7 +129,9 @@ require_once '../connection.php';
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0" style="font-weight: 550">Order ID: <?php echo $fetch['order_id']?></p>
+            <p class="lead mb-0" style="font-weight: 550">
+              Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?>
+            </p>
             </div>
           
             <center><img src = "../photo/<?php echo $fetch['image']?>" style="width: 300px;
@@ -172,6 +173,9 @@ require_once '../connection.php';
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
               <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
              </div>
+              
+
+           
               <br>
                <!------------- PAYMENT DETAILS ---------------->
                <div class="d-flex justify-content-center mb-3">
@@ -180,19 +184,16 @@ require_once '../connection.php';
              <hr>
             <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight: 550">Price: </p>
-              <p class="card-text">&#8369; <?php echo $fetch['price']?>.00</p>        
+              <p class="card-text">&#8369;<?php echo $fetch['price']?>.00</p>        
              </div>
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Quantity: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['quantity']?></p>     </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Total:</p>
-              <p class="card-text"style="margin-top:-10px;">&#8369; <?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
+              <p class="card-text"style="margin-top:-10px;">&#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
              </div>
-              <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;">Status:</p>
-              <p class="card-text"style="margin-top:-10px;"><?php echo  strtoupper($fetch['status'])?></p>       
-             </div>
+             
               <div class="d-flex justify-content-between">
                  <p class="card-text" style="font-weight:550;margin-top:-10px;">Type:</p>      
                 <p class="card-text" style="margin-top:-10px;"><?php echo  strtoupper($fetch['type'])?></p>    
@@ -204,30 +205,10 @@ require_once '../connection.php';
             <?php
             }
             ?>   
-            <br>
-            <!------------- DELIVERYMAN DETAILS ---------------->
-               <div class="d-flex justify-content-center mb-3">
-              <h4 class="mb-0" style="font-weight: 550">DELIVERYMAN DETAILS</h4>
-              </div>
-               <?php
-                    $query = $conn->query("SELECT * FROM deliveryman 
-                            WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
-                            or die(mysqli_error());
-                           $fetch = $query->fetch_array();
-                ?>
-             <hr>
-            <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight: 550">Name: </p>
-              <p class="card-text"><?php echo $fetch['name']?></p>        
-             </div>
-             <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
-              <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
-             </div>
-             <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;">Plate Number: </p>
-              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['plate_number']?></p> </div> 
-                      
+            <br> <br>
+          
+              
+
           </div>
         </div>
       </div>

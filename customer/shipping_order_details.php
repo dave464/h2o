@@ -30,11 +30,11 @@ require_once '../connection.php';
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id
-            ,deliveryman.name, deliveryman.plate_number, deliveryman.contact_number, deliveryman.deliveryman_id  FROM `orderlist`
+            FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
             RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-            RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
+         
              WHERE orderlist.order_id = '".$_REQUEST['order_id']."'") or die(mysqli_error());
             while($fetch = $query->fetch_array()){  
           ?>  
@@ -54,7 +54,8 @@ require_once '../connection.php';
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0" style="font-weight: 550">Order ID: <?php echo $fetch['order_id']?></p>
+            <p class="lead mb-0" style="font-weight: 550">
+              Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?></p>
             </div>
           
             <center><img src = "../photo/<?php echo $fetch['image']?>" style="width: 300px;
@@ -129,20 +130,7 @@ require_once '../connection.php';
             }
             ?>   
             <br>
-            <h4 class="mb-0" style="font-weight: 550">DELIVERYMAN DETAILS</h4>
-            <hr>
-            <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight: 550">Name: </p>
-              <p class="card-text"><?php echo $fetch['name']?></p>        
-             </div>
-             <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;">Plate Number: </p>
-              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['plate_number']?></p>        
-             </div> 
-             <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
-              <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
-             </div>
+         
             
            
           </div>

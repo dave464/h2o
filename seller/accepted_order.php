@@ -8,7 +8,7 @@ require '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Order List</title>
+        <title>Accepted</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="../main.css">
@@ -23,7 +23,7 @@ require '../connection.php';
        
       <center>
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">ORDER LIST
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;"> ACCEPTED ORDERS
       </p>
   
   <!--    
@@ -51,7 +51,7 @@ require '../connection.php';
   orderlist.date, customer.firstname, customer.lastname, customer.customer_id FROM orderlist 
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-  WHERE orderlist.status = 'pending' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
+  WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
   ") or die(mysqli_error());
   while($fetch = $queryy->fetch_array()){
 ?>
@@ -104,7 +104,7 @@ require '../connection.php';
       FROM orderlist 
       RIGHT JOIN product ON orderlist.product_id = product.product_id 
       RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-      WHERE orderlist.status = 'pending' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
+      WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
       ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
 ?>
@@ -117,7 +117,7 @@ require '../connection.php';
                 <h5 style="font-weight: 550;margin-top: 15px; margin-left:2px" >
                    &nbsp<?php echo $fetch['firstname']?> <?php echo $fetch['lastname']?>
                </h5>     
-            </div> 
+            </div>     
           <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height: 200px; margin-bottom: 5px;" />          
             
              <div>
@@ -125,14 +125,14 @@ require '../connection.php';
                   <tr> 
                   <td valign="top" style="padding-left:20px;"> 
                     <div style=" margin-top:-200px; margin-left: 150px;">
-                   
+                  
                       <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
-                     <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
-                     <a onclick="window.location='orderlist_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
+                      <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
+                     <a onclick="window.location='accepted_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
                  </td>
                 </tr> 

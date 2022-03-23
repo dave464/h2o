@@ -51,7 +51,7 @@ require '../connection.php';
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
   RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
-  WHERE orderlist.status = 'ready' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
+  WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
   ") or die(mysqli_error());
   while($fetch = $delquery->fetch_array()){
 ?>
@@ -107,7 +107,7 @@ require '../connection.php';
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
   RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
-  WHERE orderlist.status = 'ready' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
+  WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
   ") or die(mysqli_error());
   while($fetch = $delquery->fetch_array()){
 ?>
@@ -115,18 +115,25 @@ require '../connection.php';
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
+           <div class="d-flex flex-row comment-user">
+              <img class="rounded" src = "../img/user.png" width="30" height="30" style="margin-left:20px; margin-top: 10px">
+                <h5 style="font-weight: 550;margin-top: 15px; margin-left:2px" >
+                   &nbsp<?php echo $fetch['firstname']?> <?php echo $fetch['lastname']?>
+               </h5>     
+            </div> 
           <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height: 200px; margin-bottom: 5px;" />          
             
              <div>
                 <table>
                   <tr> 
                   <td valign="top" style="padding-left:20px;"> 
-                    <div style=" margin-top:-180px; margin-left: 150px;">
-                      <h5 class="text-dark mb-0" style="font-weight: 550" >Order ID: <?php echo $fetch['order_id']?></h5>
+                    <div style=" margin-top:-200px; margin-left: 150px;">
+            
                       <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total:  &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
+                      <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
                      <a onclick="window.location='delivery_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
                  </td>

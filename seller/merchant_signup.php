@@ -107,26 +107,23 @@ require_once '../connection.php';
                     </div>
                   </div>
 
-                  <div class="d-flex flex-row align-items-center mb-2">
-                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+                 
                     <div class="form-outline flex-fill mb-0">                  
-                      <input type="text" name="coordinates" id="coordinates" class="form-control" placeholder="Coordinates" required = "required"/>
+                      <input type="hidden" name="coordinates" id="coordinates" class="form-control" placeholder="Coordinates" required = "required"/>
                     </div>
-                  </div>
+                  
 
-                    <div class="d-flex flex-row align-items-center mb-2">
-                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+                 
                     <div class="form-outline flex-fill mb-0">                  
-                      <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude" required = "required"/>
+                      <input type="hidden" name="latitude" id="latitude" class="form-control" placeholder="latitude" required = "required"/>
                     </div>
-                  </div>
+                  
 
-                   <div class="d-flex flex-row align-items-center mb-2">
-                    <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
+              
                     <div class="form-outline flex-fill mb-0">                  
-                      <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude" required = "required"/>
+                      <input type="hidden" name="longitude" id="longitude" class="form-control" placeholder="longitude" required = "required"/>
                     </div>
-                  </div>
+                  
 
                    <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>

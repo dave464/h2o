@@ -25,7 +25,7 @@ require '../connection.php';
 ///////////-------------EDIT DELIVERYMAN'S ACCOUNT ------------/////
   if(ISSET($_POST['editProfile'])){
 
-    $name= $_POST['name'];
+        $name= $_POST['name'];
 		$contact_number = $_POST['contact_number'];
 		$plate_number = $_POST['plate_number'];
 		$username = $_POST['username'];

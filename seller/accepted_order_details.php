@@ -7,7 +7,7 @@ require_once '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Index</title>
+        <title>accepted</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -20,7 +20,7 @@ require_once '../connection.php';
       <?php include 'navbar.php' ?>
       <center> 
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">Delivery Details
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">ACCEPTED ORDERS
       </p>
        <!-- <div class="container">
         <?php
@@ -131,8 +131,7 @@ require_once '../connection.php';
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <div class="d-flex justify-content-between p-3">
             <p class="lead mb-0" style="font-weight: 550">
-              Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> 
-            </p>
+              Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?></p>
             </div>
           
             <center><img src = "../photo/<?php echo $fetch['image']?>" style="width: 300px;
@@ -174,14 +173,6 @@ require_once '../connection.php';
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
               <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
              </div>
-              <div class="d-flex justify-content-between">
-              <p class="card-text" style="font-weight:550;margin-top:-10px;"></p>
-               <a href="del_destination.php?order_id=<?php echo $fetch['order_id']?>"><input type="button" name="show" style="background-color:red; border:none;border-radius: 6px;
-            box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff; color:white; height: 25px; width:100px;"
-              value="show map"></a>     
-             </div>
-
-           
               <br>
                <!------------- PAYMENT DETAILS ---------------->
                <div class="d-flex justify-content-center mb-3">
@@ -190,16 +181,19 @@ require_once '../connection.php';
              <hr>
             <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight: 550">Price: </p>
-              <p class="card-text">&#8369;<?php echo $fetch['price']?>.00</p>        
+              <p class="card-text">&#8369; <?php echo $fetch['price']?>.00</p>        
              </div>
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Quantity: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['quantity']?></p>     </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Total:</p>
-              <p class="card-text"style="margin-top:-10px;">&#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
+              <p class="card-text"style="margin-top:-10px;">&#8369; <?php echo $fetch['quantity']* $fetch['price']?>.00</p>       
              </div>
-             
+              <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Status:</p>
+              <p class="card-text"style="margin-top:-10px;"><?php echo  strtoupper($fetch['status'])?></p>       
+             </div>
               <div class="d-flex justify-content-between">
                  <p class="card-text" style="font-weight:550;margin-top:-10px;">Type:</p>      
                 <p class="card-text" style="margin-top:-10px;"><?php echo  strtoupper($fetch['type'])?></p>    
@@ -211,13 +205,27 @@ require_once '../connection.php';
             <?php
             }
             ?>   
-            <br> <br>
-          
-              
+            <br>
+            <h5 class="card-title fw-bold">Select Driver</h5>
+            
+            <div class="select-container">
+                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
+                          <?php
+                                $query = $conn->query("SELECT * FROM deliveryman 
+                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
+                                or die(mysqli_error());
+                                while($fetch = $query->fetch_array()){
+                              ?>
+                            
+                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
+                              <?php
+                                }
+                              ?>
+                          </select>
+          </div>
 
-         <button type="submit" name="submitDeliver" class="btn btn-primary" style="width:200px;">
-         Set as Delivered</button>  
-
+            <button type="submit" name="submitDispatch" class="btn btn-primary">Dispatched</button>
+           
           </div>
         </div>
       </div>

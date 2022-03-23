@@ -112,6 +112,17 @@ require_once '../connection.php';
                     </div>
                   </div>
 
+                
+                    <div class="form-outline flex-fill mb-0">                  
+                      <input type="hidden" name="c_latitude" id="c_latitude" class="form-control" placeholder="latitude" required = "required"/>
+                    </div>
+               
+
+                    <div class="form-outline flex-fill mb-0">                  
+                      <input type="hidden" name="c_longitude" id="c_longitude" class="form-control" placeholder="longitude" required = "required"/>
+                    </div>
+                  
+                  
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -193,3 +204,22 @@ function terms_changed(termsCheckBox){
     }
 }
 </script>
+
+
+<script type="text/javascript">
+     function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  //x.innerHTML = "Latitude: " + position.coords.latitude + 
+
+   document.getElementById("c_latitude").value = position.coords.latitude;
+    document.getElementById("c_longitude").value = position.coords.longitude;
+}
+getLocation();
+ </script>

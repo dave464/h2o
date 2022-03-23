@@ -163,6 +163,11 @@ include '../connection.php';
               
 
         </div>
+
+          <a onclick="window.location='review.php?product_id=<?php echo $fetch['product_id']?>'"   
+          style="width: 65%; margin-top: 50px"
+          class="btn btn-primary">Ratings and Reviews</a>
+
           </div>
         </div>
       </div>

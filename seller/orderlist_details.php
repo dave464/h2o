@@ -130,7 +130,8 @@ require_once '../connection.php';
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0" style="font-weight: 550">Order ID: <?php echo $fetch['order_id']?></p>
+            <p class="lead mb-0" style="font-weight: 550">
+              Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?></p>
             </div>
           
             <center><img src = "../photo/<?php echo $fetch['image']?>" style="width: 300px;
@@ -205,24 +206,7 @@ require_once '../connection.php';
             }
             ?>   
             <br>
-            <h5 class="card-title fw-bold">Select Driver</h5>
-            
-            <div class="select-container">
-                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
-                          <?php
-                                $query = $conn->query("SELECT * FROM deliveryman 
-                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
-                                or die(mysqli_error());
-                                while($fetch = $query->fetch_array()){
-                              ?>
-                            
-                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
-                              <?php
-                                }
-                              ?>
-                          </select>
-          </div>
-
+           
             <button type="submit" name="submitApprove" class="btn btn-primary">Approve</button>
            
           </div>

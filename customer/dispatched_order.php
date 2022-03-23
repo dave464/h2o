@@ -82,11 +82,11 @@ require '../connection.php';
   <div class="container py-5">
 
    
-   <?php
+  <?php
         $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'pending' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
         $f_p = $q_p->fetch_array();
 
-        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'accepted' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
+        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'ready' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         $f_s = $q_s->fetch_array();
 
         $q_d = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
@@ -105,7 +105,7 @@ require '../connection.php';
       RIGHT JOIN product ON orderlist.product_id = product.product_id 
       RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
       RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
-      WHERE orderlist.status = 'delivered' && orderlist.customer_id = '".$_SESSION['customer_id']."'
+      WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'
   ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
 ?>
@@ -113,7 +113,7 @@ require '../connection.php';
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
-           <h5 style="font-weight: 550;margin-top: 15px; margin-left: 15px" >
+            <h5 style="font-weight: 550;margin-top: 15px; margin-left: 15px" >
             <i class="fas fa-store" style=""></i>
               &nbsp<?php echo $fetch['business_name']?>
             </h5>
@@ -124,15 +124,13 @@ require '../connection.php';
                   <tr> 
                   <td valign="top" style="padding-left:20px;"> 
                     <div style=" margin-top:-200px; margin-left: 150px;">
-                  
                       <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
-                     <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
+                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
                       <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
-                     <a onclick="window.location='received_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
-                     <a onclick="window.location='rate_product.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">Rate Product</a>
+                     <a onclick="window.location='dispatched_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
                     </div>
                  </td>
                 </tr> 
@@ -150,8 +148,8 @@ require '../connection.php';
         </div>
       </div>
 
-      <nav class="nav">
-  <a href="purchase.php" class="nav__link " >
+   <nav class="nav">
+  <a href="purchase.php" class="nav__link" >
       <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_p['total']?></span>
         <i class="fa fa-history" style="font-size: 18px"></i>
     <span class="nav__text">Pending</span>
@@ -161,17 +159,16 @@ require '../connection.php';
     <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
     <span class="nav__text">Accepted</span>
   </a>
-  <a href="dispatched_order.php" class="nav__link">
+  <a href="dispatched_order.php" class="nav__link  nav__link--active">
    <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_d['total']?></span>
     <i class="fas fa-truck" style="font-size: 18px"></i>
     <span class="nav__text">Dispatched</span>
   </a>
-  <a href="received_orders.php" class="nav__link nav__link--active">
+  <a href="received_orders.php" class="nav__link">
     <i class="fas fa-star" style="font-size: 18px"></i>
     <span class="nav__text">To rate</span>
   </a>
 </nav>
-
 </section>
 <!--------- SECTION END-------->
 
@@ -200,10 +197,6 @@ require '../connection.php';
   background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 
-.myButton:active {
-  position:relative;
-  top:1px;
-}
 
 
 .nav {
@@ -255,6 +248,15 @@ require '../connection.php';
 }
 
 
+/*h5 {
+  width: 150px;
+  color:#000;
+  padding:20px 0px;
+}*/
+.myButton:active {
+  position:relative;
+  top:1px;
+}
 </style>
 
 
@@ -262,59 +264,3 @@ require '../connection.php';
     </body>
 </html>
 
-
-<!--
-<style>
-  .container   {
-    /* display: flex;
-    flex-direction: column; */
-    background-color:#FFF;
-    /* border:12px solid #FFF;
-    min-height: 500px;
-    width:80%;margin:5px;
-    padding-bottom:10px; */
-
-  }
-  td{
-    //font-size: 10px;
-    white-space: nowrap;
-  }
-  th {
-    //font-size: 10px;
-    white-space: nowrap;
-  }
-  .list {
-    display: flex; 
-    width: 100%;
-    border:2px solid #000;
-  }
-.myButton {
-  box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-  background-color:#ffec64;
-  border-radius:6px;
-  border:1px solid #ffaa22;
-  display:inline-block;
-  cursor:pointer;
-  color:#333333;
-  font-family:Arial;
-  font-size:15px;
-  font-weight:bold;
-  padding:6px 24px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #ffee66;
-}
-.myButton:hover {
-  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-  background-color:#ffab23;
-}
-h5 {
-  width: 150px;
-  color:#000;
-  padding:20px 0px;
-}
-.myButton:active {
-  position:relative;
-  top:1px;
-}
-</style>

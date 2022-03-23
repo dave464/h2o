@@ -57,6 +57,9 @@
                 <li><a href = "../seller/order_list.php"><i class='bx bxs-package' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Order List</a></li>
 
+                 <li><a href = "../seller/accepted_order.php"><i class='fas fa-clipboard-check' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    </i> Accepted Orders</a></li>
+
                 <li><a href = "../seller/delivery_list.php"><i class='fas fa-address-book' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Delivery List</a></li>
 
