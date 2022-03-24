@@ -108,10 +108,7 @@ require_once '../connection.php';
                   </div>
 
                  
-                    <div class="form-outline flex-fill mb-0">                  
-                      <input type="hidden" name="coordinates" id="coordinates" class="form-control" placeholder="Coordinates" required = "required"/>
-                    </div>
-                  
+                
 
                  
                     <div class="form-outline flex-fill mb-0">                  
@@ -197,7 +194,7 @@ require_once '../connection.php';
 function showPosition(position) {
   //x.innerHTML = "Latitude: " + position.coords.latitude + 
 
-  document.getElementById("coordinates").value = position.coords.latitude+","+position.coords.longitude;
+
    document.getElementById("latitude").value = position.coords.latitude;
     document.getElementById("longitude").value = position.coords.longitude;
 }

@@ -8,7 +8,7 @@ require '../connection.php';
 		$business_name= $_POST['business_name'];
 		$owner = $_POST['owner'];
 		$address = $_POST['address'];
-		$coordinates = $_POST['coordinates'];
+		
 		$latitude = $_POST['latitude'];
 		$longitude = $_POST['longitude'];
 		$email = $_POST['email'];
@@ -42,7 +42,7 @@ require '../connection.php';
 			</script>");
 		}else{
 
-		$conn->query("INSERT INTO `merchant`(username, password, business_name, owner, address,coordinates, latitude,longitude, email,contact_number,image,opening,closing) VALUES('$username','$password','$business_name','$owner','$address','$coordinates','$latitude','$longitude','$email','$contact_number','$photo_name','$opening','$closing')") or die(mysqli_error());
+		$conn->query("INSERT INTO `merchant`(username, password, business_name, owner, address, latitude,longitude, email,contact_number,image,opening,closing) VALUES('$username','$password','$business_name','$owner','$address','$latitude','$longitude','$email','$contact_number','$photo_name','$opening','$closing')") or die(mysqli_error());
 		
 		echo ("<script>
 			alert('Your account has been created successfully');
