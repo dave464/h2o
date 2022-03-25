@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 02:50 AM
+-- Generation Time: Mar 25, 2022 at 03:06 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -226,7 +226,8 @@ INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, 
 (1, 'merchant', 'merchant', 'Aquabest', 'Dave Bryan P. Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'a1.jfif', '14.040672893673618', '120.6573486328125', '08:00:00', '17:00:00'),
 (2, 'merchant1', 'merchant2', 'Triple S Water Refilling Station', 'Dave Bryan P. Sevilla', 'Brgy.Wawa Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '09557350551', 'a2.jpg', '14.6760413', '121.0437003', '00:00:00', '00:00:00'),
 (3, 'bryan23', '123', 'tutubig g', 'dave bryan sevilla', 'brgy 4. Nasugbu, Batangas', 'davebryan.sevilla@yahoo.com', '09051934015', 'a3.jpg', '14.073133', '120.63533', '00:00:00', '00:00:00'),
-(8, 'br', '1', 'Batangas State University ARASOF', 'Ivane Kielle Rangel', 'Brgy.4 Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934315', 'h2logo.png', '14.073165', '120.635223', '08:00:00', '17:00:00');
+(8, 'br', '1', 'Water for Less', 'Ivane Kielle Rangel', 'Brgy.Wawa Nasugbu, Batangas', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934315', 'h2logo.png', '14.073165', '120.635223', '08:00:00', '17:00:00'),
+(9, 'dave123', '123', 'N/A', 'Dave Bryan Sevilla', 'Brgy.4 Nasugbu, Batangas', 'sevilladavebryan@gmail.com', '9051934014', 'a1.jfif', '14.584937', '120.977936', '12:37:00', '14:37:00');
 
 -- --------------------------------------------------------
 
@@ -254,8 +255,8 @@ CREATE TABLE `orderlist` (
 
 INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `date`) VALUES
 (1, 1, 3, 1, NULL, 'accepted', '7', 175, 'cod', NULL, '2022-03-22 01:56:20'),
-(2, 1, 3, 1, 6, 'dispatched', '7', 175, 'gcash', 'inbound2059477790076521533.jpg', '2022-03-22 02:07:28'),
-(3, 4, 3, 1, NULL, 'pending', '10', 300, 'cod', NULL, '2022-03-22 07:08:31');
+(2, 1, 3, 1, 6, 'dispatched', '7', 175, 'gcash', 'inbound2059477790076521533.jpg', '2022-03-21 02:07:28'),
+(3, 4, 3, 1, 6, 'delivered', '10', 300, 'cod', NULL, '2022-03-22 07:08:31');
 
 -- --------------------------------------------------------
 
@@ -279,8 +280,8 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_type`, `price`, `image`, `description`) VALUES
 (1, 1, 'Aquabest 25 liters', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
-(2, 2, 'WAWA', 'WAWA', 20, '', 'FJDHJF'),
-(3, 2, 'WAWA', 'WAWA', 20, '', 'FJDHJF'),
+(2, 2, 'WAWA', 'WAWA', 20, 'roundgal.png', 'FJDHJF'),
+(3, 2, 'WAWA', 'WAWA', 20, 'images (4).jpeg', 'FJDHJF'),
 (4, 1, 'Round Container', 'Mineral Water', 30, 'roundgal.png', '5 gallons');
 
 -- --------------------------------------------------------
@@ -311,7 +312,8 @@ INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_
 (2, 3, 1, 1, '1', 'Great', '', '', '', '2022-03-21 09:22:46'),
 (3, 3, 1, 1, '2', 'Lasang tubig', '', '', '', '2022-03-21 09:27:04'),
 (4, 3, 1, 1, '3', 'Bibili ulit ako mga 10', '', '', '', '2022-03-21 09:27:25'),
-(5, 3, 1, 1, '4', 'Let pacquiao lead the prayer', '', '', '', '2022-03-21 09:28:20');
+(5, 3, 1, 1, '4', 'Let pacquiao lead the prayer', '', '', '', '2022-03-21 09:28:20'),
+(6, 3, 1, 4, '2', 'eqweq', 'Yes', 'Yes', 'Yes', '2022-03-23 10:11:56');
 
 -- --------------------------------------------------------
 
@@ -476,7 +478,7 @@ ALTER TABLE `inspection`
 -- AUTO_INCREMENT for table `merchant`
 --
 ALTER TABLE `merchant`
-  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `merchant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `orderlist`
@@ -494,7 +496,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product_rating`
 --
 ALTER TABLE `product_rating`
-  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `transactions`

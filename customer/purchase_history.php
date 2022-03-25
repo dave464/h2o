@@ -8,7 +8,7 @@ require '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Purchase</title>
+        <title>Purchase History</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- <link rel="stylesheet" href="main.css"> -->
@@ -23,7 +23,7 @@ require '../connection.php';
        
       <center>
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PURCHASE
+      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">PURCHASE HISTORY
       </p>
        </center>
  <!-- <div class="container" > 
@@ -49,7 +49,7 @@ require '../connection.php';
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
   RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
   WHERE orderlist.customer_id = '".$_SESSION['customer_id']."'
-  ") 
+   ") 
   or die(mysqli_error());
   while($fetch = $query->fetch_array()){
 ?>
@@ -82,11 +82,11 @@ require '../connection.php';
   <div class="container py-5">
 
    
-  <?php
+   <?php
         $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'pending' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
         $f_p = $q_p->fetch_array();
 
-        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
+        $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'accepted' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         $f_s = $q_s->fetch_array();
 
         $q_d = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
@@ -105,7 +105,8 @@ require '../connection.php';
       RIGHT JOIN product ON orderlist.product_id = product.product_id 
       RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
       RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
-      WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'
+      WHERE  orderlist.customer_id = '".$_SESSION['customer_id']."'
+       ORDER BY orderlist.date DESC
   ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
 ?>
@@ -113,24 +114,24 @@ require '../connection.php';
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
-            <h5 style="font-weight: 550;margin-top: 15px; margin-left: 15px" >
+           <h5 style="font-weight: 550;margin-top: 15px; margin-left: 15px" >
             <i class="fas fa-store" style=""></i>
               &nbsp<?php echo $fetch['business_name']?>
             </h5>
-          <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height: 200px; margin-bottom: 5px;" />          
+          <img src = "../photo/<?php echo $fetch['image']?>" style="width: 190px;height: 190px; margin-bottom: 5px;" />          
             
              <div>
                 <table>
                   <tr> 
                   <td valign="top" style="padding-left:20px;"> 
-                    <div style=" margin-top:-200px; margin-left: 150px;">
-                      <p style="font-size:14px;margin-top:10px;">Product Name: <?php echo $fetch['product_name']?><p>
+                    <div style=" margin-top:-160px; margin-left: 150px;">
+                       <b><p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p></b>
+                      <p style="font-size:14px;margin-top:-17px;">Product Name: <?php echo $fetch['product_name']?><p>
                       <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
-                      <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
-                      <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
+                     <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
-                     <a onclick="window.location='dispatched_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:white;margin:5px;">More Details</a>
+                    
                     </div>
                  </td>
                 </tr> 
@@ -148,27 +149,6 @@ require '../connection.php';
         </div>
       </div>
 
-   <nav class="nav">
-  <a href="purchase.php" class="nav__link" >
-      <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_p['total']?></span>
-        <i class="fa fa-history" style="font-size: 18px"></i>
-    <span class="nav__text">Pending</span>
-  </a>
-  <a href="shipping_orders.php" class="nav__link ">
-    <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_s['total']?></span>
-    <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
-    <span class="nav__text">Accepted</span>
-  </a>
-  <a href="dispatched_order.php" class="nav__link  nav__link--active">
-   <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_d['total']?></span>
-    <i class="fas fa-truck" style="font-size: 18px"></i>
-    <span class="nav__text">Dispatched</span>
-  </a>
-  <a href="received_orders.php" class="nav__link">
-    <i class="fas fa-star" style="font-size: 18px"></i>
-    <span class="nav__text">To rate</span>
-  </a>
-</nav>
 </section>
 <!--------- SECTION END-------->
 
@@ -197,6 +177,10 @@ require '../connection.php';
   background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
 
+.myButton:active {
+  position:relative;
+  top:1px;
+}
 
 
 .nav {
@@ -248,15 +232,6 @@ require '../connection.php';
 }
 
 
-/*h5 {
-  width: 150px;
-  color:#000;
-  padding:20px 0px;
-}*/
-.myButton:active {
-  position:relative;
-  top:1px;
-}
 </style>
 
 

@@ -9,7 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
          <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
-
+        
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
     <body>
@@ -46,9 +46,15 @@
                     </i>  Home</a>
                 </li>
 
+                  <li>
+                    <a href = "../customer/list_of_merchants.php">
+                <i class='fas fa-clipboard-list' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    </i>&nbsp List of Merchants</a>
+                </li>
+
                  <li>
                     <a href = "../customer/cart.php">
-                <i class='bx bxs-cart' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                <i class='fas fa-cart-plus' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Cart List</a>
                 </li>
 
@@ -58,15 +64,21 @@
                     </i> Purchase List</a>
                 </li>
 
+                  <li>
+                <a href = "../customer/purchase_history.php">
+                    <i class='bx bxs-calendar' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    </i> Purchase History</a>
+                </li>
+
                 <li>
                 <a href = "../customer/settings.php">
                 <i class='fas fa-cog'  style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
-                    </i> Settings</a>
+                    </i>&nbsp Account Settings</a>
                 </li>
 
                 <li>
                 <a href = "../customer/logout.php">
-                    <i class='bx bxs-log-out' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    <i class='fas fa-power-off' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Logout</a>
                 </li>
 

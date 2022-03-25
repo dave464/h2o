@@ -25,12 +25,12 @@ require_once '../connection.php';
     
 
 
- <form action="action.php" method="POST" enctype="multipart/form-data" class="form">    
-    
-      <!-- Steps -->
-      <div class="form-step form-step-active">
-        
-          <?php
+
+<center><section  style="margin-top:-30px;">
+  <div class="container py-5">
+
+<form action="action.php" method="POST" enctype="multipart/form-data"  >
+         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
@@ -47,28 +47,19 @@ require_once '../connection.php';
             <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
             <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
             <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
-
-       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-       
-          <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
-          <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
-          <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-            
-             <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height:200px"
-           class="card-img-top"/>
-
-            <div class="d-flex justify-content-center p-3">
-            
-            </div>
-          
-         
-           <div class="card-body">
-             
-           <div class="container1">
-            <p class="lead mb-0" style="font-weight: 550;"> <?php echo $fetch['product_name']?></p>
+      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="card">         
+          <div class="card-body">    
+              <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
+              <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
+              <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
+              <img src = "../photo/<?php echo $fetch['image']?>" style="width: 200px;height:200px"
+             class="card-img-top"/>
+        <p class="lead mb-0" style="font-weight: 550;"> <?php echo $fetch['product_name']?></p>
+   
 
   <div class="feedback">
-     <p class="lead mb-0" style="margin-left:-63px;margin-top:30px;font-size:15px">How satisfied are you with this product?</p>
+     <p class="lead mb-0" style="margin-top:30px;font-size:15px">How satisfied are you with this product?</p>
     <div class="rating" style="margin-top:10px">
       <input type="radio" name="rating" value="5" id="rating-5">
       <label for="rating-5"></label>
@@ -169,36 +160,27 @@ require_once '../connection.php';
       </div>
     </div>
   </div>
-</div>
+
 
 <div class="form-floating">
   <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Describe your experience.</label>
-</div>   
-          </div>       
-      </div>
-                 
-        <?php
-        }
-        ?>
+</div> 
+  
+<br>
+<hr style="background-color: black">
 
-        <div class="btns-group" style="margin-left: 230px;">
-          <a href="#" class="btn btn-next">Next</a>
-        </div>
-
-      </div>
-<!----- Deliver man Feedback ---->
- <div class="form-step">
- <div class="logo"> <img src="../img/dPic.jpg" alt=""> </div>
+<div style="margin-top: 40px">
+<div class="logo"> <img src="../img/dPic.jpg" alt=""> </div>
   <b><div class="text-center mt-4 name"> Delivery Man </div></b>
- <table style=" margin-top: 80px">
+ <table style=" margin-top: 30px">
     <tr> 
       <td valign="top" style="padding-left:20px;"> 
   
 <div style="margin-top:5px">
-  Wearing facemask
-
-<div class="form-check form-check-inline" style="margin-left: 90px">
+  Wearing facemask?
+</div>
+<div class="form-check form-check-inline" >
   <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio1" value="Yes" />
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
@@ -207,12 +189,12 @@ require_once '../connection.php';
   <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio2" value="No" />
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
-</div>
 
 <div style="margin-top:10px">
- Complete Uniform
+ Complete Uniform?
+</div>
 
-<div class="form-check form-check-inline" style="margin-left: 93px">
+<div class="form-check form-check-inline" >
   <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio1" value="Yes" />
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
@@ -221,12 +203,11 @@ require_once '../connection.php';
   <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio2" value="No" />
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
-</div>
 
 <div style="margin-top:10px">
- Arrived on time
-
-<div class="form-check form-check-inline" style="margin-left: 115px">
+ Arrived on time?
+<br>
+<div class="form-check form-check-inline" >
   <input class="form-check-input" type="radio" name="on_time" id="inlineRadio1" value="Yes" />
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
@@ -239,14 +220,22 @@ require_once '../connection.php';
   </td>
     </tr> 
       </table>
+            </div><br><br>
 
-        <div class="btns-group" style="margin-top: 60px;">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <input type="submit" name="submitRate" value="Submit" class="btn" />
+                 <button type="submit"  name="submitRate" class="btn btn-primary">Submit</button>
+          </div>
         </div>
       </div>
-    </form>
-<br>
+            
+ 
+      <?php
+        }
+        ?>
+      </form>
+  </div>
+</section>
+<!--------- SECTION END-------->    
+
 
     </body>
 </html>
@@ -361,7 +350,7 @@ require_once '../connection.php';
 #rating-5:checked ~ .emoji-wrapper > .emoji { transform: translateY(-500px); }
 
 .feedback {
-  max-width: 360px;
+  max-width: 400px;
   background-color: #fff;
   width: 100%;
   padding: 30px;
@@ -370,7 +359,7 @@ require_once '../connection.php';
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  box-shadow: 0 4px 30px rgba(0,0,0,.05);
+  
 }
 
 </style>

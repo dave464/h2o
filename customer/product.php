@@ -15,7 +15,7 @@ require '../connection.php';
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
 
-    <body   >
+    <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
@@ -93,7 +93,7 @@ require '../connection.php';
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
             <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Rating:</p>  <p class="text-dark mb-0">
+              <p class="text-muted mb-0">Rating: </p>  <p class="text-dark mb-0">
                 <?php if($average==0) {
                 echo 'No Rating';
               } else{
@@ -158,7 +158,7 @@ require '../connection.php';
 
 
                 } ?></p> 
-              
+             
               
 
         </div>
@@ -166,6 +166,7 @@ require '../connection.php';
         <a onclick="window.location='review.php?product_id=<?php echo $fetch['product_id']?>'"   
           style="width: 65%; margin-top: 50px"
           class="btn btn-primary">Ratings and Reviews</a>
+
 
           </div>
         </div>
@@ -176,8 +177,7 @@ require '../connection.php';
     ?>
 
 
-        </div>
-      </div>
+       
     </div>
   </div>
 </section>

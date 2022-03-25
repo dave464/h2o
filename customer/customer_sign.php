@@ -136,12 +136,18 @@ require_once '../connection.php';
                   </div>
 
 <!--- Terms of Agreement -->
-  <input type="checkbox" name="checkbox" value="check" id="agree"  value="1"  onclick="terms_changed(this)"/>
-  I have read and agree to the 
+  <!--<input type="checkbox" name="checkbox" value="check" id="agree"  value="1"  onclick="terms_changed(this)"/>-->
+  <!--I have read and agree to the -->
 <!-- Button to Open the Modal -->
-<a href="login.php" data-bs-toggle="modal" data-bs-target="#myModal">
+<!--<a href="login.php" data-bs-toggle="modal" data-bs-target="#myModal">
   terms and conditions
+</a><br><br>-->
+
+By clicking Register, you agree to our
+<a href="login.php" data-bs-toggle="modal" data-bs-target="#myModal">
+  Terms and conditions, Data Policy 
 </a><br><br>
+
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -170,8 +176,8 @@ require_once '../connection.php';
   </div>
 </div>
 
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" name="submit" class="btn btn-primary btn-lg"  id=submit_button disabled>Register</button>
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"> <!--id=submit_button disabled-->
+                    <button type="submit" name="submit" class="btn btn-primary btn-lg" >Register</button>
                   </div>
                   <div class="text-center fs-6"> <h5 href="#">Already have an account?</h5><a href="index.php">Log in</a> </div>
                 </form>
