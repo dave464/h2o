@@ -2,27 +2,7 @@
 require 'validate.php';
 require_once '../connection.php';
 
- 
-        
-if(ISSET($_POST['Uplocation'])){
 
-        $d_latitude= $_POST['d_latitude'];
-        $d_longitude = $_POST['d_longitude'];
-       
-
-$conn->query("UPDATE `orderlist` SET `d_latitude` = '$d_latitude', `d_longitude` = '$d_longitude'
-   WHERE `order_id` = '".$_REQUEST['order_id']."'") or die(mysqli_error());
-
-
-
-            $query = $conn->query("SELECT *
-            FROM `orderlist`
-             WHERE order_id = '".$_REQUEST['order_id']."'") or die(mysqli_error());
-            $fetch = $query->fetch_array();  
- echo ("<script>
-        document.location.href = 'del_destination.php?order_id= ".$fetch['order_id']."';
-        </script>");
-  }
 
   
 ?>
@@ -45,7 +25,7 @@ $conn->query("UPDATE `orderlist` SET `d_latitude` = '$d_latitude', `d_longitude`
 
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
-            orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
+            orderlist.total, orderlist.type, orderlist.photo,orderlist.date, orderlist.d_longitude,orderlist.d_latitude, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.c_latitude,customer.c_longitude 
             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
@@ -71,23 +51,12 @@ $conn->query("UPDATE `orderlist` SET `d_latitude` = '$d_latitude', `d_longitude`
           <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
 
 <div class="formBlock">
-     <form   action="del_destination.php?order_id=<?php echo $fetch['order_id']?>" method="POST" >
-
-                <input type="text" name="d_latitude" class="input" id="d_latitude" ><br>
-                <input type="text" name="d_longitude" class="input" id="d_longitude" ><br>
-
-                <button style="width: 100%" type="submit" name="Uplocation" >Update Location</button>
-            </form>
-
-
     <form id="form">
-            <input type="hidden" name="start" class="input" id="start" value="<?php echo $fetch['c_latitude']?>,<?php echo $fetch['c_longitude']?>" placeholder="Input your destination"/>
-                <input type="hidden" name="end" class="input" id="destination" placeholder="Choose starting point" readonly/><br>
-                <button style="width: 100%" type="submit" >Show Route</button>
-            </form>
-
-           
-             </div>
+    <input type="" name="start" class="input" id="start" value="<?php echo $fetch['c_latitude']?>,<?php echo $fetch['c_longitude']?>" placeholder="Input your destination"/>
+    <input type="" name="end" class="input" id="destination" value="<?php echo $fetch['d_latitude']?>,<?php echo $fetch['d_longitude']?>" placeholder="Choose starting point" readonly/><br>
+    <button style="width: 100%" type="submit" >Show Delivery Location</button>
+    </form>
+</div>
 
         </div>
  
@@ -119,9 +88,7 @@ $conn->query("UPDATE `orderlist` SET `d_latitude` = '$d_latitude', `d_longitude`
 function showPosition(position) {
   //x.innerHTML = "Latitude: " + position.coords.latitude + 
 
-  document.getElementById("destination").value = position.coords.latitude+","+position.coords.longitude;
-  document.getElementById("d_latitude").value= position.coords.latitude;
-  document.getElementById("d_longitude").value= position.coords.longitude;
+
 }
 getLocation();
  </script>
@@ -177,8 +144,8 @@ let map = L.map('map', {
                 var marker;
 
                 custom_icon = L.icon({
-                    iconUrl: '../img/marker.webp',
-                    iconSize: [30, 30],
+                    iconUrl: '../img/markerrr.png',
+                    iconSize: [40, 40],
                     iconAnchor: [10, 29],
                     popupAnchor: [0, -29]
                 });

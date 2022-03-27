@@ -145,7 +145,12 @@ require_once '../connection.php';
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>
               <p class="card-text"style="margin-top:-10px;"><?php echo $fetch['contact_number']?> </p>       
              </div>
-
+          <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;"></p>
+               <a href="delivery_destination.php?order_id=<?php echo $fetch['order_id']?>"><input type="button" name="show" style="background-color:red; border:none;border-radius: 6px;
+            box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff; color:white; height: 25px; width:100px;"
+              value="show map"></a>     
+             </div>
            
            
           </div>
