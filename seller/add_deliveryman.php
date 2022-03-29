@@ -110,6 +110,16 @@ require '../connection.php';
                     </div>
                 </div>
 
+                
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="hidden" name="vaccination_status" id="form3Example4c" class="form-control" />
+                    </div>
+             
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="hidden" value="vcard.jpeg" name="photo" id="form3Example4c" class="form-control"/>
+                    </div>
+              
+
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>

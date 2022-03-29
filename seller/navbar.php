@@ -70,9 +70,9 @@
                     </i> Transactions</a></li>
 
                 <li><a href = "../seller/settings.php"><i class='fas fa-cog' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
-                    </i> Settings</a></li>
+                    </i> Account Settings</a></li>
 
-                <li><a href = "../seller/logout.php"><i class='bx bxs-log-out' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                <li><a href = "../seller/logout.php"><i class='fas fa-power-off' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Logout</a></li>
 
             </ul>

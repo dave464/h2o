@@ -154,7 +154,106 @@ if (count($_POST) > 0) {
     </div>
   </div>
 </div>
+<br>
 
+<div class="vh-200" >
+  <div class="container h-200">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-left h4 fw-bold mb-3 mx-1 mx-md-4 mt-4">Vaccination Status</p>
+
+                <form class="mx-1 mx-md-4" action="action.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" method="POST" enctype="multipart/form-data">
+
+                  <label class="labels" style=" font-size: 11px; margin-left:50px;">Current Status</label>
+                <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-syringe fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select class = "form-select" required = required name = "vaccination_status">
+                        <option value = "">Choose an option</option>
+                        <option value = "Unvaccinated" 
+                          <?php if($fetch['vaccination_status'] == "Unvaccinated"){echo "selected";}?>>Unvaccinated
+                        </option>
+                        <option value = "Partially Vaccinated" 
+                          <?php if($fetch['vaccination_status'] == "Partially Vaccinated"){echo "selected";}?>>Partially Vaccinated
+                        </option>
+                        <option value = "Fully Vaccinated" 
+                          <?php if($fetch['vaccination_status'] == "Fully Vaccinated"){echo "selected";}?>>Fully Vaccinated
+                        </option>
+                        <option value = "Boosted"
+                           <?php if($fetch['vaccination_status'] == "Boosted"){echo "selected";}?>>Boosted
+                        </option>
+                      </select>
+
+  
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-2" style="margin-top: 15px">
+                     <i class="fas fa-cloud-upload-alt fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#myModal"> Upload your vaccination card here</a>
+                    </div>
+                  </div>
+
+                
+                  <br>
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button style="width:250px; " type="submit" name="editVacstat" class="btn btn-primary btn-lg">Save Changes</button>
+                  </div>
+                  </form>
+
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="../img/vacci.webp" class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+          <form class="mx-1 mx-md-4" action="action.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>"
+                 method="POST" enctype="multipart/form-data">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <i class="fas fa-cloud-upload-alt fa-lg me-3 fa-fw"></i>
+        <h4 class="modal-title">Upload Files</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+     
+        <input type="file" class="form-control" id="customFile" name="photo" />
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" name="editVcard" class="btn btn-primary btn-sm" 
+            style="padding:5px; width: 80px;margin-left:372px">Save
+        </button>
+      </div>
+          </form>
+    </div>
+  </div>
+</div>
 
 
 

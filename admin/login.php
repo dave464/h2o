@@ -11,7 +11,10 @@
 			$_SESSION['admin_id'] = $fetch['admin_id'];
 			header('location:adminhome.php');
 		}else{
-			echo "<center><label style = 'color:red;'>Invalid username or password</label></center>";
+			echo ("<script>
+			alert('Invalid username or password');
+			document.location.href = 'index.php';
+			</script>");
 		}
 	}
 ?>

@@ -29,7 +29,8 @@ require_once '../connection.php';
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id
-            ,deliveryman.name, deliveryman.plate_number, deliveryman.contact_number, deliveryman.deliveryman_id FROM `orderlist`
+            ,deliveryman.name, deliveryman.plate_number, deliveryman.contact_number, deliveryman.deliveryman_id,deliveryman.vaccination_status
+            FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
             RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
@@ -137,6 +138,10 @@ require_once '../connection.php';
               <p class="card-text" style="font-weight: 550">Name: </p>
               <p class="card-text"><?php echo $fetch['name']?></p>        
              </div>
+             <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Vaccination Status: </p>
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['vaccination_status']?></p>        
+             </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Plate Number: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['plate_number']?></p>        

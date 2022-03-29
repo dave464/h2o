@@ -74,7 +74,7 @@ require_once '../connection.php';
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <i class="fas fa-store fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                        <?php if (isset($_GET['business_name'])) { ?>
                       <input type="text" name="business_name" id="form3Example3c" class="form-control" placeholder="Business Name" value="<?php echo $_GET['business_name']; ?>" required = "required"/>
@@ -152,8 +152,9 @@ require_once '../connection.php';
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-2">
-                    <i class="fas fa-camera fa-lg me-3 fa-fw"></i>
+                    <i class="fas fa-camera fa-lg me-3 fa-fw" style="margin-top: 20px"></i>
                     <div class="form-outline flex-fill mb-0">
+                      <label class="labels" style=" font-size: 15px; ">Upload your business logo here</label>
                     <input type="file" name="photo" class="email" required = "required">
       
                     </div>

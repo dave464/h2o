@@ -145,7 +145,7 @@ require_once '../connection.php';
 
 By clicking Register, you agree to our
 <a href="login.php" data-bs-toggle="modal" data-bs-target="#myModal">
-  Terms and conditions, Data Policy 
+  Terms and Private Policy 
 </a><br><br>
 
 

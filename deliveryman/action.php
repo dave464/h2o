@@ -41,9 +41,37 @@ $conn->query("UPDATE `deliveryman` SET `username` = '$username', `name` = '$name
   }
 
 
+///////////-------------EDIT DELIVERYMAN'S Vaccination Stat ------------/////
+  if(ISSET($_POST['editVacstat'])){
+
+        $vaccination_status= $_POST['vaccination_status'];
+
+$conn->query("UPDATE `deliveryman` SET `vaccination_status` = '$vaccination_status'
+             WHERE `deliveryman_id` = '".$_REQUEST['deliveryman_id']."'") or die(mysqli_error());
+  
+  echo ("<script>
+    alert('Your vaccination status has been update successfully');
+    document.location.href = 'settings.php';
+    </script>");
+  }
 
 
+///////////-------------EDIT DELIVERYMAN'S Vaccination Card ------------/////
+  if(ISSET($_POST['editVcard'])){
 
+     $photo = addslashes(file_get_contents($_FILES['photo']['tmp_name']));
+        $photo_name = addslashes($_FILES['photo']['name']);
+        $photo_size = getimagesize($_FILES['photo']['tmp_name']);
+        move_uploaded_file($_FILES['photo']['tmp_name'],"../photo/" . $_FILES['photo']['name']);  
+
+$conn->query("UPDATE `deliveryman` SET `photo` = '$photo_name'
+             WHERE `deliveryman_id` = '".$_REQUEST['deliveryman_id']."'") or die(mysqli_error());
+  
+  echo ("<script>
+    alert('Your vaccination card has been upload successfully');
+    document.location.href = 'settings.php';
+    </script>");
+  }
 
 
 

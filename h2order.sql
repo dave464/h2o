@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2022 at 03:06 PM
+-- Generation Time: Mar 29, 2022 at 05:03 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -140,20 +140,24 @@ CREATE TABLE `deliveryman` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `plate_number` varchar(255) NOT NULL,
-  `contact_number` varchar(255) NOT NULL
+  `contact_number` varchar(255) NOT NULL,
+  `vaccination_status` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `deliveryman`
 --
 
-INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`) VALUES
-(5, 3, 'Dave Bryan Sevilla', 'driver123', 'driver', 'DBS666', '09051934015'),
-(6, 1, 'qwerty', 'del1', 'del1', '123', '123'),
-(7, 2, 'del3', 'del3', 'del3', '123', '123'),
-(11, 1, 'Dave Sevilla', 'driver123', '123', 'DBS666', '905193401'),
-(12, 1, 'Dave Bryan Sevilla', 'driver4', '123', 'DBS666', '0905193401'),
-(15, 3, 'Dave Bryan Sevilla', 'dave2131', '123', 'DBS666', '905193401');
+INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`, `vaccination_status`, `photo`) VALUES
+(5, 3, 'Dave Bryan Sevilla', 'driver123', 'driver', 'DBS666', '09051934015', '', ''),
+(6, 1, 'qwerty', 'del1', 'del1', '123', '123', 'Partially Vaccinated', 'customer.png'),
+(7, 2, 'del3', 'del3', 'del3', '123', '123', '', ''),
+(11, 1, 'Dave Sevilla', 'driver123', '123', 'DBS666', '905193401', '', ''),
+(12, 1, 'Dave Bryan Sevilla', 'driver4', '123', 'DBS666', '0905193401', '', ''),
+(15, 3, 'Dave Bryan Sevilla', 'dave2131', '123', 'DBS666', '905193401', '', ''),
+(17, 1, 'das', 'sasa', '123', '3fsd1', '132321', '', 'accset.webp'),
+(18, 1, '312', 'davee', '123', 'kjoa3', 'e16318', '', 'register.webp');
 
 -- --------------------------------------------------------
 
@@ -246,17 +250,25 @@ CREATE TABLE `orderlist` (
   `total` int(11) NOT NULL,
   `type` text,
   `photo` text,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `d_latitude` varchar(255) NOT NULL,
+  `d_longitude` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orderlist`
 --
 
-INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `date`) VALUES
-(1, 1, 3, 1, NULL, 'accepted', '7', 175, 'cod', NULL, '2022-03-22 01:56:20'),
-(2, 1, 3, 1, 6, 'dispatched', '7', 175, 'gcash', 'inbound2059477790076521533.jpg', '2022-03-21 02:07:28'),
-(3, 4, 3, 1, 6, 'delivered', '10', 300, 'cod', NULL, '2022-03-22 07:08:31');
+INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `date`, `d_latitude`, `d_longitude`) VALUES
+(1, 1, 3, 1, NULL, 'accepted', '7', 175, 'cod', NULL, '2022-03-26 01:56:20', '', ''),
+(2, 1, 3, 1, 6, 'delivered', '7', 175, 'gcash', 'inbound2059477790076521533.jpg', '2022-03-27 02:07:28', '14.078500', '120.633301'),
+(3, 4, 3, 1, 6, 'delivered', '10', 300, 'cod', NULL, '2022-03-28 07:08:31', '14.119110', '120.624960'),
+(4, 1, 3, 1, 6, 'delivered', '1', 25, 'cod', NULL, '2022-03-24 16:00:00', '', ''),
+(5, 1, 3, 1, 6, 'delivered', '1', 25, 'cod', NULL, '2022-03-23 16:00:00', '', ''),
+(6, 1, 3, 1, 6, 'delivered', '1', 25, 'cod', NULL, '2022-03-22 16:00:00', '', ''),
+(7, 4, 3, 1, 6, 'delivered', '1', 25, 'cod', NULL, '2022-03-21 16:00:00', '', ''),
+(8, 1, 3, 1, 6, 'delivered', '2', 30, 'cod', NULL, '2022-03-20 16:00:00', '', ''),
+(9, 1, 3, 1, 6, 'delivered', '2', 30, 'cod', NULL, '2022-03-25 16:00:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -460,7 +472,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `deliveryman`
 --
 ALTER TABLE `deliveryman`
-  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -484,7 +496,7 @@ ALTER TABLE `merchant`
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `product`

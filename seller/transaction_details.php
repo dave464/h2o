@@ -28,7 +28,8 @@ require_once '../connection.php';
             product.price, product.merchant_id, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,
             transactions.quantity, transactions.total, transactions.date, transactions.transaction_id,
-            deliveryman.name, deliveryman.plate_number, deliveryman.contact_number FROM `transactions`
+            deliveryman.name, deliveryman.plate_number, deliveryman.contact_number
+             FROM `transactions`
             RIGHT JOIN product ON transactions.product_id = product.product_id
             RIGHT JOIN merchant ON transactions.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON transactions.customer_id = customer.customer_id
@@ -88,7 +89,8 @@ require_once '../connection.php';
             product.price, product.merchant_id, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,
             transactions.quantity, transactions.total, transactions.date, transactions.transaction_id,
-            deliveryman.name, deliveryman.plate_number, deliveryman.contact_number FROM `transactions`
+            deliveryman.name, deliveryman.plate_number, deliveryman.contact_number, deliveryman.vaccination_status
+            FROM `transactions`
             RIGHT JOIN product ON transactions.product_id = product.product_id
             RIGHT JOIN merchant ON transactions.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON transactions.customer_id = customer.customer_id
@@ -178,6 +180,10 @@ require_once '../connection.php';
             <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight: 550">Name: </p>
               <p class="card-text"><?php echo $fetch['name']?></p>        
+             </div>
+             <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Vaccination Status: </p>
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['vaccination_status']?></p>        
              </div>
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Plate Number: </p>

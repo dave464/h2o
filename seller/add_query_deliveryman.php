@@ -9,6 +9,7 @@ require '../connection.php';
 		$username = $_POST['username'];
 		$password= $_POST['password'];
 		$c_password= $_POST['c_password'];
+		$photo=$_POST['photo'];
 
 		$user_data = 'username='. $username. '&name='. $name. '&plate_number='. $plate_number. '&contact_number='. $contact_number;
 		
@@ -31,7 +32,7 @@ require '../connection.php';
 			</script>");
 		}else{
 
-		$conn->query("INSERT INTO `deliveryman`(merchant_id, name, contact_number, plate_number, username, password) VALUES('$merchant_id','$name','$contact_number','$plate_number','$username','$password')") or die(mysqli_error());
+		$conn->query("INSERT INTO `deliveryman`(merchant_id, name, contact_number, plate_number, username, password,photo) VALUES('$merchant_id','$name','$contact_number','$plate_number','$username','$password','$photo')") or die(mysqli_error());
 		
 		echo ("<script>
 		alert('Added Successfully');

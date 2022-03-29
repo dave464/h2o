@@ -33,7 +33,7 @@
         <!-- side navbar -->
         <div class = "sidenav" id = "sidenav">
             <span class = "cancel-btn" id = "cancel-btn">
-                <i class = "fas fa-times"></i>
+                <i class = "fas fa-times" ></i>
             </span>
 
             <ul class = "navbar">
@@ -46,12 +46,12 @@
                 <li>
                 <a href = "../deliveryman/settings.php">
                 <i class='fas fa-cog'  style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
-                    </i> Settings</a>
+                    </i> Account Settings</a>
                 </li>
 
                 <li>
                 <a href = "../deliveryman/logout.php">
-                    <i class='bx bxs-log-out' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    <i class='fas fa-power-off' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Logout</a>
                 </li>
 

@@ -10,7 +10,7 @@ require '../connection.php';
         <meta charset="utf-8">
         <title>Home</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../main.css">
+        
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,27 +28,63 @@ require '../connection.php';
 
 
      <?php
+        /*====== Query for total pending orders =====*/
         $q_p = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'pending' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' ") or die(mysqli_error());
         $f_p = $q_p->fetch_array();
-
+        /*====== Query for total accepted orders =====*/
         $q_s = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
         $f_s = $q_s->fetch_array();
-
+        /*====== Query for total dispatched orders =====*/
         $q_d = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
         $f_d = $q_d->fetch_array();
-
-          $q_del = $conn->query("SELECT COUNT(*) as total FROM `deliveryman` WHERE  deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
+        /*====== Query for count deliveryman =====*/
+        $q_del = $conn->query("SELECT COUNT(*) as total FROM `deliveryman` WHERE  deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
         $f_del = $q_del->fetch_array();
+
+        /*====== Query for total earning today =====*/
+         $q_sales = $conn->query("SELECT SUM(total) as earning FROM `orderlist` 
+            WHERE DATE(date) = DATE(NOW()) && orderlist.status = 'delivered'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+            ORDER BY `order_id` DESC") or die(mysqli_error());
+        $f_sales = $q_sales->fetch_array();
+
+         /*====== Query for total earning yesterday =====*/
+        $q_Ysales = $conn->query("SELECT SUM(total) as earning FROM `orderlist` 
+            WHERE DATE(`date`) = DATE_ADD(CURDATE(), INTERVAL -1 DAY)  && orderlist.status = 'delivered'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  ORDER BY `order_id` DESC") or die(mysqli_error());
+        $f_Ysales = $q_Ysales->fetch_array();
+
+         /*====== Query for last 7 days record =====*/
+        $exp_date_line = mysqli_query($conn,"SELECT date FROM orderlist 
+          WHERE date >= DATE_SUB(DATE(NOW()), INTERVAL 7 DAY) && orderlist.status = 'delivered'
+          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' GROUP BY date  ORDER BY `date` ASC ");
+
+         /*====== Query for total sale in last 7 days  =====*/
+         $exp_amt_line =  mysqli_query($conn,"SELECT SUM(total) FROM orderlist
+          WHERE date >= DATE_SUB(DATE(NOW()), INTERVAL 7 DAY)  &&  orderlist.status = 'delivered' 
+          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' GROUP BY date") or die(mysqli_error());
+
+          /*====== Query for last product_type =====*/
+        $Product_Type = mysqli_query($conn,"SELECT product.product_type as product_type, product.product_id, orderlist.order_id FROM orderlist
+          RIGHT JOIN product ON orderlist.product_id = product.product_id 
+          WHERE orderlist.status = 'delivered'
+           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+          GROUP BY product.product_type
+           ORDER BY product.product_type");
+
+         /*====== Query for counting product_type in last 7 days  =====*/
+         $Total_per_product =  mysqli_query($conn,"SELECT COUNT(product.product_type) ,product.product_type, product.product_id, orderlist.order_id FROM orderlist
+          RIGHT JOIN product ON orderlist.product_id = product.product_id 
+          WHERE  orderlist.status = 'delivered'
+           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+          GROUP BY product.product_type
+           ORDER BY product.product_type") or die(mysqli_error());
+
       ?>
 
 <div class="container-fluid"  style="margin-top:30px;">
   <section>
-    <!--<div class="row">
-      <div class="col-12 mt-3 mb-1">
-        <h5 class="text-uppercase">Minimal Statistics Cards</h5>
-        <p>Statistics on minimal cards.</p>
-      </div>
-    </div>-->
+<!--================ CARD SUMMARY =============-->
     <div class="row">
       <div class="col-xl-3 col-sm-6 col-12 mb-4">
         <div class="card">
@@ -110,15 +146,132 @@ require '../connection.php';
           </div>
         </div>
       </div>
+       <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-money-bill-wave text-danger fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>&#8369; <?php echo $f_sales['earning']?>.00</h3>
+                <p class="mb-0">Today Sales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-money-bill-wave text-success fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>&#8369; <?php echo $f_Ysales['earning']?>.00</h3>
+                <p class="mb-0">Yesterday Sales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
+
+ <!--============= ANALYTICS MODULE ==========-->   
+    <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+          <canvas id="line-chart" ></canvas>
+      </div>
+    </div>
+  </div><br>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+         <canvas id="pie-chart" height="310"></canvas>   
+      </div>
+    </div>
+  </div>
+</div><br>
+
   </section>
 </div>
 
 
+ <script src="Chart.min.js"></script>
+<script type="text/javascript">
+  var line = document.getElementById('line-chart').getContext('2d');
+  var myChart = new Chart(line, {
+  type: 'line',
+  data: {
+    labels: [<?php while ($fetch1 = mysqli_fetch_array($exp_date_line)) {
+                    echo '"' . date("F d, Y", strtotime( $fetch1['date'])) . '",';
+            } ?> ],
+
+    datasets: [{ 
+      data: [<?php while ($fetch2 = mysqli_fetch_array($exp_amt_line)) {
+                    echo '"' .$fetch2['SUM(total)'] . '" ,';
+            } ?>],
+        label: "Last 7 Days",
+        borderColor: "#3e95cd",
+        fill:true,
+backgroundColor: "#9bc8e5"
+
+                }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Sales Summary'
+    }
+  }
+});
+</script>
+
+<script type="text/javascript">
+ 
+var chartDiv = document.getElementById('pie-chart').getContext('2d');
+var myChart = new Chart(chartDiv, {
+    type: 'doughnut',
+    data: {
+        labels: [<?php while ($fetch3 = mysqli_fetch_array($Product_Type)) {
+                    echo '"' . $fetch3['product_type'] . '",';
+            } ?> ],
+        datasets: [
+        {
+            data: [<?php while ($fetch4 = mysqli_fetch_array($Total_per_product)) {
+                    echo '"' .$fetch4['COUNT(product.product_type)'] . '" ,';
+            } ?>],
+            backgroundColor: [
+               "#1e88e5",
+            "#26c6da",
+            "#6610f2",
+            "#7460ee"
+           
+            ]
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Pie Chart'
+        },
+    responsive: true,
+maintainAspectRatio: false,
+    }
+});
+    
+</script>
+
 
     </body>
 </html>
+
+
+
 
 <style type="text/css">
   /*body {
