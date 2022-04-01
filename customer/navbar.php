@@ -16,13 +16,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>      
         <!-- header -->
         <header class = "header" id = "header">
-<img src="../img/h2logo.png"  style="width: 45px;height: 45px;">
+<img src="../img/newLG.png"  style="width: 45px;height: 45px;">
             <div class = "head-top"  style="margin-top: -45px; margin-left: 50px;">
         
                 <div class = "site-name" >
 
-                    <span style="font-size:30px;
-                    font-family: merienda;"> H2Order</span>
+                    <!--<span style="font-size:30px;
+                    font-family: merienda;"> H2Order</span>-->
+
+                    <img src="../img/H2.png">
                 </div>
                 <div class = "site-nav">
                     <span id = "nav-btn"><i class = "fas fa-bars"></i></span>
@@ -142,7 +144,7 @@ html{
     min-height: 8vh;
    
     
-    padding: 15px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-content: stretch;

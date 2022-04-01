@@ -33,14 +33,14 @@ if (count($_POST) > 0) {
     </head>
 
 
-    <body>
+    <body style="background-color: white" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
 
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">EDIT PROFILE
+      style="color:#004aad;text-shadow: 1px 1px #03a9f4;">EDIT PROFILE
       </p>
        
 
@@ -51,7 +51,7 @@ if (count($_POST) > 0) {
 
 
   
-<div class="vh-200" >
+<div class="vh-200" style="" >
   <div class="container h-200">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -294,3 +294,10 @@ if (count($_POST) > 0) {
     return output;
     }
 </script>
+
+
+<style>
+.card{
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+</style>

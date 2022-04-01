@@ -15,11 +15,10 @@
         
         <!-- header -->
         <header class = "header" id = "header">
-        <img src="../img/h2logo.png"  style="width: 45px;height: 45px;">
+        <img src="../img/newLG.png"  style="width: 45px;height: 45px;">
             <div class = "head-top"  style="margin-top: -45px; margin-left: 50px;">
                 <div class = "site-name">
-                    <span style="font-size:30px;
-                    font-family: merienda;">H2Order</span>
+                    <img src="../img/H2.png">
                 </div>
                 <div class = "site-nav">
                     <span id = "nav-btn"><i class = "fas fa-bars"></i></span>

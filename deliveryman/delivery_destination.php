@@ -2,24 +2,48 @@
 require 'validate.php';
 require_once '../connection.php';
 
+if(ISSET($_POST['Uplocation'])){
+
+        $d_latitude= $_POST['d_latitude'];
+        $d_longitude = $_POST['d_longitude'];
+       
+
+$conn->query("UPDATE `deliveryman` SET `d_latitude` = '$d_latitude', `d_longitude` = '$d_longitude'
+   WHERE `deliveryman_id` = '".$_REQUEST['deliveryman_id']."'") or die(mysqli_error());
 
 
-  
+
+          /*  $query = $conn->query("SELECT *
+            FROM `orderlist`
+             WHERE order_id = '".$_REQUEST['order_id']."'") or die(mysqli_error());
+            $fetch = $query->fetch_array();  
+ echo ("<script>
+        alert('Your current position has been updated');
+        document.location.href = 'try.php?order_id= ".$fetch['order_id']."';
+        </script>");*/
+
+        echo ("<script>
+window.history.back()
+</script>");
+  }
+
+
 ?>
-
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>Delivery Destination</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
     <link rel="stylesheet" href="../dist/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="index.css" />
+    
 </head>
-<body style='border:0; margin: 0'>
-       <div id="map" class="map"></div>
+<body >
+   <div id="map" class="map"></div>
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
      <script src="../dist/leaflet-routing-machine.js"></script>
     <script src="Control.Geocoder.js"></script>
@@ -27,22 +51,18 @@ require_once '../connection.php';
 
  <?php
          
-
-
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
-            ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.c_latitude,customer.c_longitude ,deliveryman.d_longitude,deliveryman.d_latitude
+            ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.c_latitude,customer.c_longitude ,deliveryman.deliveryman_id,deliveryman.d_latitude,deliveryman.d_longitude
             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
             RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-             RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
+            RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
              WHERE orderlist.order_id = '".$_REQUEST['order_id']."'") or die(mysqli_error());
             while($fetch = $query->fetch_array()){  
-
-             $del_lati=$fetch['d_latitude']; 
-             $del_long=$fetch['d_longitude']; 
+        
           ?>  
 
             <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
@@ -53,49 +73,30 @@ require_once '../connection.php';
             <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
  <input type="hidden" value="<?php echo $fetch['deliveryman_id']?>" name="deliveryman_id">
 
+   <div class="formBlock" >
+     <form   action="delivery_destination.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" method="POST" >           
+         <input type="hidden" name="d_latitude" id="d_latitude" class="form-control" placeholder="latitude" />            
+         <input type="hidden" name="d_longitude" id="d_longitude" class="form-control" placeholder="longitude" />
+         <button style="width: 100%" type="submit" name="Uplocation" style="font-size:5p" >Update Location</button>
+     </form>
+  </div>
+   
 
-<input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
-          <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
-          <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
-
-<!--<div class="formBlock">
-    <form id="form">-->
-           <input type="hidden" name="c_latitude" class="input"  value="<?php echo $fetch['c_latitude']?>" id="c_latitude" ><br>
+     <input type="hidden" name="c_latitude" class="input"  value="<?php echo $fetch['c_latitude']?>" id="c_latitude" ><br>
      <input type="hidden" name="c_longitude" class="input"  value="<?php echo $fetch['c_longitude']?>" id="c_longitude" ><br>
 
-        <input type="hidden" name="d_latitude" class="input"  value="<?php echo $fetch['d_latitude']?>" id="d_latitude" ><br>
-     <input type="hidden" name="d_longitude" class="input"  value="<?php echo $fetch['d_longitude']?>" id="d_longitude" ><br>
 
-    <!--</form>
-</div>-->
-
-     <?php if($del_lati== null && $del_long ==null) {
-                
-
-  echo ("<script>
-    alert('The deliveryman is not in your way');
-    document.location.href = 'dispatched_order_details.php?order_id=".$fetch['order_id']."';
-    </script>");
-
-              } ?>
-             
-
-        </div>
- 
+<?php
+  }
+?>
 
 
+</body>
+</html>
 
 
-           <?php
-        }
-        ?>
-
-    
-
-
-    
-<script type="text/javascript">
- var map = L.map('map');
+ <script type="text/javascript">
+var map = L.map('map');
 const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const tileLayer = L.tileLayer(tileUrl,{
  maxZoom: 21 ,
@@ -115,9 +116,11 @@ function getLocation() {
 function showPosition(position) {
   //x.innerHTML = "Latitude: " + position.coords.latitude + 
 
+   document.getElementById("d_latitude").value = position.coords.latitude;
+    document.getElementById("d_longitude").value = position.coords.longitude;
 
-    let latti = document.getElementById("d_latitude").value; 
-    let longi = document.getElementById("d_longitude").value;
+    let latti =  position.coords.latitude;
+    let longi = position.coords.longitude;
 
     let latti2= document.getElementById("c_latitude").value;
     let longi2= document.getElementById("c_longitude").value;
@@ -146,7 +149,7 @@ createMarker: function (i, waypoint, n) {
 let urlIcon;
 
 if(i==0){
-    urlIcon=('../img/marker.png');
+    urlIcon=('marker.webp');
 
 }
 else if((i+1)==n){
@@ -188,15 +191,14 @@ getLocation();
 
 </script>
 
-
-<!--<style type="text/css">
- .formBlock {
-    max-width: 60px;
+<style type="text/css">
+  .formBlock {
+    max-width: 200px;
     background-color: #FFF;
     border: 1px solid #ddd;
     position: absolute;
-    top: 90px;
-    left: 5px;
+    top: 40em;
+    left:5px;
     padding: 8px;
     z-index: 999;
     box-shadow: 0 1px 5px rgba(0,0,0,0.65);
@@ -219,8 +221,11 @@ getLocation();
 input:nth-child(1) {
     margin-bottom: 10px;
 }
-</style>-->
+
+/*.leaflet-right .leaflet-control {
+   
+    margin-top: 100px;
+}*/
 
 
-</body>
-</html>
+</style>

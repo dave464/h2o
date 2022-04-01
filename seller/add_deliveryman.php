@@ -16,18 +16,18 @@ require '../connection.php';
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
-    <body style="background-color: #eee;" >
+    <body style="background-color: white"  >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
         
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
 
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">DELIVERYMAN REGISTRATION
+      style="color:#004aad;text-shadow: 1px 1px #03a9f4;">DELIVERYMAN REGISTRATION
       </p>
 
 
-      <div class="vh-200" style="background-color: #eee;">
+      <div class="vh-200" >
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -63,9 +63,10 @@ require '../connection.php';
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                        <?php if (isset($_GET['contact_number'])) { ?>
-                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" value="<?php echo $_GET['contact_number']; ?>" required = "required" />
+                      <input type="number" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" value="<?php echo $_GET['contact_number']; ?>" pattern="[0-9]{11}" maxlength="11" minlength="11"  required = "required" />
                        <?php }else{ ?>
-                      <input type="text" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone">
+                      <input type="number" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone"
+                      pattern="[0-9]{11}" maxlength="11" minlength="11">
                       <?php }?>    
                     </div>
                 </div>
@@ -119,6 +120,8 @@ require '../connection.php';
                       <input type="hidden" value="vcard.jpeg" name="photo" id="form3Example4c" class="form-control"/>
                     </div>
               
+         <input type="hidden" name="d_latitude" id="d_latitude" class="form-control" placeholder="latitude" />            
+         <input type="hidden" name="d_longitude" id="d_longitude" class="form-control" placeholder="longitude" />
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
@@ -146,3 +149,21 @@ require '../connection.php';
     </body>
 </html>
 
+
+<script type="text/javascript">
+     function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  //x.innerHTML = "Latitude: " + position.coords.latitude + 
+
+   document.getElementById("d_latitude").value = position.coords.latitude;
+    document.getElementById("d_longitude").value = position.coords.longitude;
+}
+getLocation();
+ </script>

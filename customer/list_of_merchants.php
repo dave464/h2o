@@ -31,7 +31,7 @@ require '../connection.php';
 <div  >
 
 
- <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">FIND THE BEST WATER REFILLING STATION NEAR YOU</p>
+ <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#004aad;text-shadow: 1px 1px #03a9f4;">FIND THE BEST WATER REFILLING STATION NEAR YOU</p>
 
 <div class="container">
     <div class="row height d-flex justify-content-center align-items-center">
@@ -64,15 +64,15 @@ require '../connection.php';
          
 
        <i class="fas fa-store fa-lg me-3 fa-fw" ></i>
-          <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 17px">
+          <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
           <?php echo $fetch['business_name']?></h5>
       
   <i class="fas fa-map-marker fa-lg me-3 fa-fw" style="color: red;"></i>
-          <h5 class="AD" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 17px">
+          <h5 class="AD" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
           <?php echo $fetch['address']?></h5>
        
           <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-          <h5 style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 17px">
+          <h5 style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
           <?php echo $fetch['contact_number']?></h5>
         
 
@@ -187,7 +187,7 @@ function search_store() {
     right: 2px;
     height: 39px;
     width: 110px;
-    background: #0073ae;
+    background: #004aad;
 }
 
 

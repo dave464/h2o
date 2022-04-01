@@ -29,7 +29,7 @@ require '../connection.php';
     ?>
        
        <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-       style="color:#0073ae;text-shadow: 1px 1px #03a9f4;"><?php echo $fetch['product_name']?> - &#8369; <?php echo $fetch['price']?>.00
+       style="color:#004aad;text-shadow: 1px 1px #03a9f4;"><?php echo $fetch['product_name']?> - &#8369; <?php echo $fetch['price']?>.00
        </p>   
 
 

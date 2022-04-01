@@ -19,7 +19,7 @@ require '../connection.php';
 
    <center>
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">WATER IS NOTHING BUT LIFE
+      style="color:#004aad;text-shadow: 1px 1px #03a9f4;">WATER IS NOTHING BUT LIFE
       </p>
        </center><BR>
  

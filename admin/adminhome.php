@@ -426,6 +426,156 @@
         $f_wawa = $q_wawa->fetch_array(); 
       ?>
 
+       <?php  
+      $q_aga= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.aga%'") or die(mysqli_error());
+        $f_aga = $q_aga->fetch_array(); 
+      ?>
+
+        <?php  
+      $q_balaytigue= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.balaytigue%'") or die(mysqli_error());
+        $f_balaytigue = $q_balaytigue->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_balok= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.balok-balok%'") or die(mysqli_error());
+        $f_balok = $q_balok->fetch_array(); 
+      ?>
+
+    <?php  
+ $q_banilad= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.banilad%'") or die(mysqli_error());
+        $f_banilad = $q_banilad->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_bilaran= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.bilaran%'") or die(mysqli_error());
+        $f_bilaran = $q_bilaran->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_bucana= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.bucana%'") or die(mysqli_error());
+        $f_bucana = $q_bucana->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_bulihan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.bulihan%'") or die(mysqli_error());
+        $f_bulihan = $q_bulihan->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_bunducan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.bunducan%'") or die(mysqli_error());
+        $f_bunducan = $q_bunducan->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_butucan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.butucan%'") or die(mysqli_error());
+        $f_butucan = $q_butucan->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_calayo= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.calayo%'") or die(mysqli_error());
+        $f_calayo = $q_calayo->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_catandaan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.catandaan%'") or die(mysqli_error());
+        $f_catandaan = $q_catandaan->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_kaylaway= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.kaylaway%'") or die(mysqli_error());
+        $f_kaylaway = $q_kaylaway->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_kayrilaw= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.kayrilaw%'") or die(mysqli_error());
+        $f_kayrilaw = $q_kayrilaw->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_cogunan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.cogunan%'") or die(mysqli_error());
+        $f_cogunan = $q_cogunan->fetch_array(); 
+      ?>
+
+    <?php  
+      $q_dayap= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.dayap%'") or die(mysqli_error());
+        $f_dayap = $q_dayap->fetch_array(); 
+      ?>
+
+ <?php  
+      $q_latag= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.latag%'") or die(mysqli_error());
+        $f_latag = $q_latag->fetch_array(); 
+      ?>
+
+<?php  
+      $q_looc= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.looc%'") or die(mysqli_error());
+        $f_looc = $q_looc->fetch_array(); 
+      ?>
+
+<?php  
+      $q_lumbangan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.lumbangan%'") or die(mysqli_error());
+        $f_lumbangan = $q_lumbangan->fetch_array(); 
+      ?>
+
+<?php  
+      $q_malapad= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.malapad%'") or die(mysqli_error());
+        $f_malapad = $q_malapad->fetch_array(); 
+      ?>
+
+<?php  
+      $q_mataas= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.mataas%'") or die(mysqli_error());
+        $f_mataas = $q_mataas->fetch_array(); 
+      ?>
+
+<?php  
+      $q_maugat= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.maugat%'") or die(mysqli_error());
+        $f_maugat = $q_maugat->fetch_array(); 
+      ?>
+
+<?php  
+    $q_munting= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.munting%'") or die(mysqli_error());
+        $f_munting = $q_munting->fetch_array(); 
+      ?>
+
+<?php  
+$q_natipuan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.natipuan%'") or die(mysqli_error());
+        $f_natipuan = $q_natipuan->fetch_array(); 
+      ?>
+
+<?php  
+ $q_pantalan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.pantalan%'") or die(mysqli_error());
+        $f_pantalan = $q_pantalan->fetch_array(); 
+      ?>
+
+<?php  
+      $q_papaya= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.papaya%'") or die(mysqli_error());
+        $f_papaya = $q_papaya->fetch_array(); 
+      ?>
+
+<?php  
+      $q_putat= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.putat%'") or die(mysqli_error());
+        $f_putat = $q_putat->fetch_array(); 
+      ?>
+
+<?php  
+      $q_reparo= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.reparo%'") or die(mysqli_error());
+        $f_reparo = $q_reparo->fetch_array(); 
+      ?>
+
+<?php  
+$q_talangan= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.talangan%'") or die(mysqli_error());
+        $f_talangan = $q_talangan->fetch_array(); 
+      ?>
+
+<?php  
+ $q_tumalim= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.tumalim%'") or die(mysqli_error());
+        $f_tumalim = $q_tumalim->fetch_array(); 
+      ?>
+
+<?php  
+      $q_utod= $conn->query("SELECT COUNT(address) as total FROM `merchant` WHERE address LIKE '%Brgy.utod%'") or die(mysqli_error());
+        $f_utod = $q_utod->fetch_array(); 
+      ?>
+
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -435,8 +585,26 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Brgy 1',<?php echo $f_b1['total']?>], ['Brgy 2',<?php echo $f_b2['total']?>], ['Brgy 3',<?php echo $f_b3['total']?>], ['Brgy 4',<?php echo $br4_wstation['total']?>], ['Brgy 5',<?php echo $f_b5['total']?>], ['Brgy 6',<?php echo $f_b6['total']?>], 
-          ['Brgy 7', <?php echo $f_b7['total']?>], ['Brgy 8',<?php echo $f_b8['total']?>], ['Brgy 9',<?php echo $f_b9['total']?>], ['Brgy 10',<?php echo $f_b10['total']?>], ['Brgy 11',<?php echo $f_b11['total']?>], ['Brgy 12',<?php echo $f_b12['total']?>], ['Brgy Wawa',<?php echo $f_wawa['total']?>]
+          ['Brgy 1',<?php echo $f_b1['total']?>], ['Brgy 2',<?php echo $f_b2['total']?>], ['Brgy 3',<?php echo $f_b3['total']?>],
+          ['Brgy 4',<?php echo $br4_wstation['total']?>], ['Brgy 5',<?php echo $f_b5['total']?>], ['Brgy 6',<?php echo $f_b6['total']?>], 
+          ['Brgy 7', <?php echo $f_b7['total']?>], ['Brgy 8',<?php echo $f_b8['total']?>], ['Brgy 9',<?php echo $f_b9['total']?>],
+          ['Brgy 10',<?php echo $f_b10['total']?>], ['Brgy 11',<?php echo $f_b11['total']?>], ['Brgy 12',<?php echo $f_b12['total']?>],
+          ['Brgy Wawa',<?php echo $f_wawa['total']?>], ['Brgy Aga',<?php echo $f_aga['total']?>], 
+          ['Brgy Balaytigue',<?php echo $f_balaytigue['total']?>], ['Brgy Balok-Balok',<?php echo $f_balok['total']?>], 
+          ['Brgy Banilad',<?php echo $f_banilad['total']?>], ['Brgy Bilaran',<?php echo $f_bilaran['total']?>], 
+          ['Brgy Bucana',<?php echo $f_bucana['total']?>], ['Brgy Bulihan',<?php echo $f_bulihan['total']?>], 
+          ['Brgy Bunducan',<?php echo $f_bunducan['total']?>], ['Brgy Butucan',<?php echo $f_butucan['total']?>], 
+          ['Brgy Calayo',<?php echo $f_calayo['total']?>], ['Brgy Catandaan',<?php echo $f_catandaan['total']?>], 
+          ['Brgy Kaylaway',<?php echo $f_kaylaway['total']?>], ['Brgy Kayrilaw',<?php echo $f_kayrilaw['total']?>], 
+          ['Brgy Cogunan',<?php echo $f_cogunan['total']?>], ['Brgy Dayap',<?php echo $f_dayap['total']?>], 
+          ['Brgy Latag',<?php echo $f_latag['total']?>], ['Brgy Looc',<?php echo $f_looc['total']?>], 
+          ['Brgy Lumbangan',<?php echo $f_lumbangan['total']?>], ['Brgy Malapad Na Bato',<?php echo $f_malapad['total']?>], 
+          ['Brgy Mataas Na Pulo',<?php echo $f_mataas['total']?>], ['Brgy Maugat',<?php echo $f_maugat['total']?>], 
+          ['Brgy Munting Indang',<?php echo $f_munting['total']?>], ['Brgy Natipuan',<?php echo $f_natipuan['total']?>], 
+          ['Brgy Pantalan',<?php echo $f_pantalan['total']?>], ['Brgy Papaya',<?php echo $f_papaya['total']?>], 
+          ['Brgy Putat',<?php echo $f_putat['total']?>], ['Brgy Reparo',<?php echo $f_reparo['total']?>], 
+          ['Brgy Talangan',<?php echo $f_talangan['total']?>], ['Brgy Tumalim',<?php echo $f_tumalim['total']?>], 
+          ['Brgy Utod',<?php echo $f_utod['total']?>]
         
         ]);
 

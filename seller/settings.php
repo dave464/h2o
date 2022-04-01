@@ -40,7 +40,7 @@ if (count($_POST) > 0) {
        
 
       <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
-      style="color:#0073ae;text-shadow: 1px 1px #03a9f4;">EDIT PROFILE
+      style="color:#004aad;text-shadow: 1px 1px #03a9f4;">EDIT PROFILE
       </p>
 
       
@@ -211,3 +211,10 @@ if (count($_POST) > 0) {
     return output;
     }
 </script>
+
+
+<style>
+.card{
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+</style>
