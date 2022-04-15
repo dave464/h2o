@@ -1,40 +1,38 @@
-<!-- Navigation Bar --> 
-<div class="sidebar">
-   
-   <div class="logo_name" style=" margin-top:70px;">
-    <h3> H2Order </h3><h3>H2Order</h3></div>
- 
-      <ul class="nav_list" style="margin-top:120px; margin-left:-40px;">
-       
-        <li>
-         <a href="../admin/adminhome.php">
-          <i class='bx bx-grid-alt'></i>
-          <span style=" font-size: 16px;" class="links_name">Dashboard</span>
-         </a>  
-       </li>
+<nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="adminhome.php" aria-expanded="false"> <i class="fa-solid fa-gauge"></i> <span
+                                    class="hide-menu" style="margin-left: 5px"> Dashboard</span></a></li>
 
-        <li>
-          <a href="../admin/calendar.php">
-           <i class='bx bxs-calendar'></i>
-           <span style=" font-size: 16px;" class="links_name">Calendar</span>
-          </a>      
-        </li>
 
-        <li>
-         <a href="../admin/inspection.php">
-          <i class='bx bxs-search-alt-2'></i>
-          <span style=" font-size: 16px;" class="links_name">Inspection & Monitoring</span>
-         </a>
-       </li>
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="merchant_list.php" aria-expanded="false"> <i class="fas fa-store"></i> <span
+                                    class="hide-menu" style="margin-left: 5px"> List of Merchants</span></a></li>
+                                    
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="map.php" aria-expanded="false"> <i class="fa-solid fa-map-location-dot"></i>
+                                    <span class="hide-menu" style="margin-left: 5px">Map</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="calendar.php" aria-expanded="false"><i class="fa-regular fa-calendar-days" style="margin-top:-3px"></i>
+                                <span class="hide-menu" style="margin-left:5px">Calendar</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="announcement.php" aria-expanded="false"><i class="fa-solid fa-bullhorn" style="margin-top:-3px"></i><span class="hide-menu" style="margin-left: 5px">Announcement</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="inspection.php" aria-expanded="false"><i class="fa-solid fa-flask"  style="margin-top:-3px"></i>
+                                 <span class="hide-menu" style="margin-left: 5px">Alpha Lab Test</span></a>
+                        </li>
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="badge.php" aria-expanded="false"><i class="fa-solid fa-certificate" style="margin-top:-1px"></i>
+                                 <span class="hide-menu" style="margin-left: 5px">Badge</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="profile.php" aria-expanded="false"><i class="fa-solid fa-user"  style="margin-top:-3px"></i>
+                                <span class="hide-menu"  style="margin-left: 5px">Profile</span></a>
+                        </li>      
+                    </ul>
 
-       <li>
-         <a href="../admin/announcement.php">
-          <i class='bx bxs-megaphone'></i>
-          <span style=" font-size: 16px;" class="links_name">Announcements</span>
-         </a>   
-       </li>
-           
-      </ul>
-   </div> 
-
-  </div>
+                </nav>

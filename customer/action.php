@@ -53,7 +53,8 @@ require '../connection.php';
     /*===== PRODUCT RATE ===== */
 
     if(ISSET($_POST['submitRate'])){
-       
+          
+        $order_id= $_POST['order_id'];
         $product_id= $_POST['product_id'];
          $customer_id = $_POST['customer_id'];
          $merchant_id = $_POST['merchant_id'];
@@ -65,6 +66,11 @@ require '../connection.php';
          
 
          $conn->query("INSERT INTO `product_rating` (customer_id, product_id, merchant_id,rating,comment,w_facemask,c_uniform,on_time) VALUES ('$customer_id','$product_id','$merchant_id','$rating','$comment','$w_facemask','$c_uniform','$on_time')") or die(mysqli_error());
+
+
+        $conn->query("UPDATE `orderlist` SET `status` = 'rated' WHERE `order_id`= $order_id  && `customer_id` = '".$_SESSION['customer_id']."'" ) or die(mysqli_error());
+
+
          echo ("<script>
          alert('You Have Successfully Rate This Product');
          document.location.href = 'received_orders.php';

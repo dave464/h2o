@@ -8,6 +8,7 @@ require '../connection.php';
 		$firstname= $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$address = $_POST['address'];
+		$barangay = $_POST['barangay'];
 		$email = $_POST['email'];
 		$contact_number= $_POST['contact_number'];
 		$c_latitude = $_POST['c_latitude'];
@@ -34,7 +35,7 @@ require '../connection.php';
 			</script>");
 		}else{
 
-		$conn->query("INSERT INTO `customer`(username, password, firstname, lastname, address, email,contact_number,c_latitude,c_longitude) VALUES('$username','$password','$firstname','$lastname','$address','$email','$contact_number','$c_latitude','$c_longitude')") or die(mysqli_error());
+		$conn->query("INSERT INTO `customer`(username, password, firstname, lastname, address, barangay, email,contact_number,c_latitude,c_longitude) VALUES('$username','$password','$firstname','$lastname','$address', '$barangay', '$email','$contact_number','$c_latitude','$c_longitude')") or die(mysqli_error());
 		
 		echo ("<script>
 			alert('Your account has been created successfully');

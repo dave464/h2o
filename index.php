@@ -18,12 +18,13 @@
 
 
         <div class="container" >
-            <div class="row d-grid gap-2 col-6 mx-auto">
+            <div class="row d-grid gap-2 col-5 mx-auto">
                 <button type="button" onclick="window.location='customer/index.php'" class="btn btn-outline-primary btn-lg fw-bold border-2">CUSTOMER</button>
                 <button type="button" onclick="window.location='seller/index.php'" class="btn btn-outline-success btn-lg fw-bold border-2">MERCHANT</button>
-                <button type="button" onclick="window.location='deliveryman/index.php'" class="btn btn-outline-info btn-lg fw-bold border-2">DELIVERY MAN</button>
+                <button type="button" onclick="window.location='deliveryman/index.php'" class="btn btn-outline-info btn-lg fw-bold border-2">DELIVERYMAN</button>
             </div>
         </div>
+        
    
 
     </body>

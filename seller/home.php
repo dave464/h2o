@@ -44,31 +44,36 @@ require '../connection.php';
         /*====== Query for total earning today =====*/
          $q_sales = $conn->query("SELECT SUM(total) as earning FROM `orderlist` 
             WHERE DATE(date) = DATE(NOW()) && orderlist.status = 'delivered'  
-            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
             ORDER BY `order_id` DESC") or die(mysqli_error());
         $f_sales = $q_sales->fetch_array();
 
          /*====== Query for total earning yesterday =====*/
         $q_Ysales = $conn->query("SELECT SUM(total) as earning FROM `orderlist` 
             WHERE DATE(`date`) = DATE_ADD(CURDATE(), INTERVAL -1 DAY)  && orderlist.status = 'delivered'  
-            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  ORDER BY `order_id` DESC") or die(mysqli_error());
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'   || orderlist.status = 'rated'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+            ORDER BY `order_id` DESC") or die(mysqli_error());
         $f_Ysales = $q_Ysales->fetch_array();
 
          /*====== Query for last 7 days record =====*/
         $exp_date_line = mysqli_query($conn,"SELECT date FROM orderlist 
-          WHERE date >= DATE_SUB(DATE(NOW()), INTERVAL 7 DAY) && orderlist.status = 'delivered'
-          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' GROUP BY date  ORDER BY `date` ASC ");
+          WHERE YEARWEEK(`date`, 1) = YEARWEEK( CURDATE() - INTERVAL 1 WEEK, 1) && orderlist.status = 'delivered'
+          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
+           GROUP BY date  ORDER BY `date` ASC ");
 
          /*====== Query for total sale in last 7 days  =====*/
          $exp_amt_line =  mysqli_query($conn,"SELECT SUM(total) FROM orderlist
-          WHERE date >= DATE_SUB(DATE(NOW()), INTERVAL 7 DAY)  &&  orderlist.status = 'delivered' 
-          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' GROUP BY date") or die(mysqli_error());
+          WHERE YEARWEEK(`date`, 1) = YEARWEEK( CURDATE() - INTERVAL 1 WEEK, 1)  &&  orderlist.status = 'delivered' 
+          && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
+           GROUP BY date") or die(mysqli_error());
 
           /*====== Query for last product_type =====*/
         $Product_Type = mysqli_query($conn,"SELECT product.product_type as product_type, product.product_id, orderlist.order_id FROM orderlist
           RIGHT JOIN product ON orderlist.product_id = product.product_id 
           WHERE orderlist.status = 'delivered'
-           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  || orderlist.status = 'rated'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'
           GROUP BY product.product_type
            ORDER BY product.product_type");
 
@@ -76,9 +81,34 @@ require '../connection.php';
          $Total_per_product =  mysqli_query($conn,"SELECT COUNT(product.product_type) ,product.product_type, product.product_id, orderlist.order_id FROM orderlist
           RIGHT JOIN product ON orderlist.product_id = product.product_id 
           WHERE  orderlist.status = 'delivered'
-           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
+           && orderlist.merchant_id = '".$_SESSION['merchant_id']."'   || orderlist.status = 'rated'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'
           GROUP BY product.product_type
            ORDER BY product.product_type") or die(mysqli_error());
+
+
+          $query = $conn->query("SELECT * FROM `merchant` WHERE `merchant_id` = '$_SESSION[merchant_id]'") or die(mysqli_error());
+          $fetch = $query->fetch_array();
+              $stat=$fetch['status']; 
+
+                $std_num= 0;
+                $counter =0;
+                $merchantId = $fetch['merchant_id'];
+                $query2 = $conn->query("SELECT product_rating.rating
+                FROM product_rating WHERE product_rating.merchant_id = $merchantId");
+
+                while($fetch2 = $query2->fetch_array()){
+
+                  $std_num += $fetch2['rating'];
+                  $counter++;
+                }
+                if($std_num > 0) {
+                  $average = $std_num / $counter;
+
+                }
+                else {
+                  $average = 0;
+                }
 
       ?>
 
@@ -176,6 +206,54 @@ require '../connection.php';
           </div>
         </div>
       </div>
+       <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+
+                <?php if ($stat=='approved') {
+                  echo '<i class="fas fa-user-check text-info fa-3x"></i>';
+                }else{
+                  echo '<i class="fa fa-spinner fa-spin text-info fa-3x"></i>';
+                }
+               
+
+                  ?>
+
+              </div>
+              <div class="text-end">
+                <h3><?php echo $fetch['status']?></h3>
+                <p class="mb-0">Account Status</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ <div class="col-xl-3 col-sm-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="fas fa-star text-warning fa-3x"></i>
+              </div>
+              <div class="text-end">
+                <h3>
+                     <?php if($average==0) {
+                            echo 'No Rating';
+                      } else{
+                            echo round($average,2);
+                              echo '/5.00 ';
+                          }
+                        ?>
+                </h3>
+                <p class="mb-0">Ratings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     
 
@@ -215,7 +293,7 @@ require '../connection.php';
       data: [<?php while ($fetch2 = mysqli_fetch_array($exp_amt_line)) {
                     echo '"' .$fetch2['SUM(total)'] . '" ,';
             } ?>],
-        label: "Last 7 Days",
+        label: "Last Week Record",
         borderColor: "#3e95cd",
         fill:true,
 backgroundColor: "#9bc8e5"

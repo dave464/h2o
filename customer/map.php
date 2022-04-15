@@ -26,7 +26,7 @@ require '../connection.php';
 
  
 <?php 
-$sql = "SELECT * FROM `merchant`";
+$sql = "SELECT * FROM `merchant` WHERE status ='approved' ORDER BY business_name asc ";
 
 $server = "localhost";
 $username = "root";
@@ -45,6 +45,8 @@ $saveJson["type"]="Feature";
 $saveJson["properties"]=[
                     "name"=> $row['business_name'],
                     "address"=>$row['address'],
+                    "barangay"=>$row['barangay'],
+                    "municipality"=>'Nasugbu,Batangas',
                     "phone"=>$row['contact_number'],
                     "image"=>$row['image'],
                     "opening"=>date('h:i A', strtotime($row['opening'])),
@@ -158,7 +160,7 @@ body {
 
 <script>
 function openNav() {
-  document.getElementById("mySidepanel").style.width = "60%";
+  document.getElementById("mySidepanel").style.width = "75%";
 }
 
 function closeNav() {
@@ -235,7 +237,7 @@ function generateList() {
     div.classList.add('shop-item');
     a.innerText = shop.properties.name;
     a.href = '#';
-    p.innerText = shop.properties.address;
+    p.innerText = shop.properties.address +' '+ shop.properties.barangay +' '+ shop.properties.municipality;
     div.appendChild(a);
     div.appendChild(p);
     li.appendChild(div);
@@ -255,7 +257,7 @@ function makePopupContent(shop) {
       </div>
             <center> <h4>${shop.properties.name}</h4> </center>
         <i class="fas fa-map-marker fa-lg me-3 fa-fw" style="color: red; margin-left:10px;" ></i>
-          <p style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.address}</p>
+          <p style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.address} ${shop.properties.barangay} ${shop.properties.municipality}</p>
         <i class="fas fa-phone fa-lg me-3 fa-fw" style="color: black; margin-left:10px;" ></i>
           <p  style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.phone}</p>
          <i class="fas fa-clock fa-lg me-3 fa-fw" style="color: black; margin-left:10px;" ></i>

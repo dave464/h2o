@@ -23,6 +23,7 @@ require '../connection.php';
             if($count > 0) {
                 $conn->query("UPDATE `cart` SET `number_of_items` = $number_of_items WHERE `product_id`= $product_id  && `customer_id` = '".$_SESSION['customer_id']."'" ) or die(mysqli_error());
                 echo ("<script>
+                 alert('Added to cart');
                 document.location.href = 'cart.php';
                 </script>");
             }

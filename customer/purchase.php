@@ -91,6 +91,9 @@ require '../connection.php';
 
         $q_d = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'dispatched' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
         $f_d = $q_d->fetch_array();
+
+        $q_r = $conn->query("SELECT COUNT(*) as total FROM `orderlist` WHERE orderlist.status = 'delivered' && orderlist.customer_id = '".$_SESSION['customer_id']."'") or die(mysqli_error());
+        $f_r = $q_r->fetch_array();
       ?>
 
 
@@ -106,6 +109,7 @@ require '../connection.php';
       RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
       RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
       WHERE orderlist.status = 'pending' && orderlist.customer_id = '".$_SESSION['customer_id']."'
+       ORDER BY orderlist.date DESC
   ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
 ?>
@@ -150,25 +154,72 @@ require '../connection.php';
       </div>
 
       <nav class="nav">
-  <a href="purchase.php" class="nav__link nav__link--active" >
-      <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_p['total']?></span>
-        <i class="fa fa-history" style="font-size: 18px"></i>
-    <span class="nav__text">Pending</span>
-  </a>
-  <a href="shipping_orders.php" class="nav__link ">
-    <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_s['total']?></span>
-    <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
-    <span class="nav__text">Accepted</span>
-  </a>
-  <a href="dispatched_order.php" class="nav__link">
-   <span class="badge bg-danger" style="margin-left: 40px;"><?php echo $f_d['total']?></span>
-    <i class="fas fa-truck" style="font-size: 18px"></i>
-    <span class="nav__text">Dispatched</span>
-  </a>
-  <a href="received_orders.php" class="nav__link">
-    <i class="fas fa-star" style="font-size: 18px"></i>
-    <span class="nav__text">To rate</span>
-  </a>
+<!---================== Total pending orders ================-->
+<?php if ($f_p['total']!=0) {
+         echo '<a href="purchase.php" class="nav__link nav__link--active" >    
+               <span class="badge bg-danger" style="margin-left: 40px;">'.$f_p['total'].'</span>
+              <i class="fa fa-history" style="font-size: 18px"></i>
+          <span class="nav__text">Pending</span>
+        </a>';
+      }else{
+          echo '<a href="purchase.php" class="nav__link nav__link--active" > 
+                   <span class="badge" style="margin-left: 40px; color:white;background-color:white">0</span>  
+              <i class="fa fa-history" style="font-size: 18px"></i>
+          <span class="nav__text">Pending</span> </a>';
+
+      } 
+ ?>
+<!---==================== Total shipping orders ==============-->
+ <?php if ($f_s['total']!=0) {
+         echo ' <a href="shipping_orders.php" class="nav__link ">
+                  <span class="badge bg-danger" style="margin-left: 40px;">'.$f_s['total'].'</span>
+                  <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
+                  <span class="nav__text">Accepted</span>
+                </a>';
+      }else{
+          echo '<a href="shipping_orders.php" class="nav__link ">
+                 <span class="badge" style="margin-left: 40px; color:white;background-color:white">0</span>  
+                  <i class="fas fa-clipboard-check" style="font-size: 18px"></i>
+                  <span class="nav__text">Accepted</span>
+                </a>';
+
+      } 
+ ?>
+
+<!---======================== Total dispatched orders ===========-->
+ <?php if ($f_d['total']!=0) {
+         echo ' <a href="dispatched_order.php" class="nav__link">
+               <span class="badge bg-danger" style="margin-left: 40px;">'.$f_d['total'].'</span>
+                <i class="fas fa-truck" style="font-size: 18px"></i>
+                <span class="nav__text">Dispatched</span>
+              </a>';
+      }else{
+          echo '<a href="dispatched_order.php" class="nav__link">
+                 <span class="badge " style="margin-left: 40px;color:white;background-color:white">0</span> 
+                <i class="fas fa-truck" style="font-size: 18px"></i>
+                <span class="nav__text">Dispatched</span>
+              </a>';
+
+      } 
+ ?>
+
+<!---=========================== Total rate orders ==================-->
+ <?php if ($f_r['total']!=0) {
+         echo ' <a href="received_orders.php" class="nav__link">
+                <span class="badge bg-danger" style="margin-left: 40px;">'.$f_r['total'].'</span>
+                <i class="fas fa-star" style="font-size: 18px"></i>
+                <span class="nav__text">To rate</span>
+              </a>';
+      }else{
+          echo ' <a href="received_orders.php" class="nav__link">
+                 <span class="badge" style="margin-left: 40px; color:white;background-color:white">0</span> 
+                <i class="fas fa-star" style="font-size: 18px"></i>
+                <span class="nav__text">To rate</span>
+              </a>';
+
+      } 
+ ?>
+
 </nav>
 </section>
 <!--------- SECTION END-------->

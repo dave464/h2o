@@ -108,7 +108,8 @@ require_once '../connection.php';
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
             orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
-            ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id FROM `orderlist`
+            ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.barangay
+             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
             RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
             RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
@@ -124,7 +125,7 @@ require_once '../connection.php';
             <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
             <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
 
-       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+       <div class="col-md-12 col-lg-5 mb-5 mb-lg-0">
         <div class="card">
           <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
           <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
@@ -138,7 +139,7 @@ require_once '../connection.php';
             height: 300px; margin-bottom: 5px;" class="card-img-top"/></center> 
           
            <div class="card-body">
-              <!------------- PRODUCT DETAILS ---------------->
+               <!------------- PRODUCT DETAILS ---------------->
              <div class="d-flex justify-content-center mb-3">
               <h4 class="mb-0" style="font-weight:550">PRODUCT DETAILS</h4>
               </div>
@@ -147,6 +148,10 @@ require_once '../connection.php';
               <p class="card-text" style="font-weight: 550">Product Name: </p>
               <p class="card-text"><?php echo $fetch['product_name']?></p>        
              </div>
+             <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Product Type: </p>
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['product_type']?></p>        
+             </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Seller: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['business_name']?></p>        
@@ -167,7 +172,8 @@ require_once '../connection.php';
              </div>
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Address: </p>
-              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['address']?></p>        
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['address']?>
+               <?php echo $fetch['barangay']?> Nasugbu,Batangas</p>        
              </div> 
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Contact:</p>

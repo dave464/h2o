@@ -38,7 +38,7 @@
             <ul class = "navbar">
                 <li>
                 <a href = "../deliveryman/home.php">
-                    <i class='fas fa-address-book' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                    <i class='fas fa-truck' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Delivery List</a>
                 </li>
 

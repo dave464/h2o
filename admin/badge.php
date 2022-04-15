@@ -56,19 +56,19 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand ms-4" href="adminhome.php">
+                   <a class="navbar-brand ms-4" href="adminhome.php">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo.png" style="height: 60px; margin-top: 15px; margin-left:-20px" alt="homepage" class="dark-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/H3.png" style="width: 150px; margin-left: -10px;margin-top:-10px" alt="homepage" class="dark-logo" />
 
                         </span>
                     </a>
@@ -135,40 +135,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="adminhome.php" aria-expanded="false"> <i class="fa-solid fa-gauge"></i> <span
-                                    class="hide-menu" style="margin-left: 5px"> Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map.php" aria-expanded="false"><i class="fa-solid fa-map-location-dot"></i>
-                                    <span class="hide-menu"  style="margin-left: 5px">Map</span></a>
-                        </li>
-                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="calendar.php" aria-expanded="false"><i class="fa-regular fa-calendar-days" style="margin-top:-3px"></i>
-                                <span class="hide-menu" style="margin-left:5px">Calendar</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="announcement.php" aria-expanded="false"><i class="fa-solid fa-bullhorn" style="margin-top:-3px"></i><span class="hide-menu" style="margin-left: 5px">Announcement</span></a>
-                        </li>
-                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="inspection.php" aria-expanded="false"><i class="fa-solid fa-flask"  style="margin-top:-3px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Alpha Lab Test</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="badge.php" aria-expanded="false"><i class="fa-solid fa-certificate" style="margin-top:-1px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Badge</span></a>
-                        </li> 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="profile.php" aria-expanded="false"><i class="fa-solid fa-user"  style="margin-top:-3px"></i>
-                                <span class="hide-menu"  style="margin-left: 5px">Profile</span></a>
-                        </li>
-                         
-                       
-                    </ul>
-
-                </nav>
+                  <?php include 'navbar.php' ?>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -230,73 +197,6 @@
                                 <div class="table-responsive">
 
 
-
-  <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal"
- style="margin-left: 20px; margin-bottom: 20px; color: white;">
-  Add Data
-</button>
-
-<!-- The Modal -->
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-          <form action ="add_query_badge.php" method = "POST"> 
-            <div class = "form-group">
-              <label>Name </label>
-              <select  class = "form-control" required = required name = "merchant_id">           
-                <?php
-                  $query = "SELECT * FROM merchant";
-                  $result = $conn->query($query);
-                  
-                  if ($result->num_rows > 0) {
-                      echo '<option value="">Select Waterstation</option>';
-                       while ($row = $result->fetch_assoc()) {
-                      echo '<option value="'.$row['merchant_id'].'">'.$row['business_name'].'</option>';
-                    }
-                  }else{
-                      echo '<option value="">Waterstation not available</option>';
-                  }
-                ?>
-             </select>
-          </div>
-       <div class = "form-group">
-          <label>Status</label>
-          <select class = "form-control" required = required name = "status">
-          <option value = "">Choose an option</option>
-          <option value = "Passed">Passed</option>
-          <option value = "Failed">Failed</option>
-         </select>
-      </div>
-       <br/>
-           
-         <div class = "form-group">
-            <button name = "add_badge" class = "btn btn-info form-control" style="background:dodgerBlue;"><i class = ""></i> Saved</button>
-          </div>
-            <?php require_once 'add_query_badge.php'?>
-          </form>
-        
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
   <!--<a class = "btn btn-primary"  id ="addBtn" href="add_inspection.php" > Add Data</a> </div>-->
      <br>
 
@@ -319,37 +219,27 @@
                                                 <th class="border-top-0">ID</th>
                                                 <th class="border-top-0">NAME</th>
                                                 <th class="border-top-0">DATE</th>
-                                                <th class="border-top-0">STATUS</th>
-                                                <th class="border-top-0">STAT</th>
+                                                <th class="border-top-0">STATUS</th>                                               
                                                 <th class="border-top-0">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                               <?php  
-                                                   $query = $conn->query("SELECT badge.badge_id, merchant.business_name, badge.date, badge.status
-                                                   FROM merchant RIGHT JOIN badge ON merchant.merchant_id = badge.merchant_id ") or die(mysqli_error());
+                                                   $query = $conn->query("SELECT inspection.inspection_id, merchant.business_name,
+                                                          inspection.date,inspection.status 
+                                                 FROM merchant
+                                                 RIGHT JOIN inspection
+                                                 ON merchant.merchant_id = inspection.merchant_id 
+                                                 WHERE inspection.date > DATE_SUB(CURDATE(), INTERVAL 6 MONTH)") or die(mysqli_error());
                                                    while($fetch = $query->fetch_array()){
                                                ?>
                                             <tr>
-                                                <td><?php echo $fetch['badge_id']?></td>
+                                                <td><?php echo $fetch['inspection_id']?></td>
                                                 <td><?php echo $fetch['business_name']?></td>
                                                 <td><?php echo date("M d, Y", strtotime($fetch['date']))?></td>
-                                                <td><?php echo $fetch['status']?></td>
-                                                <td><?php
-                                                         $startdate = $fetch['date'] ;
-                                                         $expire = strtotime($startdate. ' + 2  days');
-                                                         $today = strtotime("today midnight");
-
-                                                      if($today >= $expire){
-                                                          echo "Expired";
-                                                      } else {
-                                                          echo "Active";
-                                                        }
-                                                      ?> </td> 
-                                                <td><a class = "btn btn-warning"  href="edit_query_badge.php?badge_id=<?php echo 
-                                                     $fetch['badge_id']?>" style="color:white;" ><i class="fa-solid fa-pen-to-square"></i></a>
-
-                                                    <a class = "btn btn-danger" href="delete_badge.php?badge_id=<?php echo $fetch['badge_id']?>" onclick = "confirmationDelete(this); return false;"
+                                                <td><?php echo $fetch['status']?></td>                                              
+                                                <td>
+                                                   <a class = "btn btn-danger" href="delete_inspection.php?inspection_id=<?php echo $fetch['inspection_id']?>" onclick = "confirmationDelete(this); return false;"
                                                      style="color:white; margin-left:10px">
                                                     <i class="fa-solid fa-trash"></i></a></td>
                                             </tr>
@@ -380,7 +270,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+            <footer class="footer"> © 2022 H2ORDER </a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

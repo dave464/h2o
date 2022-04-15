@@ -23,6 +23,7 @@ $conn->query("UPDATE `deliveryman` SET `d_latitude` = '$d_latitude', `d_longitud
         </script>");*/
 
         echo ("<script>
+         alert('Your current position has been updated'); 
 window.history.back()
 </script>");
   }

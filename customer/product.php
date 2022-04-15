@@ -78,7 +78,7 @@ require '../connection.php';
 
           <img src = "../photo/<?php echo $fetch['image']?>" 
           onclick="window.location='product_view.php?product_id=<?php echo $fetch['product_id']?>'"
-           class="card-img-top"/>
+           class="card-img-top" />
 
           <div class="card-body">
 

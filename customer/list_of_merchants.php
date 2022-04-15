@@ -52,13 +52,9 @@ require '../connection.php';
 </div>
    
 
-        <?php
-            $query = $conn->query("SELECT * FROM `merchant`") or die(mysqli_error());
-            while($fetch = $query->fetch_array()){
-          ?>  
 
 
-        <div class="store" >
+       <!-- <div class="store" >
 
         <center><img src="../photo/<?php echo $fetch['image']?>" style="width:70%;height:200px;cursor: pointer;"  onclick="window.location='product.php?merchant_id=<?php echo $fetch['merchant_id']?>'" data-bs-toggle="tooltip" data-bs-placement="right" title="Click here to discover <?php echo $fetch['business_name']?>'s product"></center><br>
          
@@ -76,13 +72,73 @@ require '../connection.php';
           <?php echo $fetch['contact_number']?></h5>
         
 
+        </div>-->
+
+
+
+
+<!--------- SECTION Start-------->
+<section >
+  <div class="container py-5">
+
+
+    <div class="row">
+
+
+        <?php
+            $query = $conn->query("SELECT * FROM `merchant` WHERE status ='approved' ORDER BY business_name asc ") or die(mysqli_error());
+            while($fetch = $query->fetch_array()){
+
+             
+
+
+          ?>  
+    
+      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+        <div class="card">
+          
+             <div class="store" >
+
+        <center><img src="../photo/<?php echo $fetch['image']?>" style="width:70%;height:200px;cursor: pointer;"  onclick="window.location='product.php?merchant_id=<?php echo $fetch['merchant_id']?>'" data-bs-toggle="tooltip" data-bs-placement="right" title="Click here to discover <?php echo $fetch['business_name']?>'s product"></center><br>
+         
+
+       <i class="fas fa-store fa-lg me-3 fa-fw" ></i>
+          <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
+          <?php echo $fetch['business_name']?></h5>
+      
+  <i class="fas fa-map-marker fa-lg me-3 fa-fw" style="color: red;"></i>
+          <h5 class="AD" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
+          <?php echo $fetch['address']?> <?php echo $fetch['barangay']?> Nasugbu,Batangas </h5>
+       
+          <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+          <h5 style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
+          <?php echo $fetch['contact_number']?></h5>
+        
+        
+
         </div>
 
-       <?php
-       }
-    ?>
+
+
+        </div><br>
+      </div>
+  
    
- 
+<?php
+    }
+  ?> 
+
+        </div>
+      </div>
+
+</section>
+<!--------- SECTION END-------->
+
+
+
+
+
+
 </div>
 
 
@@ -97,7 +153,7 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 function search_store() {
   let input = document.getElementById('searchbar').value
   input=input.toLowerCase();
-  let x = document.getElementsByClassName('store');
+  let x = document.getElementsByClassName('col-md-12');
   
   for (i = 0; i < x.length; i++) {
     if (!x[i].innerHTML.toLowerCase().includes(input)) {
@@ -121,7 +177,7 @@ function search_store() {
 
 <style type="text/css">
   
-.store {
+/*.store {
   max-width: 380px;
   min-height: 300px;
   margin: 50px auto;
@@ -131,6 +187,25 @@ function search_store() {
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
   border-color: gray;
   border: 1px solid rgba(0,0,0,.125);
+}*/
+
+
+.col-md-12{
+  display: list-item;  
+    list-style-type: none;
+
+
+
+}
+
+.card{
+   padding: 40px 30px 30px 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+  border-color: gray;
+  border: 1px solid rgba(0,0,0,.125);
+
 }
 
 
@@ -149,12 +224,13 @@ function search_store() {
   color: #039be5;
 }
 
+/*
 @media (max-width: 380px) {
   .store   {
     margin: 30px 20px;
     padding: 40px 15px 15px 15px;
   }
-}
+}*/
 
 
 

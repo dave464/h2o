@@ -47,19 +47,19 @@
                 <li><a href = "../seller/announcement.php"><i class='fas fa-bullhorn' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
                     </i>  Announcement</a></li>
 
-                <li><a href = "../seller/add_product.php"><i class='fas fa-plus-square' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
+                <li><a href = "../seller/add_product.php"><i class='fas fa-plus-square' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i>  Add Product</a></li>
 
-                <li><a href = "../seller/product_list.php"><i class='fas fa-list-alt' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
+                <li><a href = "../seller/product_list.php"><i class='fas fa-clipboard-list' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Product List</a></li>
 
-                <li><a href = "../seller/order_list.php"><i class='bx bxs-package' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                <li><a href = "../seller/order_list.php"><i class='fas fa-box' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
                     </i> Order List</a></li>
 
                  <li><a href = "../seller/accepted_order.php"><i class='fas fa-clipboard-check' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i> Accepted Orders</a></li>
 
-                <li><a href = "../seller/delivery_list.php"><i class='fas fa-address-book' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
+                <li><a href = "../seller/delivery_list.php"><i class='fas fa-truck' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
                     </i> Delivery List</a></li>
 
                 <li><a href = "../seller/deliveryman.php"><i class='fas fa-user' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">

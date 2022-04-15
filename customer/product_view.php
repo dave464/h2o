@@ -49,7 +49,7 @@ require '../connection.php';
    <input type="hidden" value="<?php echo $_SESSION['customer_id']?>" name="customer_id">
           
    
-      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+     <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
           
           <img src = "../photo/<?php echo $fetch['image']?>" 
@@ -84,13 +84,17 @@ require '../connection.php';
             <div class="d-flex justify-content-between mb-3">
               <h5 class="mb-0">Description: <?php echo $fetch['description']?></h5>
               
-            </div>
+            </div><br>
 
             <div class="d-flex justify-content-center align-items-center  mb-3">
               
-            <center><br>Enter Quantity:<br><span style="font-size:100%;color:#CCCC00;margin:20px">
+            <!--<center><br>Enter Quantity:<br><span style="font-size:100%;color:#CCCC00;margin:20px">
             <input type="number" name="number_of_items" class="email" id="number" min="1" pattern="[1-9]*"
-            style="text-align:center"></span></center>
+            style="text-align:center"></span></center>-->
+
+            <input id="slider" name="number_of_items" type="range" value=0 
+             min="0" max="25"  onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)">
+            <label for="slider" id="rangeValue">0</label>
               
             </div>
             
@@ -112,7 +116,7 @@ require '../connection.php';
 
    <script>
     function addcart() {
-      var number = document.getElementById("number").value;
+      var number = document.getElementById("slider").value;
       
       if(number=="") {
         alert("Please enter quantity first");
@@ -124,28 +128,18 @@ require '../connection.php';
 
       
     }
-    function addpurchase() {
-      var number = document.getElementById("number").value;
-      
-      if(number=="") {
-        alert("Please enter quantity first");
-      } else {
-        window.location='addpurchase.php?item=55&number='+number+'&username=dave&status=1';
-      }
-      
-    }
-    function rateproduct() {
-      var rate = document.getElementById("rate").value;
-      
-      if(rate == '') {
-        alert("Select ratings to continue..");
-      } else {
-          window.location='rate.php?item=55&rate='+rate+'';
-      }
-    }
+    
+
+
     </script>
     
-    
+ 
+
+     <script type="text/javascript">
+          function rangeSlide(value) {
+              document.getElementById('rangeValue').innerHTML = value;
+          }
+      </script>
 
     </body>
 </html>
@@ -168,5 +162,92 @@ require '../connection.php';
 .btn:hover {
   background:linear-gradient(to bottom, #0d6edf 5%, #2196F3 100%);
 }
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+  width: 90%;
+  max-width: 400px;
+  outline: none;
+}
+input[type="range"]:focus,
+input[type="range"]:active,
+input[type="range"]::-moz-focus-inner,
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+  outline: none;
+}
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  background-image: url("../img/gall.png");
+  background-position: 0 0;
+  background-size: cover;
+ 
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb:active {
+  background-position: 100% 0px;
+  
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 20px;
+  background: #eee;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-progress {
+  height: 20px;
+  background: #4685d7;
+  border-radius: 10px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  border: none;
+  height: 60px;
+  width: 60px;
+  background-color: transparent;
+  background-image: url("../img/gall.png");
+  background-position: 0 0;
+  background-size: cover;
+
+  cursor: pointer;
+  margin-top: -23px;
+  -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb:active {
+  background-position: 100% 0px;
+ 
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 20px;
+  background: #eee;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+label {
+  background: #eee;
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  padding: 14px;
+  margin-left: 10px;
+  font-family: Roboto, 'Helvetica Neue', Arial;
+  font-size: 20px;
+  width: 60px;
+  text-align: center;
+  color: #2968bb;
+  font-weight: bold;
+  content: '';
+}
+
+
 
 </style>

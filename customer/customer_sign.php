@@ -100,17 +100,80 @@ require_once '../connection.php';
                     </div>
                   </div>
 
+                  
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-map-marker fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                        <?php if (isset($_GET['address'])) { ?>
-                      <input type="text" name="address" id="form3Example3c" class="form-control" placeholder="Address"  value="<?php echo $_GET['address']; ?>"required = "required"/>
+                      <input type="text" name="address" id="form3Example3c" class="form-control" 
+                          placeholder="Street/Sitio/Subd (Optional)"
+                         value="<?php echo $_GET['address']; ?>" />
                        <?php }else{ ?>
-                      <input type="text" name="address" id="form3Example1c" class="form-control"
-                      placeholder="Address">
+                      <input type="text" name="address" id="form3Example1c" class="form-control" placeholder="Street/Sitio/Subd (Optional)">
                       <?php }?>
                     </div>
                   </div>
+
+                   <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      
+                      <select class = "form-select" required = required name = "barangay">
+                        <option value = "">Select Barangay</option>
+                        <option value = "Brgy.Aga">Brgy.Aga</option>
+                        <option value = "Brgy.Balaytigue">Brgy.Balaytigue</option>
+                        <option value = "Brgy.Balok-Balok">Brgy.Balok-Balok</option>
+                        <option value = "Brgy.Banilad">Brgy.Banilad</option>
+                        <option value = "Brgy.1">Brgy.1</option>
+                        <option value = "Brgy.2">Brgy.2</option>
+                        <option value = "Brgy.3">Brgy.3</option>
+                        <option value = "Brgy.4">Brgy.4</option>
+                        <option value = "Brgy.5">Brgy.5</option>
+                        <option value = "Brgy.6">Brgy.6</option>
+                        <option value = "Brgy.7">Brgy.7</option>
+                        <option value = "Brgy.8">Brgy.8</option>
+                        <option value = "Brgy.9">Brgy.9</option>
+                        <option value = "Brgy.10">Brgy.10</option>
+                        <option value = "Brgy.11">Brgy.11</option>
+                        <option value = "Brgy.12">Brgy.12</option>
+                        <option value = "Brgy.Bilaran">Brgy.Bilaran</option>
+                        <option value = "Brgy.Bucana">Brgy.Bucana</option>
+                        <option value = "Brgy.Bulihan">Brgy.Bulihan</option>
+                        <option value = "Brgy.Bunducan">Brgy.Bunducan</option>
+                        <option value = "Brgy.Butucan">Brgy.Butucan</option>
+                        <option value = "Brgy.Calayo">Brgy.Calayo</option>
+                        <option value = "Brgy.Catandaan">Brgy.Catandaan</option>
+                        <option value = "Brgy.Kaylaway">Brgy.Kaylaway</option>
+                        <option value = "Brgy.Kayrilaw">Brgy.Kayrilaw</option>
+                        <option value = "Brgy.Cogunan">Brgy.Cogunan</option>
+                        <option value = "Brgy.Dayap">Brgy.Dayap</option>
+                        <option value = "Brgy.Latag">Brgy.Latag</option>
+                        <option value = "Brgy.Lumbangan">Brgy.Lumbangan</option>
+                        <option value = "Brgy.Malapad Na Bato">Brgy.Malapad Na Bato</option>
+                        <option value = "Brgy.Mataas Na Pulo">Brgy.Mataas Na Pulo</option>
+                        <option value = "Brgy.Maugat">Brgy.Maugat</option>
+                        <option value = "Brgy.Munting Indang">Brgy.Munting Indang</option>
+                        <option value = "Brgy.Natipuan">Brgy.Natipuan</option>
+                        <option value = "Brgy.Pantalan">Brgy.Pantalan</option>
+                        <option value = "Brgy.Papaya">Brgy.Papaya</option>
+                        <option value = "Brgy.Putat">Brgy.Putat</option>
+                        <option value = "Brgy.Reparo">Brgy.Reparo</option>
+                        <option value = "Brgy.Tumalim">Brgy.Tumalim</option>
+                        <option value = "Brgy.Utod">Brgy.Utod</option>
+                        <option value = "Brgy.Wawa">Brgy.Wawa</option>
+                      </select>
+
+                    </div>
+                  </div>
+
+
+                   <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-university fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text"  id="form3Example1c" class="form-control" value="Nasugbu,Batangas" disabled>
+                    </div>
+                  </div>
+                
 
                 
                     <div class="form-outline flex-fill mb-0">                  

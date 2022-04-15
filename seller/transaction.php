@@ -61,7 +61,8 @@ require '../connection.php';
 
    <?php  
    $query = $conn->query("SELECT product.product_name, product.price, merchant.business_name,deliveryman.name,
-   transactions.quantity, transactions.total, transactions.date, transactions.transaction_id FROM transactions 
+   transactions.quantity, transactions.total, transactions.date, transactions.transaction_id 
+   FROM transactions 
    RIGHT JOIN deliveryman ON transactions.deliveryman_id = deliveryman.deliveryman_id 
    RIGHT JOIN product ON transactions.product_id = product.product_id 
    RIGHT JOIN merchant ON transactions.merchant_id = merchant.merchant_id 

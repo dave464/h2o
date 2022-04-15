@@ -63,14 +63,14 @@
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo.png" style="height: 60px; margin-top: 15px; margin-left:-20px" alt="homepage" class="dark-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/H3.png" style="width: 150px; margin-left: -10px;margin-top:-10px" alt="homepage" class="dark-logo" />
 
                         </span>
                     </a>
@@ -137,40 +137,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="adminhome.php" aria-expanded="false"> <i class="fa-solid fa-gauge"></i> <span
-                                    class="hide-menu" style="margin-left: 5px"> Dashboard</span></a></li>
-                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map.php" aria-expanded="false"><i class="fa-solid fa-map-location-dot"></i>
-                                    <span class="hide-menu"  style="margin-left: 5px">Map</span></a>
-                        </li>
-                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="calendar.php" aria-expanded="false"><i class="fa-regular fa-calendar-days" style="margin-top:-3px"></i>
-                                <span class="hide-menu" style="margin-left:5px">Calendar</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="announcement.php" aria-expanded="false"><i class="fa-solid fa-bullhorn" style="margin-top:-3px"></i><span class="hide-menu" style="margin-left: 5px">Announcement</span></a>
-                        </li>
-                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="inspection.php" aria-expanded="false"><i class="fa-solid fa-flask"  style="margin-top:-3px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Alpha Lab Test</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="badge.php" aria-expanded="false"><i class="fa-solid fa-certificate" style="margin-top:-1px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Badge</span></a>
-                        </li>  
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="profile.php" aria-expanded="false"><i class="fa-solid fa-user"  style="margin-top:-3px"></i>
-                                <span class="hide-menu"  style="margin-left: 5px">Profile</span></a>
-                        </li>
-                        
-                       
-                    </ul>
-
-                </nav>
+                  <?php include 'navbar.php' ?>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -222,7 +189,7 @@
             <div class="container-fluid">
 
                 <?php 
-                    $sql = "SELECT * FROM `merchant`";
+                    $sql = "SELECT * FROM `merchant` WHERE status = 'approved' ORDER BY business_name asc ";
 
                     $server = "localhost";
                     $username = "root";
@@ -241,6 +208,8 @@
                     $saveJson["properties"]=[
                                         "name"=> $row['business_name'],
                                         "address"=>$row['address'],
+                                        "barangay"=>$row['barangay'],
+                                        "municipality"=>'Nasugbu,Batangas',
                                         "phone"=>$row['contact_number'],
                                         "image"=>$row['image'],
                                         "opening"=>date('h:i A', strtotime($row['opening'])),
@@ -270,8 +239,16 @@
                 <i class="fas fa-times fa-lg me-3 fa-fw" style="color: black; float: right;font-size: 20px;" ></i> </a>
                 <h4 style=" letter-spacing: 1.3px; margin-left:10px;font-weight: 550">Waterstation</h4>
             </div>
-            <ul class="list">
-            </ul>
+
+                  <input id="searchbar" onkeyup="search_animal()" type="search"
+                name="search" placeholder="Search" style="margin-left: 16px; width:230px; height: 28px"> 
+
+                  <button type="button" class="btn btn-sm btn-primary" style="margin-left: -4.5px;">
+                    <i class="fas fa-search"></i>
+                  </button>
+
+                    <ul class="list">
+                    </ul>
         </div>
         <div id="map">
 
@@ -296,7 +273,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+            <footer class="footer"> © 2022 H2ORDER</a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -485,7 +462,7 @@
         div.classList.add('shop-item');
         a.innerText = shop.properties.name;
         a.href = '#';
-        p.innerText = shop.properties.address;
+        p.innerText = shop.properties.address +' '+ shop.properties.barangay +' '+ shop.properties.municipality;
         div.appendChild(a);
         div.appendChild(p);
         li.appendChild(div);
@@ -505,7 +482,7 @@
           </div>
                 <center> <h4>${shop.properties.name}</h4> </center>
             <i class="fas fa-map-marker fa-lg me-3 fa-fw" style="color: red; margin-left:10px;" ></i>
-              <p style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.address}</p>
+              <p style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.address} ${shop.properties.barangay} ${shop.properties.municipality}</p>
             <i class="fas fa-phone fa-lg me-3 fa-fw" style="color: black; margin-left:10px;" ></i>
               <p  style="margin:5px;margin-left:15px;margin-top: -18px;">${shop.properties.phone}</p>
              <i class="fas fa-clock fa-lg me-3 fa-fw" style="color: black; margin-left:10px;" ></i>
@@ -551,6 +528,24 @@
         }, 3000);
     }
 
+    </script>
+
+
+    <script type="text/javascript">
+        function search_animal() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('shop-item');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
     </script>
 
     <style type="text/css">

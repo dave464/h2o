@@ -17,6 +17,7 @@ require '../connection.php';
         VALUES('$customer_id','$product_id','$merchant_id','".$_SESSION['deliveryman_id']."','$quantity','$total' )") 
         or die(mysqli_error());
         echo ("<script>
+        alert('Item has been delivered successfully');
         document.location.href = 'home.php';
         </script>");
 	}

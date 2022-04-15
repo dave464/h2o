@@ -113,7 +113,7 @@ require '../connection.php';
 
                 
                     <div class="form-outline flex-fill mb-0">
-                      <input type="hidden" name="vaccination_status" id="form3Example4c" class="form-control" />
+                      <input type="hidden" name="vaccination_status" value="Unvaccinated" id="form3Example4c" class="form-control" />
                     </div>
              
                     <div class="form-outline flex-fill mb-0">

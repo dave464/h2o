@@ -50,19 +50,19 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand ms-4" href="adminhome.php">
+                   <a class="navbar-brand ms-4" href="adminhome.php">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo.png" style="height: 60px; margin-top: 15px; margin-left:-20px" alt="homepage" class="dark-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/H3.png" style="width: 150px; margin-left: -10px;margin-top:-10px" alt="homepage" class="dark-logo" />
 
                         </span>
                     </a>
@@ -129,40 +129,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="adminhome.php" aria-expanded="false"> <i class="fa-solid fa-gauge"></i> <span
-                                    class="hide-menu" style="margin-left: 5px"> Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map.php" aria-expanded="false"><i class="fa-solid fa-map-location-dot"></i>
-                                    <span class="hide-menu"  style="margin-left: 5px">Map</span></a>
-                        </li>
-                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="calendar.php" aria-expanded="false"><i class="fa-regular fa-calendar-days" style="margin-top:-3px"></i>
-                                <span class="hide-menu" style="margin-left:5px">Calendar</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="announcement.php" aria-expanded="false"><i class="fa-solid fa-bullhorn" style="margin-top:-3px"></i><span class="hide-menu" style="margin-left: 5px">Announcement</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="inspection.php" aria-expanded="false"><i class="fa-solid fa-flask"  style="margin-top:-3px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Alpha Lab Test</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="badge.php" aria-expanded="false"><i class="fa-solid fa-certificate" style="margin-top:-1px"></i>
-                                 <span class="hide-menu" style="margin-left: 5px">Badge</span></a>
-                        </li> 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="profile.php" aria-expanded="false"><i class="fa-solid fa-user"  style="margin-top:-3px"></i>
-                                <span class="hide-menu"  style="margin-left: 5px">Profile</span></a>
-                        </li>
-                          
-                       
-                    </ul>
-
-                </nav>
+                 <?php include 'navbar.php' ?>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -225,7 +192,14 @@
                                         class="rounded-circle" width="150" />
                                     <h4 class="card-title mt-2"><?php echo $fetch['name']?></h4>
                                     <h6 class="card-subtitle"></h6>
-                                    <br><br><br>
+                                    
+                                        <div class="form-group" style="margin-top: 27px; margin-left: 80px">
+                                            <div class="col-sm-12 d-flex ">
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "" >Update photo</button>
+                                            </div>
+                                        </div>
+
+                                    
                                 </center>
                             </div>
                         </div>
@@ -293,7 +267,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer"> © 2021 Material Pro Admin by <a href="https://www.wrappixel.com/">wrappixel.com </a>
+            <footer class="footer"> © 2022 H2ORDER </a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
