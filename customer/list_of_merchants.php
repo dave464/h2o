@@ -44,11 +44,20 @@ require '../connection.php';
         </div>
     </div>
     <br>
-    <a href="map.php" style="text-decoration:none; ">
-     <i class="fas fa-map-marked-alt fa-lg me-3 fa-fw" ></i>
-          <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -22px;  font-size: 18px">
-          View on map</h5>
-      </a>
+
+        <div class="d-flex justify-content-start mb-3">         
+           <a href="map.php" style="text-decoration:none; ">
+             <i class="fas fa-map-marked-alt fa-lg me-3 fa-fw" ></i>
+              <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -22px;  font-size: 18px">
+              View on map</h5>
+          </a>
+
+         <a href="filter_product.php" style="text-decoration:none; ">
+              <img src="../img/gall.png" style="margin-left: 20px; width: 35px; height: 35px; margin-top: -10px;" >
+           <h5 class="BN" style="color:#000;margin:5px;margin-left:55px;margin-top: -22px;  font-size: 18px">
+           View products</h5>
+           </a>  
+       </div>
 </div>
    
 
