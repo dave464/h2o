@@ -48,6 +48,12 @@ require '../connection.php';
 
     <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fas fa-filter"></span></button> </div>
     <div id="mobile-filter">
+<!---====================== MOBILE VIEW ============================= -->
+         <div class="py-3">
+                <h5 class="font-weight-bold">Price</h5>
+
+                
+            </div>
        
         <div class="py-3">
             <h5 class="font-weight-bold">Product Type</h5>
@@ -60,7 +66,7 @@ require '../connection.php';
                 <form class="brand">
                     <div class="form-inline d-flex align-items-center py-1"> 
                         <label class="tick">
-                            <input type="checkbox"  value="<?= $row['product_type'];?>" id="product_type" class="product_checked">
+                            <input type="checkbox"  value="<?= $row['product_type'];?>" name="product_type" id="product_type" class="product_checked">
                             <?=  $row['product_type'];?>
                             <span class="check"></span>
                          </label> 
@@ -132,7 +138,10 @@ require '../connection.php';
                 </form>
         </div>
     </div>
-    <div class="content py-md-0 py-3">
+    <!---====================== END MOBILE VIEW ============================= -->
+
+    <div class="content py-md-0 py-3">       
+     <!---====================== WEB VIEW ============================= -->
         <section id="sidebar">
             <div class="py-3">
                 <h5 class="font-weight-bold">Price</h5>
@@ -222,7 +231,9 @@ require '../connection.php';
                         </label> </div>
                 </form>
             </div>
-        </section> <!-- Products Section -->
+        </section> 
+ <!---====================== END WEB VIEW ============================= -->
+        <!-- Products Section -->
         <section id="products">
             <div class="container py-3">
                 <div class="row" id="result">
@@ -346,6 +357,9 @@ require '../connection.php';
 
     </body>
 </html>
+
+
+
 
 
 
