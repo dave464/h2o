@@ -7,7 +7,7 @@ require_once '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Index</title>
+        <title>Order_Details</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -107,7 +107,7 @@ require_once '../connection.php';
         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
-            orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
+            orderlist.total, orderlist.type, orderlist.photo , orderlist.receipt, orderlist.receipt_status,orderlist.date, merchant.business_name,merchant.merchant_id
             ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.barangay 
             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
@@ -204,25 +204,66 @@ require_once '../connection.php';
                  <p class="card-text" style="font-weight:550;margin-top:-10px;">Type:</p>      
                 <p class="card-text" style="margin-top:-10px;"><?php echo  strtoupper($fetch['type'])?></p>    
              </div>
+
               <?php 
-                if($fetch['type'] == 'gcash') {      
+                if($fetch['type'] == 'gcash' && $fetch['receipt_status'] == 'incomplete') {  
+
             ?>
-            <img src="../photo/<?php echo $fetch['photo']?>"  style="width:100%;height:350px" onclick="window.location='../photo/<?php echo $fetch['photo']?>'" alt="...">
-            <?php
-            }
-            ?>   
+               
+               <div class="d-flex justify-content-between">
+                  <p class="card-text" style="font-weight:550;margin-top:-10px;"></p>      
+                  <p class="card-text" style="margin-top:-10px;color: red"><b>Incomplete Payment</b></p>   
+              </div> 
+
+            <div style=" border:3px solid red;margin-top: 10px">
+                <img src="../photo/<?php echo $fetch['photo']?>"  style="width:100%;height:400px" onclick="window.location='../photo/<?php echo $fetch['photo']?>'" alt="...">
+
+
+                  <img src="../receipt/<?php echo $fetch['receipt']?>"  id = "lbl"  style="width:100%;height:400px" onclick="window.location='../receipt/<?php echo $fetch['receipt']?>'" alt="...">
+
+              </div>
+
+              <?php
+                } elseif ($fetch['type'] == 'gcash'){
+                     echo ' <img src="../photo/'.$fetch['photo'].'"  style="width:100%;height:400px">
+                            ';
+                
+                }
+               ?>   
             <br>
 
+            
+            <?php 
+                if($fetch['type'] == 'gcash'  && $fetch['receipt_status'] == 'incomplete') {    
+                echo '  <button type="submit" name="submitApprove" class="btn btn-primary" style="margin-left:65px">Approve</button>
+                        <button type="submit" name="submitIncomplete" class="btn btn-primary" style="margin-left:225px;;margin-top:-59px">Incomplete</button>
+                       ';
+                 } elseif($fetch['type'] == 'gcash') {    
+                echo '  <button type="submit" name="submitComplete" class="btn btn-primary" style="margin-left:65px">Approve</button>
+                        <button type="submit" name="submitIncomplete" class="btn btn-primary" style="margin-left:225px;;margin-top:-59px">Incomplete</button>
+                       ';
+                 }else{
+
+               echo '  <button type="submit" name="submitApprove" class="btn btn-primary" style="margin-left:120px">Approve</button>
+                       <button type="submit" name="submitCancel" class="btn btn-primary" style="margin-left:270px ;width:50px;margin-top:-59px">
+                      <i class="fas fa-trash-alt fa-sm fa-fw"></i>
+                        </button>';
+
+                 }  
+            ?>
+                
+
+          
+
+               
+
            
-            <button type="submit" name="submitApprove" class="btn btn-primary" style="margin-left:80px">Approve</button>
-            <button type="submit" name="submitCancel" class="btn btn-primary" style="margin-left:230px ;width:50px;margin-top:-59px">
-              <i class="fas fa-trash-alt fa-sm fa-fw"></i>
-            </button>
 
             
 
           </div>
         </div>
+         <br>
       </div>
         
             </form>
@@ -242,3 +283,29 @@ require_once '../connection.php';
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 </style>
+
+
+<script src = "../js/jquery.js"></script>
+<script src = "../js/bootstrap.js"></script>
+<script type = "text/javascript">
+  $(document).ready(function(){
+    $pic = $('<img id = "image" width = "100%" height = "100%"/>');
+    $lbl = $('<center id = "lbl">[Photo]</center>');
+    $("#photo").change(function(){
+      $("#lbl").remove();
+      var files = !!this.files ? this.files : [];
+      if(!files.length || !window.FileReader){
+        $("#image").remove();
+        $lbl.appendTo("#preview");
+      }
+      if(/^image/.test(files[0].type)){
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onloadend = function(){
+          $pic.appendTo("#preview");
+          $("#image").attr("src", this.result);
+        }
+      }
+    });
+  });
+</script>

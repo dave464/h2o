@@ -96,7 +96,7 @@ require '../connection.php';
   <div class="container py-5">
     <div class="row">
 
-
+ 
  <?php
       $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
       product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
@@ -107,6 +107,8 @@ require '../connection.php';
       WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
       ") or die(mysqli_error());
       while($fetch = $queryy->fetch_array()){
+
+        
 ?>
 
     
@@ -134,6 +136,7 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
                      <a onclick="window.location='accepted_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
+
                  </td>
                 </tr> 
               </table>
@@ -146,6 +149,7 @@ require '../connection.php';
 <?php
     }
   ?> 
+
 
         </div>
       </div>

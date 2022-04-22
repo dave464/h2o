@@ -20,6 +20,7 @@ require '../connection.php';
         $quantity = $_POST['quantity'];
         $total = $_POST['total'];
         $type = $_POST['type'];
+        $receipt = $_POST['receipt'];
 
         // echo ("<script>
         // alert('$product_id');
@@ -32,8 +33,8 @@ require '../connection.php';
 		$photo_size = getimagesize($_FILES['photos']['tmp_name']);
 		move_uploaded_file($_FILES['photos']['tmp_name'],"../photo/" . $_FILES['photos']['name']);
 
-        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo) 
-        VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type','$photo_name' )") 
+        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo,receipt) 
+        VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type','$photo_name','$receipt' )") 
         or die(mysqli_error());
 
         } else {
@@ -77,5 +78,36 @@ require '../connection.php';
          </script>");
  
      }
+
+
+
+
+    if(ISSET($_POST['submitReceipt'])){
+          
+        $order_id= $_POST['order_id'];
+        $product_id= $_POST['product_id'];
+         $customer_id = $_POST['customer_id'];
+         $merchant_id = $_POST['merchant_id'];
+      
+         
+
+        $receipt = addslashes(file_get_contents($_FILES['receipt']['tmp_name']));
+        $photo_name = addslashes($_FILES['receipt']['name']);
+        $photo_size = getimagesize($_FILES['receipt']['tmp_name']);
+        move_uploaded_file($_FILES['receipt']['tmp_name'],"../receipt/" . $_FILES['receipt']['name']);  
+
+        $conn->query("UPDATE `orderlist` SET `receipt` = '$photo_name' WHERE `order_id`= $order_id  && `customer_id` = '".$_SESSION['customer_id']."'" ) or die(mysqli_error());
+
+
+         echo ("<script>
+         alert('Payment Updated Successfully');
+         document.location.href = 'purchase.php';
+         </script>");
+ 
+     }
+
+
+
+    
 
 ?>

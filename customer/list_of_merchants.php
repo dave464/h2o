@@ -4,6 +4,34 @@ require '../connection.php';
 ?>
 
 
+<?php
+
+
+function distance($latitudeFrom, $longitudeFrom,
+                  $latitudeTo, $longitudeTo) {
+
+   $long1 = deg2rad($longitudeFrom);
+    $long2 = deg2rad($longitudeTo);
+    $lat1 = deg2rad($latitudeFrom);
+    $lat2 = deg2rad($latitudeTo);
+      
+    //Haversine Formula
+    $dlong = $long2 - $long1;
+    $dlati = $lat2 - $lat1;
+      
+    $val = pow(sin($dlati/2),2)+cos($lat1)*cos($lat2)*pow(sin($dlong/2),2);
+      
+    $res = 2 * asin(sqrt($val));
+      
+    $radius = 3958.756;
+      
+    return ($res*$radius);
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,7 +113,6 @@ require '../connection.php';
 
 
 
-
 <!--------- SECTION Start-------->
 <section >
   <div class="container py-5">
@@ -93,15 +120,21 @@ require '../connection.php';
 
     <div class="row">
 
+ <?php
+   $query = $conn->query("SELECT * FROM `merchant` WHERE status ='approved' ORDER BY business_name asc ") or die(mysqli_error());
 
-        <?php
-            $query = $conn->query("SELECT * FROM `merchant` WHERE status ='approved' ORDER BY business_name asc ") or die(mysqli_error());
-            while($fetch = $query->fetch_array()){
+   $queryy = $conn->query("SELECT *from customer WHERE `customer_id` = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
 
-             
+        while ($fetch2= $queryy->fetch_array()) {
+          $lt=$fetch2['c_latitude'];
+          $lg=$fetch2['c_longitude'];
+        }
+
+    while($fetch = $query->fetch_array()){
+    $closes=distance($lt, $lg,$fetch['latitude'], $fetch['longitude']);
 
 
-          ?>  
+ ?>  
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
@@ -123,7 +156,9 @@ require '../connection.php';
           <h5 style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
           <?php echo $fetch['contact_number']?></h5>
         
-        
+         <?php echo "Approximately ".round($closes,2)." miles away on you";?><br>
+
+
 
         </div>
 

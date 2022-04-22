@@ -51,7 +51,7 @@ require '../connection.php';
          /*====== Query for total earning yesterday =====*/
         $q_Ysales = $conn->query("SELECT SUM(total) as earning FROM `orderlist` 
             WHERE DATE(`date`) = DATE_ADD(CURDATE(), INTERVAL -1 DAY)  && orderlist.status = 'delivered'  
-            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'   || orderlist.status = 'rated'  
+            && orderlist.merchant_id = '".$_SESSION['merchant_id']."'   ||DATE(`date`) = DATE_ADD(CURDATE(), INTERVAL -1 DAY)  && orderlist.status = 'rated'  
             && orderlist.merchant_id = '".$_SESSION['merchant_id']."'  
             ORDER BY `order_id` DESC") or die(mysqli_error());
         $f_Ysales = $q_Ysales->fetch_array();

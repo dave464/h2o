@@ -7,7 +7,7 @@ require_once '../connection.php';
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Index</title>
+        <title>Shipping Order Details</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -15,7 +15,7 @@ require_once '../connection.php';
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link rel = "icon" href = "images/logo.png" type = "image/png">
     </head>
-    <body >
+    <body style="background-color: #fff">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <?php include 'navbar.php' ?>
       <center> 
@@ -28,7 +28,7 @@ require_once '../connection.php';
         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
             product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
-            orderlist.total, orderlist.type, orderlist.photo,orderlist.date, merchant.business_name,merchant.merchant_id
+            orderlist.total, orderlist.type, orderlist.photo,orderlist.receipt, orderlist.receipt_status,orderlist.date, merchant.business_name,merchant.merchant_id
             , merchant.owner, merchant.address , merchant.barangay,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id
             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
@@ -132,11 +132,26 @@ require_once '../connection.php';
                 <p class="card-text" style="margin-top:-10px;"><?php echo  strtoupper($fetch['type'])?></p>    
              </div>
               <?php 
-                if($fetch['type'] == 'gcash') {      
+                if($fetch['type'] == 'gcash' && $fetch['receipt_status'] == 'complete') {      
             ?>
-            <img src="../photo/<?php echo $fetch['photo']?>"  style="width:100%;height:350px" onclick="window.location='../photo/<?php echo $fetch['photo']?>'" alt="...">
+            <div style=" border:5px solid green ;margin-top: 10px"> 
+                          <img src="../photo/<?php echo $fetch['photo'] ?>"  style="width:100%;height:400px"
+                          onclick="window.location='../photo/<?php echo $fetch['photo']?>'" />
+                    
+                    <div class = "form-group">
+                        <div id = "preview" style = "width:400px; height :400px; ">
+                            <img src = "../receipt/<?php echo $fetch['receipt']?>" id = "lbl" width = "100%" height = "100%"
+                            onclick="window.location='../receipt/<?php echo $fetch['receipt']?>'" />
+                       </div>     
+                    </div>
+                        </div>
             <?php
-            }
+              } elseif ($fetch['type'] == 'gcash'  && $fetch['receipt_status'] == 'Complete'){
+                  echo '<div style=" border:5px solid green ;margin-top: 10px">  
+                          <img src="../photo/'.$fetch['photo'].'" onclick="window.location=\' ../photo/'.$fetch['photo'].' \' " style="width:100%;height:400px">
+                        </div>';  
+               
+                }
             ?>   
             <br>
          
@@ -156,6 +171,33 @@ require_once '../connection.php';
     </body>
 </html>
 
+
+
+
+<script src = "../js/jquery.js"></script>
+<script src = "../js/bootstrap.js"></script>
+<script type = "text/javascript">
+  $(document).ready(function(){
+    $pic = $('<img id = "image" width = "100%" height = "100%"/>');
+    $lbl = $('<center id = "lbl">[Photo]</center>');
+    $("#photo").change(function(){
+      $("#lbl").remove();
+      var files = !!this.files ? this.files : [];
+      if(!files.length || !window.FileReader){
+        $("#image").remove();
+        $lbl.appendTo("#preview");
+      }
+      if(/^image/.test(files[0].type)){
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onloadend = function(){
+          $pic.appendTo("#preview");
+          $("#image").attr("src", this.result);
+        }
+      }
+    });
+  });
+</script>
 
 
 <style>

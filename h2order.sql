@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2022 at 04:42 AM
+-- Generation Time: Apr 22, 2022 at 08:35 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -293,7 +293,7 @@ INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, 
 (64, 'merchant64', 'merchant64', 'Pantalan Water Refilling Station', 'Kurt Michael Relano', '', 'Brgy.Pantalan', 'pantalan@gmail.com', '09557350551', '64.png', '14.085132826575784', '120.63297271728517', '08:00:00', '17:00:00', 'approved'),
 (65, 'merchant65', 'merchant65', 'PB APAC 8 Water Refilling Station', 'Ivane Kielle Rangel', '', 'Brgy.Munting Indang', 'pbapac@gmail.com', '09557350551', '65.png', '14.088795806243636', '120.69150924682619', '08:00:00', '17:00:00', 'approved'),
 (66, 'merchant66', 'merchant66', 'PerfectBliss Water Refilling Station', 'Dave Bryan Sevilla', 'Victoriaville Subd.', 'Brgy.Bilaran', 'perfect@gmail.com', '09557350551', '66.png', '14.05033159116703', '120.68893432617189', '08:00:00', '17:00:00', 'approved'),
-(67, 'merchant67', 'merchant67', 'Philzen Water Refilling Station', 'Kurt Michael Relano', 'C. Alvarez St.', 'Brgy.3 Nasugbu,Batangas', 'philzen@gmail.com', '09557350551', '67.png', '14.071843625946023', '120.62915325164796', '08:00:00', '17:00:00', 'approved'),
+(67, 'merchant67', 'merchant67', 'Philzen Water Refilling Station', 'Kurt Michael Relano', 'C. Alvarez St.', 'Brgy.3', 'philzen@gmail.com', '09557350551', '67.png', '14.071843625946023', '120.62915325164796', '08:00:00', '17:00:00', 'approved'),
 (68, 'merchant68', 'merchant68', 'Pocono Water Refilling Station', 'Kurt Michael Relano', 'J.P. Laurel St.', 'Brgy.11', 'pocono@gmail.com', '09557350551', '68.png', '14.06194646788018', '120.63451766967775', '08:00:00', '17:00:00', 'approved'),
 (69, 'merchant69', 'merchant69', 'Poseidone CL Water Refilling Station', 'Kurt Michael Relano', 'Sitio Pasong Kawayan', 'Brgy.Banilad', 'poseidon@gmail.com', '09557350551', '69.png', '14.075392344825943', '120.73948860168458', '08:00:00', '17:00:00', 'approved'),
 (70, 'merchant70', 'merchant70', 'Rainzen Water Refilling Station', 'Ivane Kielle Rangel', '', 'Brgy.3', 'rain@gmail.com', '09557350551', '70.png', '14.071552233091587', '120.62942147254945', '08:00:00', '17:00:00', 'approved'),
@@ -332,6 +332,8 @@ CREATE TABLE `orderlist` (
   `total` int(11) NOT NULL,
   `type` text,
   `photo` text,
+  `receipt` varchar(255) NOT NULL,
+  `receipt_status` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -339,20 +341,20 @@ CREATE TABLE `orderlist` (
 -- Dumping data for table `orderlist`
 --
 
-INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `date`) VALUES
-(1, 8, 1, 23, 1, 'accepted', '1', 25, 'cod', NULL, '2022-03-28 08:18:08'),
-(2, 8, 1, 23, 1, 'dispatched', '3', 75, 'cod', NULL, '2022-03-29 12:21:06'),
-(3, 8, 1, 23, 1, 'accepted', '2', 100, 'cod', NULL, '2022-03-30 12:21:12'),
-(4, 8, 1, 23, 1, 'delivered', '5', 125, 'cod', NULL, '2022-03-31 12:26:47'),
-(5, 8, 1, 23, 1, 'delivered', '6', 150, 'cod', NULL, '2022-04-01 12:26:47'),
-(6, 8, 1, 23, 1, 'delivered', '7', 175, 'cod', NULL, '2022-04-02 12:26:47'),
-(7, 8, 1, 23, 1, 'rated', '8', 200, 'cod', NULL, '2022-04-03 12:26:50'),
-(8, 8, 1, 23, 1, 'rated', '6', 150, 'cod', NULL, '2022-04-04 12:26:50'),
-(9, 8, 1, 23, 1, 'delivered', '7', 175, 'cod', NULL, '2022-04-03 16:00:00'),
-(10, 7, 1, 23, 1, 'rated', '4', 120, 'cod', NULL, '2022-04-04 12:32:14'),
-(11, 7, 1, 23, NULL, 'cancelled', '2', 60, 'cod', NULL, '2022-04-05 02:44:35'),
-(12, 7, 1, 23, 1, 'delivered', '1', 30, 'cod', NULL, '2022-04-10 00:26:21'),
-(13, 8, 1, 23, 1, 'delivered', '6', 150, 'cod', NULL, '2022-04-10 01:50:15');
+INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `receipt`, `receipt_status`, `date`) VALUES
+(1, 8, 1, 23, 1, 'rated', '1', 25, 'cod', NULL, '', '', '2022-04-19 08:18:08'),
+(2, 8, 1, 23, 1, 'dispatched', '3', 75, 'cod', NULL, '', '', '2022-03-29 12:21:06'),
+(3, 8, 1, 23, 1, 'accepted', '2', 100, 'cod', NULL, '', '', '2022-03-30 12:21:12'),
+(7, 8, 1, 23, 1, 'rated', '8', 200, 'cod', NULL, '', '', '2022-04-03 12:26:50'),
+(8, 8, 1, 23, 1, 'rated', '6', 150, 'cod', NULL, '', '', '2022-04-04 12:26:50'),
+(10, 7, 1, 23, 1, 'rated', '4', 120, 'cod', NULL, '', '', '2022-04-04 12:32:14'),
+(11, 7, 1, 23, NULL, 'cancelled', '2', 60, 'cod', NULL, '', '', '2022-04-05 02:44:35'),
+(14, 7, 1, 23, NULL, 'accepted', '14', 420, 'cod', NULL, '', 'complete', '2022-04-12 15:09:12'),
+(15, 7, 1, 23, 1, 'dispatched', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 04:12:42'),
+(16, 7, 1, 23, NULL, 'accepted', '4', 120, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 16:11:06'),
+(17, 7, 1, 23, NULL, 'accepted', '1', 30, 'gcash', 'gcash-mc-pay2.jpg', '', 'complete', '2022-04-21 04:05:59'),
+(18, 7, 1, 23, 1, 'dispatched', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-04-21 04:11:34'),
+(19, 7, 1, 23, NULL, 'pending', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'incomplete', '2022-04-21 04:12:57');
 
 -- --------------------------------------------------------
 
@@ -379,8 +381,8 @@ INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_typ
 (2, 2, 'Round Container', 'Alkaline Water', 25, 'roundgal.jpg', '5 gallons'),
 (3, 2, 'Slim Container', 'Purified Water', 30, 'images (4).jpeg', '25 liters'),
 (4, 1, 'Round Container', 'Mineral Water', 30, 'roundgal.jpg', '5 gallons'),
-(5, 3, 'Slim Container', 'Purified Water', 25, 'images(4).jpeg', '25 liters'),
-(6, 4, 'Slim Container', 'Purified Water', 25, 'images(4).jpeg', '25 liters'),
+(5, 3, 'Slim Container', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
+(6, 4, 'Slim Container', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
 (7, 23, 'Slim Container', 'Purified Water', 30, 'images (4).jpeg', '25 liters of purified water                    '),
 (8, 23, 'Round Container 20 Liters', 'Mineral Water', 25, 'roundgal.jpg', '20 liters of mineral water                 '),
 (9, 23, 'Bottle water 350 ML', 'Mineral Water', 10, 'bottle.jpg', 'Bottle Mineral Water 350 ml           ');
@@ -450,7 +452,9 @@ INSERT INTO `transactions` (`transaction_id`, `product_id`, `customer_id`, `merc
 (8, 7, 1, 23, 1, 4, 120, '2022-04-04 12:34:25'),
 (9, 8, 1, 23, 1, 6, 150, '2022-04-05 07:55:05'),
 (10, 7, 1, 23, 1, 1, 30, '2022-04-10 01:24:26'),
-(11, 8, 1, 23, 1, 6, 150, '2022-04-10 01:52:01');
+(11, 8, 1, 23, 1, 6, 150, '2022-04-10 01:52:01'),
+(12, 7, 1, 23, 1, 5, 150, '2022-04-22 03:45:59'),
+(13, 7, 1, 23, 1, 3, 90, '2022-04-22 03:46:10');
 
 --
 -- Indexes for dumped tables
@@ -596,7 +600,7 @@ ALTER TABLE `merchant`
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -614,7 +618,7 @@ ALTER TABLE `product_rating`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
