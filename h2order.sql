@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 08:35 AM
+-- Generation Time: Apr 30, 2022 at 03:52 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -312,7 +312,7 @@ INSERT INTO `merchant` (`merchant_id`, `username`, `password`, `business_name`, 
 (83, 'merchant83', 'merchant83', 'WATERLEAH Water Refilling Station', 'Kurt Michael Relano', 'F. Alix St. Cor Zalbadea', 'Brgy.6', 'waterleah@gmail.com', '09557350551', '83.png', '14.071625081340018', '120.63803672790529', '08:00:00', '17:00:00', 'approved'),
 (84, 'merchant84', 'merchant84', 'WINTERFELL Purified Drinking Water', 'Ivane Kielle Rangel', '', 'Brgy.Looc', 'winterfell@gmail.com', '09557350551', '84.png', '14.165059819648738', '120.63207149505617', '08:00:00', '17:00:00', 'approved'),
 (85, 'merchant85', 'merchant85', 'Yanny\'s Purified Drinking Water', 'Kurt Michael Relano', 'KM 82 Sitio Kaybibisaya', 'Brgy.Aga', 'yanny@gmail.com', '09557350551', '85.png', '14.097495147382407', '120.80332517623901', '08:00:00', '17:00:00', 'approved'),
-(86, 'merchant123', '1', 'Tubig Tubig G', 'Dave Bryan Sevilla', '', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '5.png', '14.3842', '120.884', '08:00:00', '17:00:00', 'pending'),
+(86, 'merchant123', '1', 'Tubig Tubig G', 'Dave Bryan Sevilla', '', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '5.png', '14.3842', '120.884', '08:00:00', '17:00:00', 'approved'),
 (87, 'dave1', '1', 'wawater G', 'dave', '', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '905193401', '1.png', '14.073098', '120.635284', '08:00:00', '17:00:00', 'pending');
 
 -- --------------------------------------------------------
@@ -350,7 +350,7 @@ INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`,
 (10, 7, 1, 23, 1, 'rated', '4', 120, 'cod', NULL, '', '', '2022-04-04 12:32:14'),
 (11, 7, 1, 23, NULL, 'cancelled', '2', 60, 'cod', NULL, '', '', '2022-04-05 02:44:35'),
 (14, 7, 1, 23, NULL, 'accepted', '14', 420, 'cod', NULL, '', 'complete', '2022-04-12 15:09:12'),
-(15, 7, 1, 23, 1, 'dispatched', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 04:12:42'),
+(15, 7, 1, 23, 1, 'delivered', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 04:12:42'),
 (16, 7, 1, 23, NULL, 'accepted', '4', 120, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 16:11:06'),
 (17, 7, 1, 23, NULL, 'accepted', '1', 30, 'gcash', 'gcash-mc-pay2.jpg', '', 'complete', '2022-04-21 04:05:59'),
 (18, 7, 1, 23, 1, 'dispatched', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-04-21 04:11:34'),
@@ -367,6 +367,7 @@ CREATE TABLE `product` (
   `merchant_id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `product_type` varchar(255) NOT NULL,
+  `volume` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
@@ -376,16 +377,17 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_type`, `price`, `image`, `description`) VALUES
-(1, 1, 'Aquabest 25 liters', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
-(2, 2, 'Round Container', 'Alkaline Water', 25, 'roundgal.jpg', '5 gallons'),
-(3, 2, 'Slim Container', 'Purified Water', 30, 'images (4).jpeg', '25 liters'),
-(4, 1, 'Round Container', 'Mineral Water', 30, 'roundgal.jpg', '5 gallons'),
-(5, 3, 'Slim Container', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
-(6, 4, 'Slim Container', 'Purified Water', 25, 'images (4).jpeg', '25 liters'),
-(7, 23, 'Slim Container', 'Purified Water', 30, 'images (4).jpeg', '25 liters of purified water                    '),
-(8, 23, 'Round Container 20 Liters', 'Mineral Water', 25, 'roundgal.jpg', '20 liters of mineral water                 '),
-(9, 23, 'Bottle water 350 ML', 'Mineral Water', 10, 'bottle.jpg', 'Bottle Mineral Water 350 ml           ');
+INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_type`, `volume`, `price`, `image`, `description`) VALUES
+(1, 1, 'Aquabest', 'Purified Water', '25 Liters', 25, 'images (4).jpeg', '25 liters'),
+(2, 2, 'Round Container', 'Alkaline Water', '25 Liters', 25, 'roundgal.jpg', '5 gallons'),
+(3, 2, 'Slim Container', 'Purified Water', '25 Liters', 30, 'images (4).jpeg', '25 liters'),
+(4, 1, 'Round Container', 'Mineral Water', '25 Liters', 30, 'roundgal.jpg', '5 gallons'),
+(5, 3, 'Slim Container', 'Purified Water', '25 Liters', 25, 'images (4).jpeg', '25 Liters'),
+(6, 4, 'Slim Container', 'Purified Water', '25 Liters', 25, 'images (4).jpeg', '25 liters'),
+(7, 23, 'Slim Container', 'Purified Water', '25 Liters', 30, 'images (4).jpeg', '25 liters of purified water                    '),
+(8, 23, 'Round Container', 'Mineral Water', '25 Liters', 25, 'roundgal.jpg', '20 liters of mineral water                 '),
+(9, 23, 'Bottle water ', 'Mineral Water', '350 mL', 10, 'bottle.jpg', 'Bottle Mineral Water 350 ml           '),
+(10, 23, 'Slim Container', 'Purified Water', '20 Liters', 30, 'images (4).jpeg', 'Recharge Your Body With Electrolytes                    ');
 
 -- --------------------------------------------------------
 
@@ -606,7 +608,7 @@ ALTER TABLE `orderlist`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_rating`
