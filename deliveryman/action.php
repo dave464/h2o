@@ -20,6 +20,11 @@ require '../connection.php';
         alert('Item has been delivered successfully');
         document.location.href = 'home.php';
         </script>");
+
+
+        if ($order_id == 0) {       
+            $conn->query("UPDATE `deliveryman` SET `status` = 'available' WHERE `deliveryman_id`= '".$_SESSION['deliveryman_id']."' " ) or die(mysqli_error());
+            }
 	}
 
 

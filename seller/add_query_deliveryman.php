@@ -9,12 +9,13 @@ require '../connection.php';
 		$username = $_POST['username'];
 		$password= $_POST['password'];
 		$c_password= $_POST['c_password'];
+		$status=$_POST['status'];
 		$photo=$_POST['photo'];
 		$vaccination_status=$_POST['vaccination_status'];
 		$d_latitude=$_POST['d_latitude'];
 		$d_longitude=$_POST['d_longitude'];
 
-		$user_data = 'username='. $username. '&name='. $name. '&plate_number='. $plate_number. '&contact_number='. $contact_number
+		$user_data = 'username='. $username. '&name='. $name. '&plate_number='. $plate_number. '&contact_number='. $contact_number.'&status'. $status
 		. '&vaccination_status='. $vaccination_status;
 		
 	if($password !== $c_password){
@@ -36,7 +37,7 @@ require '../connection.php';
 			</script>");
 		}else{
 
-		$conn->query("INSERT INTO `deliveryman`(merchant_id, name, contact_number, plate_number, username, password, vaccination_status, photo,d_latitude,d_longitude) VALUES('$merchant_id','$name','$contact_number','$plate_number','$username','$password','$vaccination_status','$photo','$d_latitude','$d_longitude' )") or die(mysqli_error());
+		$conn->query("INSERT INTO `deliveryman`(merchant_id, name, contact_number, plate_number, username, password,status, vaccination_status, photo,d_latitude,d_longitude) VALUES('$merchant_id','$name','$contact_number','$plate_number','$username','$password','$status','$vaccination_status','$photo','$d_latitude','$d_longitude' )") or die(mysqli_error());
 		
 		echo ("<script>
 		alert('Added Successfully');

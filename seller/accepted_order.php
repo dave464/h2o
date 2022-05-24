@@ -26,13 +26,14 @@ require '../connection.php';
       style="color:#004aad;text-shadow: 1px 1px #03a9f4;"> ACCEPTED ORDERS
       </p>
   
-  <!--    
+   
   <div class="container" >  
   <div class="table-responsive">
 
   <table class="table">
   <thead>
     <tr id="tr">
+      <th scope="col" scope="col"></th>
       <th scope="col" scope="col">No.</th>
       <th class="col">PRODUCT NAME</th>
       <th scope="col">NAME</th>
@@ -41,24 +42,34 @@ require '../connection.php';
       <th scope="col">TOTAL TO PAY</th>
       <th scope="col">STATUS</th>
       <th scope="col">TYPE</th>
+      <th scope="col">DELIVERY MAN</th>
       <th scope="col">ACTION</th>
     </tr>
   </thead> 
   <tbody>
 <?php
-  $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id FROM orderlist 
-  RIGHT JOIN product ON orderlist.product_id = product.product_id 
-  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-  WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
-  ") or die(mysqli_error());
-  while($fetch = $queryy->fetch_array()){
+ $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
+      product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,merchant.business_name,merchant.merchant_id,
+      orderlist.date, customer.firstname, customer.lastname, customer.customer_id
+      FROM orderlist 
+      RIGHT JOIN product ON orderlist.product_id = product.product_id 
+      RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
+      RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
+      WHERE orderlist.status = 'accepted' && orderlist.merchant_id = '".$_SESSION['merchant_id']."' 
+      ") or die(mysqli_error());
+      while($fetch = $queryy->fetch_array()){
 ?>
   <form action="action.php" method="POST" enctype="multipart/form-data" > 
-
+         <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
+            <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
+            <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
+            <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
+            <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
+            <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
+            
 
       <tr id="tr2">
+       <td class="align-middle"> <input type="checkbox" name="check[]" value="<?php echo $fetch['order_id']?>"></td> 
            <td class="align-middle"><?php echo $fetch['order_id']?></td>
       <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
       <td class="align-middle"><?php echo strtoupper($fetch['firstname'])?></td>
@@ -67,23 +78,46 @@ require '../connection.php';
       <td class="align-middle">&#8369; <?php echo $fetch['quantity'] * $fetch['price']?>.00</td>
       <td class="align-middle"><?php echo strtoupper($fetch['status'])?></td>
       <td class="align-middle"><?php echo strtoupper($fetch['type'])?></td>
+
       <td class="align-middle">
-          <a onclick="window.location='orderlist_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">
+          <a onclick="window.location='accepted_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">
           View
         </a>
       </td>
+            <td class="align-middle"> 
+        <div class="select-container">
+                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
+                          <?php
+                                $query = $conn->query("SELECT * FROM deliveryman 
+                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."' ") 
+                                or die(mysqli_error());
+                                while($fetch = $query->fetch_array()){
+                              ?>
+                            
+
+                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?> (<?php echo ($fetch['status'])?>)</option>
+                              <?php
+                                }
+                              ?>
+                          </select>
+          </div>
+      </td>  
 
     </tr>
-</form>
+
+
+
 
 <?php
        }
     ?>
+  <button name="DISPATCH" class="myButton">Dispatch</button>   
+</form>
           </tbody>
 </table>
 
 </div>
-</div> -->
+</div> 
 
 
  
@@ -91,7 +125,7 @@ require '../connection.php';
 
 
 
-<!--------- SECTION Start-------->
+<!--------- SECTION Start-------
 <section >
   <div class="container py-5">
     <div class="row">
@@ -110,6 +144,13 @@ require '../connection.php';
 
         
 ?>
+<form action="action.php" method="POST" enctype="multipart/form-data" > 
+          <input type="hidden" value="<?php echo $fetch['product_id']?>" name="product_id">
+            <input type="hidden" value="<?php echo $fetch['merchant_id']?>" name="merchant_id">
+            <input type="hidden" value="<?php echo $fetch['customer_id']?>" name="customer_id">
+            <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
+            <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
+            <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
 
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -140,21 +181,38 @@ require '../connection.php';
                  </td>
                 </tr> 
               </table>
+                   <div class="select-container">
+                          <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
+                          <?php
+                                $query = $conn->query("SELECT * FROM deliveryman 
+                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."'") 
+                                or die(mysqli_error());
+                                while($fetch = $query->fetch_array()){
+                              ?>
+                            
+                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?></option>
+                              <?php
+                                }
+                              ?>
+                          </select>
+          </div>
 
           </div>
         </div><br>
       </div>
   
-   
+   </>
 <?php
     }
   ?> 
 
 
         </div>
+         <button type="submit" name="submitDispatch" class="btn btn-primary">Dispatched</button>
+       </form>
       </div>
 </section>
-<!--------- SECTION END-------->
+------- SECTION END-------->
 
     
 

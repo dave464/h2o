@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2022 at 03:52 PM
+-- Generation Time: May 24, 2022 at 12:04 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -125,7 +125,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `barangay`, `email`, `contact_number`, `c_latitude`, `c_longitude`) VALUES
 (1, 'qwerty', 'qwerty', 'Dave Bryan', 'Sevilla', '', 'Brgy.4', 'davebryan.sevilla@gmail.com', '09557350551', '14.073360911642', '120.63532887761305'),
-(2, 'dave', '111', 'Dave', 'Sevilla ', '', 'Brgy.4', 'davebryansevilla@gmail.com', '09051934015', '', ''),
+(2, 'dave', '111', 'Dave', 'Sevilla ', '', 'Brgy.4', 'davebryansevilla@gmail.com', '09051934015', '14.077771243464303', '120.62597990254564'),
 (3, 'dave', '111', 'Dave', 'Sevilla ', '', 'Brgy.4', 'davebryansevilla@gmail.com', '09051934015', '', ''),
 (5, 'devs', '1', 'Dave Bryan', 'Sevilla', '120 C. Alvarez St.', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '14.3842', '120.884');
 
@@ -143,6 +143,7 @@ CREATE TABLE `deliveryman` (
   `password` varchar(255) NOT NULL,
   `plate_number` varchar(255) NOT NULL,
   `contact_number` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `vaccination_status` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
   `d_latitude` varchar(255) NOT NULL,
@@ -153,8 +154,9 @@ CREATE TABLE `deliveryman` (
 -- Dumping data for table `deliveryman`
 --
 
-INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`, `vaccination_status`, `photo`, `d_latitude`, `d_longitude`) VALUES
-(1, 23, 'Alvin Hila', 'del1', 'del1', 'ALV213', '09554395551', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884');
+INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`, `status`, `vaccination_status`, `photo`, `d_latitude`, `d_longitude`) VALUES
+(1, 23, 'Alvin Hila', 'del1', 'del1', 'ALV213', '09554395551', 'unavailable', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884'),
+(2, 23, 'Rod Sevilla', 'rod', '123', 'KMR442', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884');
 
 -- --------------------------------------------------------
 
@@ -186,6 +188,7 @@ CREATE TABLE `inspection` (
   `inspection_id` int(11) NOT NULL,
   `merchant_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `file` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -193,10 +196,14 @@ CREATE TABLE `inspection` (
 -- Dumping data for table `inspection`
 --
 
-INSERT INTO `inspection` (`inspection_id`, `merchant_id`, `date`, `status`) VALUES
-(1, 1, '2022-02-28 03:15:52', 'Passed'),
-(2, 1, '2022-03-19 07:22:11', 'Passed'),
-(3, 5, '2021-10-04 06:53:28', 'Passed');
+INSERT INTO `inspection` (`inspection_id`, `merchant_id`, `date`, `file`, `status`) VALUES
+(1, 1, '2022-02-28 03:15:52', '', 'Passed'),
+(2, 1, '2022-03-19 07:22:11', '', 'Passed'),
+(3, 5, '2021-10-04 06:53:28', '', 'Passed'),
+(19, 1, '2022-05-13 13:54:25', 'Minutes-of-the-Preoral-Defense.docx', 'Passed'),
+(20, 2, '2022-05-13 14:11:14', 'Certificate of Participation.pdf', 'Passed'),
+(21, 23, '2022-05-13 15:27:35', 'Minutes-of-the-Preoral-Defense.docx', 'Passed'),
+(23, 23, '2022-05-16 23:36:09', 'Extended_Abstract-Choosing_the_Future_of_Lightweight_Encryption_Algorithms.pdf', 'Passed');
 
 -- --------------------------------------------------------
 
@@ -344,7 +351,7 @@ CREATE TABLE `orderlist` (
 INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `receipt`, `receipt_status`, `date`) VALUES
 (1, 8, 1, 23, 1, 'rated', '1', 25, 'cod', NULL, '', '', '2022-04-19 08:18:08'),
 (2, 8, 1, 23, 1, 'dispatched', '3', 75, 'cod', NULL, '', '', '2022-03-29 12:21:06'),
-(3, 8, 1, 23, 1, 'accepted', '2', 100, 'cod', NULL, '', '', '2022-03-30 12:21:12'),
+(3, 8, 1, 23, 1, 'dispatched', '2', 100, 'cod', NULL, '', '', '2022-03-30 12:21:12'),
 (7, 8, 1, 23, 1, 'rated', '8', 200, 'cod', NULL, '', '', '2022-04-03 12:26:50'),
 (8, 8, 1, 23, 1, 'rated', '6', 150, 'cod', NULL, '', '', '2022-04-04 12:26:50'),
 (10, 7, 1, 23, 1, 'rated', '4', 120, 'cod', NULL, '', '', '2022-04-04 12:32:14'),
@@ -353,8 +360,9 @@ INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`,
 (15, 7, 1, 23, 1, 'delivered', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 04:12:42'),
 (16, 7, 1, 23, NULL, 'accepted', '4', 120, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 16:11:06'),
 (17, 7, 1, 23, NULL, 'accepted', '1', 30, 'gcash', 'gcash-mc-pay2.jpg', '', 'complete', '2022-04-21 04:05:59'),
-(18, 7, 1, 23, 1, 'dispatched', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-04-21 04:11:34'),
-(19, 7, 1, 23, NULL, 'pending', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'incomplete', '2022-04-21 04:12:57');
+(18, 7, 1, 23, NULL, 'accepted', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-04-21 04:11:34'),
+(19, 7, 1, 23, NULL, 'accepted', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-21 04:12:57'),
+(20, 7, 2, 23, 1, 'delivered', '7', 210, 'cod', NULL, '', 'complete', '2022-05-18 01:57:05');
 
 -- --------------------------------------------------------
 
@@ -456,7 +464,8 @@ INSERT INTO `transactions` (`transaction_id`, `product_id`, `customer_id`, `merc
 (10, 7, 1, 23, 1, 1, 30, '2022-04-10 01:24:26'),
 (11, 8, 1, 23, 1, 6, 150, '2022-04-10 01:52:01'),
 (12, 7, 1, 23, 1, 5, 150, '2022-04-22 03:45:59'),
-(13, 7, 1, 23, 1, 3, 90, '2022-04-22 03:46:10');
+(13, 7, 1, 23, 1, 3, 90, '2022-04-22 03:46:10'),
+(14, 7, 1, 23, 1, 7, 210, '2022-05-24 06:17:08');
 
 --
 -- Indexes for dumped tables
@@ -578,7 +587,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `deliveryman`
 --
 ALTER TABLE `deliveryman`
-  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -590,7 +599,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `inspection`
 --
 ALTER TABLE `inspection`
-  MODIFY `inspection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `inspection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `merchant`
@@ -602,7 +611,7 @@ ALTER TABLE `merchant`
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -620,7 +629,7 @@ ALTER TABLE `product_rating`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
