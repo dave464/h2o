@@ -1,6 +1,51 @@
 <?php
 require 'validate.php';
 require '../connection.php';
+
+
+
+$loadFun="";
+if(isset($_SESSION['lat']) && isset($_SESSION['lon'])){
+  $lat=$_SESSION['lat'];
+  $lon=$_SESSION['lon'];
+  
+  $res=mysqli_query($conn," SELECT product.product_id,product.image,product.product_name,product.product_type,
+  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
+  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname ,
+   (
+      3959 * acos (
+      cos ( radians($lat) )
+      * cos( radians(customer.c_latitude) )
+      * cos( radians(customer.c_longitude ) - radians($lon) )
+      + sin ( radians($lat) )
+      * sin( radians(customer.c_latitude) )
+    )
+) AS distance
+  FROM orderlist 
+  RIGHT JOIN product ON orderlist.product_id = product.product_id 
+  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
+  RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
+  WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
+  HAVING distance < 20
+ORDER BY distance  ");
+}else{
+  $res=mysqli_query($conn," SELECT product.product_id,product.image,product.product_name,product.product_type,
+  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
+  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname 
+  FROM orderlist 
+  RIGHT JOIN product ON orderlist.product_id = product.product_id 
+  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
+  RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
+  WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' ");
+
+  
+
+  $loadFun="onload='getLocation()'";
+}
+
+
+
+
 ?>
 
 
@@ -14,9 +59,11 @@ require '../connection.php';
         <link rel="stylesheet" href="../main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
         <link rel = "icon" href = "images/logo.png" type = "image/png">
+
+                 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
 
-    <body style="background-color: white"  >
+    <body style="background-color: white"  <?php echo $loadFun?>  >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
@@ -91,7 +138,40 @@ require '../connection.php';
 
 </div>  -->
 
+     
+ <script>
+    function error(err){
+      //alert(err.message);
+    }
+    function success(pos){
+      var lat=pos.coords.latitude;
+      var lon=pos.coords.longitude;
+      jQuery.ajax({
+        url:'#',
+        data:'lat='+lat+'&lon='+lon,
+        type:'post',
+        success:function(result){
+          window.location.href='home.php'
+        }
+        
+      });
+    }
+    function getLocation(){
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(success,error);
+      }else{
+        
+      }
+    }
+    </script>
 
+<?php
+
+if(isset($_POST['lat']) && isset($_POST['lon'])){
+  $_SESSION['lat']=$_POST['lat'];
+  $_SESSION['lon']=$_POST['lon'];
+}
+?>
 
 
 <!--------- SECTION Start-------->
@@ -100,17 +180,7 @@ require '../connection.php';
     <div class="row">
 
 
- <?php
- $delquery = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-  product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname FROM orderlist 
-  RIGHT JOIN product ON orderlist.product_id = product.product_id 
-  RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
-  RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
-  WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
-  ") or die(mysqli_error());
-  while($fetch = $delquery->fetch_array()){
-?>
+ <?php while($fetch=mysqli_fetch_assoc($res)){?>
 
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -134,6 +204,24 @@ require '../connection.php';
                       <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
                      <p style="font-size:14px;margin-top:-18px;">Total:  &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
                       <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
+                      <p style="font-size:14px;margin-top:-18px;">Distance: 
+                          <?php 
+
+                            $x=$fetch['distance'];
+                            $y=1000;
+
+                           if ( $fetch['distance'] > 1 ) {
+                              echo round('  '.$fetch['distance'].' ) ',2);
+                              echo " KM";
+
+                           }elseif ($fetch['distance'] < 1) {
+                              echo  round($x * $y,2);
+                              echo " M";
+                           }
+                       
+                       ?>
+
+                        <p>   
                      <a onclick="window.location='delivery_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
                  </td>
@@ -168,7 +256,7 @@ require '../connection.php';
 }
 .myButton {
   box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
+  background:linear-gradient(to bottom,  #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
   display:inline-block;
   cursor:pointer;
@@ -178,7 +266,7 @@ require '../connection.php';
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
-  border-color:	#0d6edf;
+  border-color: #0d6edf;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
 .myButton:hover {
