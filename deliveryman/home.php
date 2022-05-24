@@ -28,6 +28,9 @@ if(isset($_SESSION['lat']) && isset($_SESSION['lon'])){
   WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
   HAVING distance < 20
 ORDER BY distance  ");
+$count = mysqli_num_rows($res);
+
+
 }else{
   $res=mysqli_query($conn," SELECT product.product_id,product.image,product.product_name,product.product_type,
   product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
@@ -37,9 +40,6 @@ ORDER BY distance  ");
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
   RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
   WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' ");
-
-  
-
   $loadFun="onload='getLocation()'";
 }
 
@@ -180,7 +180,16 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
     <div class="row">
 
 
- <?php while($fetch=mysqli_fetch_assoc($res)){?>
+ <?php 
+
+if ($count > 0) {
+  
+
+ while($fetch=mysqli_fetch_assoc($res)){
+
+
+
+  ?>
 
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -235,6 +244,12 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
    
 <?php
     }
+
+
+     } else{
+      $conn->query("UPDATE `deliveryman` SET `status` = 'available' WHERE `deliveryman_id`= '".$_SESSION['deliveryman_id']."' " ) or die(mysqli_error());
+            
+     }
   ?> 
 
         </div>
