@@ -196,6 +196,115 @@ require '../connection.php';
 </div><br>
 
 
+
+
+<?php 
+
+    $q_r = $conn->query("SELECT MAX(orderlist.date) as MAX_DATE , orderlist.date , customer.customer_id, customer.firstname
+      FROM `orderlist`
+      RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
+      WHERE orderlist.status = 'delivered' && orderlist.customer_id = '".$_SESSION['customer_id']."' ||
+            orderlist.status = 'rated' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
+    $f_r = $q_r->fetch_array();
+      
+
+?>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal" >
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color:#B0E0E6; width: 100%; height: 500px " >
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title">
+             <b style="color: #081F46 ">Welcome Back, <?php echo $f_r['firstname']?></b> 
+                       
+          </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <?php
+
+                date_default_timezone_set('Asia/Manila');
+
+                // 24-hour format of an hour without leading zeros (0 through 23)
+                $Hour = date('G');
+
+                  if ( $Hour >= 5 && $Hour <= 11 ) {
+                      echo "Good Morning";
+                  } else if ( $Hour >= 12 && $Hour <= 18 ) {
+                      echo "Good Afternoon";
+                  } else if ( $Hour >= 19 || $Hour <= 4 ) {
+                      echo "Good Evening";
+                  }
+          ?>
+
+        <?php 
+          // Declare and define two dates
+          $date1 = strtotime(date("Y-m-d", strtotime($f_r['MAX_DATE'])));
+          $date2 = strtotime(date("Y-m-d"));
+         
+          echo "Ma'am/Sir, <br><br>"
+              . ($date2 - $date1)/60/60/24;
+
+          echo " days ago since your last <br>";
+          echo " order do you want to order now?";
+          ?>
+        
+        <img src="../img/bgModal.png" style="margin-left: 220px;margin-top:-50px;height: 70%; width: 55%">  
+         <img src="../img/watbg.png" style="float:left; height: 35%; width: 40% ; margin-top: -200px  " > 
+        <a href="list_of_merchants.php" class="btn btn-primary " style="float: left; margin-top: -50px">
+            <i class="fas fa-cart-plus"></i> Order Now</a> 
+
+        <img src="../img/wave.png" style="margin-left:-17px " width="490px" height="80px">    
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<?php 
+
+    $q_r = $conn->query("SELECT MAX(date) as MAX_DATE , date FROM `orderlist`
+      WHERE orderlist.status = 'delivered' && orderlist.customer_id = '".$_SESSION['customer_id']."' ||
+            orderlist.status = 'rated' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
+    $f_r = $q_r->fetch_array();
+   
+      $startdate = $f_r['date'] ;
+      $expire = strtotime($startdate. ' + 2  days');
+      $today = strtotime("today midnight");
+
+      if($today >= $expire ){
+
+         echo '  <script>
+                  var modalObject = document.getElementById("myModal");
+
+                  var spanObject = document.getElementsByClassName("btn-close")[0];
+
+                  modalObject.style.display = "block";
+
+                  spanObject.onclick = function(){
+                     modalObject.style.display= "none";
+                  }
+
+                  window.onclick = function(event){
+                     if (event.target == modalObject) {
+                           modalObject.style.display = "none";
+                     }
+                  } 
+                  </script>';
+      }
+
+?>
+
+
+
+
 <style>
 .article{
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;

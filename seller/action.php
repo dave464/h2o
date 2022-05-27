@@ -3,8 +3,8 @@ require 'validate.php';
 require '../connection.php';
 
     if(ISSET($_POST['submitApprove'])){
-		$product_id= $_POST['product_id'];
-		$customer_id = $_POST['customer_id'];
+        $product_id= $_POST['product_id'];
+        $customer_id = $_POST['customer_id'];
         $merchant_id = $_POST['merchant_id'];
         $order_id = $_POST['order_id'];
         $quantity = $_POST['quantity'];
@@ -21,7 +21,7 @@ require '../connection.php';
         document.location.href = 'accepted_order.php';
         </script>");
 
-	}
+    }
 
 
     if(ISSET($_POST['submitDispatch'])){
@@ -166,7 +166,8 @@ require '../connection.php';
             $conn->query("UPDATE `orderlist` SET `status` = 'dispatched', `deliveryman_id`= $deliveryman_id  WHERE `order_id`= $update_id  && `merchant_id` = '".$_SESSION['merchant_id']."'" ) or die(mysqli_error());
 
 
-        $conn->query("UPDATE `deliveryman` SET `status` = 'unavailable' WHERE `deliveryman_id`= '".$_SESSION['deliveryman_id']."' " ) or die(mysqli_error());
+       
+        $conn->query("UPDATE `deliveryman` SET `status` = 'unavailable' WHERE `deliveryman_id`= '$deliveryman_id'  && `merchant_id` = '".$_SESSION['merchant_id']."'" ) or die(mysqli_error());
 
             echo ("<script>
             alert('Ready to deliver');

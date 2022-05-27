@@ -13,6 +13,8 @@ require '../connection.php';
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="../main.css">
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
        
     </head>
 
@@ -33,24 +35,17 @@ require '../connection.php';
   <table class="table">
   <thead>
     <tr id="tr">
-      <th scope="col" scope="col"></th>
-      <th scope="col" scope="col">No.</th>
-      <th class="col">PRODUCT NAME</th>
-      <th scope="col">NAME</th>
-      <th scope="col">PRICE</th>
-      <th scope="col">QUANTITY</th>
-      <th scope="col">TOTAL TO PAY</th>
-      <th scope="col">STATUS</th>
-      <th scope="col">TYPE</th>
-      <th scope="col">DELIVERY MAN</th>
-      <th scope="col">ACTION</th>
+      <th scope="col" scope="col"><input type='checkbox' id='checkAll' > All </th>
+      <th scope="col" ></th>
+      <th scope="col"></th>
+      
     </tr>
   </thead> 
   <tbody>
 <?php
  $queryy = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
       product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,merchant.business_name,merchant.merchant_id,
-      orderlist.date, customer.firstname, customer.lastname, customer.customer_id
+      orderlist.date, customer.firstname, customer.lastname, customer.customer_id,customer.address,customer.barangay
       FROM orderlist 
       RIGHT JOIN product ON orderlist.product_id = product.product_id 
       RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
@@ -66,41 +61,56 @@ require '../connection.php';
             <input type="hidden" value="<?php echo $fetch['quantity']?>" name="quantity">
             <input type="hidden" value="<?php echo $fetch['quantity'] * $fetch['price']?>" name="total">
             <input type="hidden" value="<?php echo $fetch['order_id']?>" name="order_id">
-            
+
 
       <tr id="tr2">
        <td class="align-middle"> <input type="checkbox" name="check[]" value="<?php echo $fetch['order_id']?>"></td> 
-           <td class="align-middle"><?php echo $fetch['order_id']?></td>
-      <td class="align-middle"><?php echo strtoupper($fetch['product_name'])?></td>
-      <td class="align-middle"><?php echo strtoupper($fetch['firstname'])?></td>
-      <td class="align-middle"> &#8369;<?php echo $fetch['price']?>.00</td>
-      <td class="align-middle"><?php echo $fetch['quantity']?></td>
-      <td class="align-middle">&#8369; <?php echo $fetch['quantity'] * $fetch['price']?>.00</td>
-      <td class="align-middle"><?php echo strtoupper($fetch['status'])?></td>
-      <td class="align-middle"><?php echo strtoupper($fetch['type'])?></td>
-
+      <td > <img src = "../photo/<?php echo $fetch['image']?>" style="width:200px;height:200px;" /> </td>
       <td class="align-middle">
-          <a onclick="window.location='accepted_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#000;margin:5px;">
-          View
-        </a>
-      </td>
-            <td class="align-middle"> 
-        <div class="select-container">
+        <div>
+                      
+                      <p style="font-size:14px;margin-top:10px;">Address: <?php echo $fetch['address']?>
+                      <?php echo $fetch['barangay']?> Nasugbu,Batangas<p>
+                      <p style="font-size:14px;margin-top:-18px;">Product Name: <?php echo $fetch['product_name']?><p>
+                      <p style="font-size:14px;margin-top:-18px;">Price:  &#8369;<?php echo $fetch['price']?>.00<p>
+                      <p style="font-size:14px;margin-top:-18px;">Quantity: <?php echo $fetch['quantity']?><p>
+                     <p style="font-size:14px;margin-top:-18px;">Total: &#8369;<?php echo $fetch['quantity']* $fetch['price']?>.00<p>
+                      <p style="font-size:14px;margin-top:-18px;">Status:  <?php echo  strtoupper($fetch['status'])?><p>
+                      <p style="font-size:14px;margin-top:-18px;">Reference #: AS <?php echo date("mdY-", strtotime($fetch['date']))?><?php echo $fetch['order_id']?> <p>
+                     <a onclick="window.location='accepted_order_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;">More Details</a>
+                    </div>
+
+                      <p style="font-size:14px;">Select Driver<p>
+                     <div class="select-container" style="margin-top:-10px">
                           <select class="form-select form-select-sm" name="deliveryman" aria-label="Default select example" id="sel">
                           <?php
                                 $query = $conn->query("SELECT * FROM deliveryman 
-                                WHERE deliveryman.merchant_id = '".$fetch['merchant_id']."' ") 
+                                WHERE status = 'available' && deliveryman.merchant_id = '".$fetch['merchant_id']."' ") 
                                 or die(mysqli_error());
-                                while($fetch = $query->fetch_array()){
-                              ?>
-                            
 
-                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?> (<?php echo ($fetch['status'])?>)</option>
+                               $count = mysqli_num_rows($query); 
+
+                               if ($count > 0) {
+                                  while($fetch = $query->fetch_array()){
+                              ?>
+                                  <option value="<?php echo $fetch['deliveryman_id']?>" name="name"><?php echo ($fetch['name'])?>
+                                    
+                                  </option>
                               <?php
                                 }
+
+                               }else{
+                                echo '<option value="" name="name">No Deliveryman Available</option>';
+                               }
+
+                               
                               ?>
                           </select>
           </div>
+      </td>
+     
+            <td class="align-middle"> 
+       
       </td>  
 
     </tr>
@@ -120,6 +130,32 @@ require '../connection.php';
 </div> 
 
 
+
+<script type="text/javascript">
+            $(document).ready(function(){
+                // Check/Uncheck ALl
+                $('#checkAll').change(function(){
+                    if($(this).is(':checked')){
+                        $('input[name="check[]"]').prop('checked',true);
+                    }else{
+                        $('input[name="check[]"]').each(function(){
+                            $(this).prop('checked',false);
+                        }); 
+                    }
+                });
+                // Checkbox click
+                $('input[name="check[]"]').click(function(){
+                    var total_checkboxes = $('input[name="check[]"]').length;
+                    var total_checkboxes_checked = $('input[name="check[]"]:checked').length;
+ 
+                    if(total_checkboxes_checked == total_checkboxes){
+                        $('#checkAll').prop('checked',true);
+                    }else{
+                        $('#checkAll').prop('checked',false);
+                    }
+                });
+            });
+        </script>
  
 
 
@@ -225,7 +261,7 @@ require '../connection.php';
 }
 .myButton {
   box-shadow:inset 0px 1px 0px 0px #fff6af;
-  background:linear-gradient(to bottom,	 #2196F3 5%, #0d6edf 100%);
+  background:linear-gradient(to bottom,  #2196F3 5%, #0d6edf 100%);
   border-radius:6px;
   display:inline-block;
   cursor:pointer;
@@ -235,7 +271,7 @@ require '../connection.php';
   font-weight:bold;
   padding:6px 24px;
   text-decoration:none;
-  border-color:	#0d6edf;
+  border-color: #0d6edf;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
 .myButton:hover {
@@ -256,16 +292,7 @@ require '../connection.php';
 
 
 <style>
-/* .container {
-    /* display: flex;
-    flex-direction: column; */
-    background-color:#FFF;
-    /* border:12px solid #FFF;
-    min-height: 500px;
-    width:80%;margin:5px;
-    padding-bottom:10px; 
 
-  }
   td{
     //font-size: 10px;
     white-space: nowrap;
@@ -286,7 +313,7 @@ require '../connection.php';
   }
   label {
     font-size: 12px;
-  }*/
+  }
 
 
 

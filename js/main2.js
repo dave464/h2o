@@ -15,8 +15,11 @@ $(document).ready(function() {
         var action = "filterRequest";
        
         var product_type = get_filtered_product('product_type');
+        var price = get_filtered_product('price');
         var product_name = get_filtered_product('product_name');
         var volume = get_filtered_product('volume');
+        
+
 
         $.ajax({
             url: "../customer/filter.php",
@@ -25,6 +28,7 @@ $(document).ready(function() {
                 action: action,
                 
                 product_type: product_type,
+                price: price,
                 product_name: product_name,
                 volume: volume
             },

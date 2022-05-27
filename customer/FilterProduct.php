@@ -22,6 +22,7 @@ require_once '../connection.php';
     <link rel="stylesheet" href="../css/style2.css">
 
 
+     <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>  
 </head>
 
 <body>
@@ -33,9 +34,155 @@ require_once '../connection.php';
     <main>
         <div class="main-container">
             <div class="container-element filter-section">
-                <h4>Filter</h4>
-                <hr>
-            
+                
+
+
+    <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fa fa-filter"></span></button> </div>
+    <div id="mobile-filter">
+<!---====================== MOBILE VIEW ============================= -->
+        
+       
+        <div class="py-3">
+            <h5 class="font-weight-bold">Product Type</h5>
+             <?php 
+                $sql="SELECT DISTINCT product_type FROM product ORDER BY product_type";
+                $result= $conn->query($sql);
+                while ($row=$result->fetch_assoc() ) {
+                
+             ?>
+                <form class="brand">
+                    <div class="form-inline d-flex align-items-center py-1"> 
+                        <label class="tick">
+                             <?php
+                            $select_sql = "SELECT DISTINCT product_type, COUNT(product_type) as total FROM product GROUP
+                            BY product_type ORDER BY product_type";
+                            $result = $conn->query($select_sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input product-check" value="<?= $row['product_type']; ?>" id="product_type"><span>
+                                            <?= $row['product_type']; ?> (<?= $row['total']; ?>)</span>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                         </label> 
+                     </div>     
+                </form>
+
+                <?php 
+
+                    }
+                 ?>
+        </div>
+        <div class="py-3" style="margin-top:-20px">
+            <h5 class="font-weight-bold">Product Name</h5>
+             <?php 
+                $sql="SELECT DISTINCT product_type FROM product ORDER BY product_type";
+                $result= $conn->query($sql);
+                while ($row=$result->fetch_assoc() ) {
+                
+             ?>
+                <form class="brand">
+                    <div class="form-inline d-flex align-items-center py-1"> 
+                        <label class="tick">
+                              <?php
+                            $select_sql = "SELECT DISTINCT product_name, COUNT(product_name) as Total FROM product
+                            GROUP BY product_name ORDER BY product_name";
+                            $result = $conn->query($select_sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input product-check" value="<?= $row['product_name']; ?>" id="product_name"><span>
+                                            <?= $row['product_name']; ?>  (<?= $row['Total'];?>)</span>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                         </label> 
+                     </div>     
+                </form>
+
+                <?php 
+
+                    }
+                 ?>
+        </div>
+          <div class="py-3"  style="margin-top:-20px">
+            <h5 class="font-weight-bold">Volume</h5>
+             <?php 
+                $sql="SELECT DISTINCT product_type FROM product ORDER BY product_type";
+                $result= $conn->query($sql);
+                while ($row=$result->fetch_assoc() ) {
+                
+             ?>
+                <form class="brand">
+                    <div class="form-inline d-flex align-items-center py-1"> 
+                        <label class="tick">
+                              <?php
+                            $select_sql = "SELECT DISTINCT volume FROM product
+                            ORDER BY volume DESC";
+                            $result = $conn->query($select_sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input product-check" value="<?= $row['volume']; ?>" id="volume"><span>
+                                            <?= $row['volume']; ?></span>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                         </label> 
+                     </div>     
+                </form>
+
+                <?php 
+
+                    }
+                 ?>
+        </div>
+        <div class="py-3"  style="margin-top:-20px">
+            <h5 class="font-weight-bold">Price</h5>
+             <?php 
+                $sql="SELECT DISTINCT product_type FROM product ORDER BY product_type";
+                $result= $conn->query($sql);
+                while ($row=$result->fetch_assoc() ) {
+                
+             ?>
+                <form class="brand">
+                    <div class="form-inline d-flex align-items-center py-1"> 
+                        <label class="tick">
+                              <?php
+                            $select_sql = "SELECT DISTINCT price, COUNT(price) as total FROM product GROUP
+                            BY price ORDER BY price";
+                            $result = $conn->query($select_sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input product-check" value="<?= $row['price']; ?>" id="price"><span>
+                                         &#8369; <?= $row['price']; ?> (<?= $row['total']; ?>)</span>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                         </label> 
+                     </div>     
+                </form>
+
+                <?php 
+
+                    }
+                 ?>
+        </div>
+        
+    </div>
+
+      
+      <!--     
              <div class="mobile-flex-display">                
                     <div class="filter-element">
                         <h6>Product Type <span class="mobile-drop"><i class="fas fa-caret-down"></i></span></h6>
@@ -51,6 +198,27 @@ require_once '../connection.php';
                                     <label class="form-check-label">
                                         <input type="checkbox" class="form-check-input product-check" value="<?= $row['product_type']; ?>" id="product_type"><span>
                                             <?= $row['product_type']; ?> (<?= $row['total']; ?>)</span>
+                                    </label>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>                 
+                </div>
+                  <div class="mobile-flex-display">                
+                    <div class="filter-element">
+                        <h6>Price <span class="mobile-drop"><i class="fas fa-caret-down"></i></span></h6>
+                        <div class="filter-selection scrollable-selection">
+                            <?php
+                            $select_sql = "SELECT DISTINCT price, COUNT(price) as total FROM product GROUP
+                            BY price ORDER BY price";
+                            $result = $conn->query($select_sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                            ?>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input product-check" value="<?= $row['price']; ?>" id="price"><span>
+                                            <?= $row['price']; ?> (<?= $row['total']; ?>)</span>
                                     </label>
                                 </div>
                             <?php } ?>
@@ -98,7 +266,7 @@ require_once '../connection.php';
                             <?php } ?>
                         </div>
                     </div>               
-                </div>
+                </div>-->
             </div><br>
             <div class="container-element product-section">
                 <?php

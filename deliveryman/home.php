@@ -11,7 +11,8 @@ if(isset($_SESSION['lat']) && isset($_SESSION['lon'])){
   
   $res=mysqli_query($conn," SELECT product.product_id,product.image,product.product_name,product.product_type,
   product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname ,
+  orderlist.date, customer.firstname, customer.lastname, customer.customer_id,customer.address,customer.barangay,
+  deliveryman.name, deliveryman.deliveryman_id as delname ,
    (
       3959 * acos (
       cos ( radians($lat) )
@@ -26,7 +27,7 @@ if(isset($_SESSION['lat']) && isset($_SESSION['lon'])){
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
   RIGHT JOIN deliveryman ON orderlist.deliveryman_id = deliveryman.deliveryman_id
   WHERE orderlist.status = 'dispatched' && orderlist.deliveryman_id = '".$_SESSION['deliveryman_id']."' 
-  HAVING distance < 20
+  HAVING distance < 100
 ORDER BY distance  ");
 $count = mysqli_num_rows($res);
 
@@ -34,7 +35,8 @@ $count = mysqli_num_rows($res);
 }else{
   $res=mysqli_query($conn," SELECT product.product_id,product.image,product.product_name,product.product_type,
   product.price, product.merchant_id, orderlist.order_id, orderlist.quantity, orderlist.total ,orderlist.status, orderlist.type,
-  orderlist.date, customer.firstname, customer.lastname, customer.customer_id, deliveryman.name, deliveryman.deliveryman_id as delname 
+  orderlist.date, customer.firstname, customer.lastname, customer.customer_id,customer.address,customer.barangay,
+  deliveryman.name, deliveryman.deliveryman_id as delname 
   FROM orderlist 
   RIGHT JOIN product ON orderlist.product_id = product.product_id 
   RIGHT JOIN customer ON orderlist.customer_id = customer.customer_id
@@ -183,11 +185,10 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
  <?php 
 
 if ($count > 0) {
-  
 
  while($fetch=mysqli_fetch_assoc($res)){
 
-
+ 
 
   ?>
 
@@ -230,7 +231,9 @@ if ($count > 0) {
                        
                        ?>
 
-                        <p>   
+                        <p>
+                     <p style="font-size:14px;margin-top:-18px;">Address: <?php echo $fetch['address']?>
+                      <?php echo $fetch['barangay']?> Nasugbu,Batangas <p>   
                      <a onclick="window.location='delivery_details.php?order_id=<?php echo $fetch['order_id']?>'" class="myButton" style="color:#fff;margin:5px;">More Details</a>
                     </div>
                  </td>

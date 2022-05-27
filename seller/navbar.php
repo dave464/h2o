@@ -47,6 +47,9 @@
                 <li><a href = "../seller/announcement.php"><i class='fas fa-bullhorn' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
                     </i>  Announcement</a></li>
 
+                <li><a href = "../seller/lab_result.php"><i class='fas fa-flask' style="color:black;text-shadow: 2px 2px white;font-size: 18px;">
+                    </i>  Lab Result</a></li>
+
                 <li><a href = "../seller/add_product.php"><i class='fas fa-plus-square' style="color:black;text-shadow: 2px 2px white;font-size: 20px;">
                     </i>  Add Product</a></li>
 

@@ -40,7 +40,7 @@ require '../connection.php';
 
     <?php  
       $query = $conn->query("SELECT product.product_id,product.image,product.product_name,
-      product.price,product.product_type, merchant.merchant_id, merchant.business_name
+      product.price,product.product_type,product.volume, merchant.merchant_id, merchant.business_name
       FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product_id = '".$_REQUEST['product_id']."'") or die(mysqli_error());
     ?>
 
@@ -59,7 +59,7 @@ require '../connection.php';
           <div class="card-body">
           
             <div class="d-flex justify-content-between">
-              <p class="small"><?php echo $fetch['product_type']?></p>
+              <p class="small"><?php echo $fetch['product_type']?> <?php echo $fetch['volume']?></p>
              
             </div>
                 

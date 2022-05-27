@@ -1,74 +1,117 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funda of Web IT</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .notSearched {
+  display:none;
+}
+    </style>
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="columnsContainer">
+  <div class="leftColumn">
+    <!--<div class="filterResearch">
+      <select name="filter" id="searchFilter">
+        <option value="all">Apply a filter</option>
+        <option value="1.">1 Star</option>
+        <option value="2.">2 Stars</option>
+        <option value="3.">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5.">5 Stars</option>
+      </select>
+    </div>-->
+
+    <div class="form-check">
+        <label class="form-check-label">
+        <input type="checkbox" class="product-check" value="1" id="product_name">
+      
+    </div>
+     <div class="form-check">
+        <label class="form-check-label">
+       
+        <input type="checkbox" class="product-check" value="2" id="product_name">
+    </div>
+
+     <div class="form-check">
+        <label class="form-check-label">
+        <input type="checkbox" class="product-check" value="3" id="product_name">
+      
+    </div>
+     <div class="form-check">
+        <label class="form-check-label">
+       
+        <input type="checkbox" class="product-check" value="4" id="product_name">
+    </div>
+
+     <div class="form-check">
+        <label class="form-check-label">
+        <input type="checkbox" class="product-check" value="5" id="product_name">
+      
+    </div>
     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mt-3">
-                    <div class="card-header">
-                        <h4>How to Filter or Find or Search data using Multiple Checkbox in php</h4>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Brand List  -->
-            <div class="col-md-3">
-                <form action="" method="GET">
-                    <div class="card shadow mt-3">
-                        <div class="card-header">
-                            <h5>Filter 
-                                <button type="submit" class="btn btn-primary btn-sm float-end">Search</button>
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <h6>Brand List</h6>
-                            <hr>
-                            <?php
-                                $con = mysqli_connect("localhost","root","","phptutorials");
+    <div id="map"></div>
 
-                                $brand_query = "SELECT * FROM a_brands";
-                                $brand_query_run  = mysqli_query($con, $brand_query);
+    <div class="rightColumn" style="margin-top:50px;">
 
-                                if(mysqli_num_rows($brand_query_run) > 0)
-                                {
-                                    foreach($brand_query_run as $brandlist)
-                                    {
-                                        $checked = [];
-                                        if(isset($_GET['brands']))
-                                        {
-                                            $checked = $_GET['brands'];
-                                        }
-                                        ?>
-                                            <div>
-                                                <input type="checkbox" name="brands[]" value="<?= $brandlist['id']; ?>" 
-                                                    <?php if(in_array($brandlist['id'], $checked)){ echo "checked"; } ?>
-                                                 />
-                                                <?= $brandlist['name']; ?>
-                                            </div>
-                                        <?php
-                                    }
-                                }
-                                else
-                                {
-                                    echo "No Brands Found";
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-           
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+      //Cards down below
+      <div class="card-grid">
+        <div class="card-wrap" id="">
+          <img src="https://image.ibb.co/k4SSPK/Spinaci_Green_Dark_Blue.jpg " class="photo">
+          <div class="restoName">
+            <h3>Restaurant Name Here</h3>
+            <p class="restoAddress">In questo posto ci andrà l'indirizzo del ristorante in questione, sarà una stringa lunga</p>
+            <p class="ratePlace">Rating: 4.5</p>
+          </div>
+        </div>
+        <div class="card-wrap" id=""><img src=" https://image.ibb.co/k4SSPK/Spinaci_Green_Dark_Blue.jpg" class="photo">
+          <div class="restoName">
+            <h3>Restaurant Name Here</h3>
+            <p class="restoAddress">In questo posto ci andrà l'indirizzo del ristorante in questione, sarà una stringa lunga222</p>
+            <p class="ratePlace">Rating: 2.2</p>
+          </div>
+        </div>
+        <div class="card-wrap" id=""><img src=" https://image.ibb.co/k4SSPK/Spinaci_Green_Dark_Blue.jpg" class="photo">
+          <div class="restoName">
+            <h3>Restaurant Name Here</h3>
+            <p class="restoAddress">In questo posto ci andrà l'indirizzo del ristorante in questione, sarà una stringa lunga222</p>
+            <p class="ratePlace">Rating: 4.42</p>
+          </div>
+        </div>
+        <div class="card-wrap" id=""><img src=" https://image.ibb.co/k4SSPK/Spinaci_Green_Dark_Blue.jpg" class="photo">
+          <div class="restoName">
+            <h3>Restaurant Name Here</h3>
+            <p class="restoAddress">In questo posto ci andrà l'indirizzo del ristorante in questione, sarà una stringa lunga222</p>
+            <p class="ratePlace">Rating: 2.1</p>
+          </div>
+        </div>
+        <div class="card-wrap" id=""><img src=" https://image.ibb.co/k4SSPK/Spinaci_Green_Dark_Blue.jpg" class="photo">
+          <div class="restoName">
+            <h3>Restaurant Name Here</h3>
+            <p class="restoAddress">In questo posto ci andrà l'indirizzo del ristorante in questione, sarà una stringa lunga333</p>
+            <p class="ratePlace">Rating: 4.53</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <script type="text/javascript">
+   
+        $("input").on("click", function() {
+  let selectedValue = this.value;
+  if (selectedValue == "all") return;
+  $('.card-wrap').each(function(index, element) {
+    var text = $(element).find(".ratePlace").text();
+    let number = text.match(/[0-9]*\,?[0-9]+/g);
+    number = number[0].replace(",", ".");
+    number = (Math.round(number));
+    console.log(number, selectedValue ,   number >= selectedValue )
+    number == selectedValue ? $(element).removeClass("notSearched") : $(element).addClass("notSearched");
+  })
+});
+    </script>
 </body>
 </html>

@@ -27,9 +27,10 @@ require_once '../connection.php';
       <div class="container">
         <?php
             $query = $conn->query("SELECT product.product_id,product.image,product.product_name,product.product_type,
-            product.price, product.merchant_id,orderlist.status, orderlist.order_id,orderlist.quantity,
-            orderlist.total, orderlist.type, orderlist.photo,orderlist.receipt, orderlist.receipt_status,orderlist.date, merchant.business_name,merchant.merchant_id
-            ,customer.firstname, customer.lastname, customer.address, customer.contact_number,customer.customer_id,customer.barangay
+            product.price, product.merchant_id,product.volume,orderlist.status, orderlist.order_id,orderlist.quantity,
+            orderlist.total, orderlist.type, orderlist.photo,orderlist.receipt, orderlist.receipt_status,orderlist.date, 
+            merchant.business_name,merchant.merchant_id,customer.firstname, customer.lastname, customer.address, 
+            customer.contact_number,customer.customer_id,customer.barangay
             FROM `orderlist`
             RIGHT JOIN product ON orderlist.product_id = product.product_id
             RIGHT JOIN merchant ON orderlist.merchant_id = merchant.merchant_id
@@ -73,7 +74,11 @@ require_once '../connection.php';
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Product Type: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['product_type']?></p>        
-             </div> 
+             </div>
+              <div class="d-flex justify-content-between">
+              <p class="card-text" style="font-weight:550;margin-top:-10px;">Volume: </p>
+              <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['volume']?></p>        
+             </div>  
              <div class="d-flex justify-content-between">
               <p class="card-text" style="font-weight:550;margin-top:-10px;">Seller: </p>
               <p class="card-text" style="margin-top:-10px;"><?php echo $fetch['business_name']?></p>        
@@ -140,7 +145,7 @@ require_once '../connection.php';
                           onclick="window.location='../photo/<?php echo $fetch['photo']?>'" />
                     
                     <div class = "form-group">
-                        <div id = "preview" style = "width:400px; height :400px; ">
+                        <div id = "preview" style = "width:100%; height :400px; ">
                             <img src = "../receipt/<?php echo $fetch['receipt']?>" id = "lbl" width = "100%" height = "100%"
                             onclick="window.location='../receipt/<?php echo $fetch['receipt']?>'" />
                        </div>     

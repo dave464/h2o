@@ -41,6 +41,35 @@ require '../connection.php';
                 <option value="Uk">UK</option>
             </select> </div>
     </div>-->
+
+<script type="text/javascript">
+    function ShowHideDiv(chkPassport) {
+        var dvPassport = document.getElementById("dvPassport");
+        dvPassport.style.display = chkPassport.checked ? "block" : "none";
+    }
+     function ShowHideDivs(chkPassports) {
+        var dvPassports = document.getElementById("dvPassports");
+        dvPassports.style.display = chkPassports.checked ? "block" : "none";
+    }
+</script>
+<label for="chkPassport">
+    <input type="checkbox" id="chkPassport" onclick="ShowHideDiv(this)" />
+    Do you have Passport?
+</label>
+<hr />
+<div id="dvPassport" style="display: none">
+    Passport Number: 5star
+    <input type="text" id="txtPassportNumber" />
+</div>
+
+<div id="dvPassports" style="display: none">
+    Passport Number:
+    4s
+    <input type="text" id="txtPassportNumber" />
+    
+</div>
+</script>
+
     <div class="d-sm-flex align-items-sm-center pt-2 clear">
         <div class="text-muted filter-label"></div>
         
@@ -88,7 +117,7 @@ require '../connection.php';
                             <span class="fas fa-star"></span> 
                             <span class="fas fa-star"></span> 
                             <span class="fas fa-star"></span> 
-                            <input type="checkbox"> 
+                            <input type="checkbox" id="chkPassport" onclick="ShowHideDiv(this)"> 
                             <span class="check"></span> 
                       </label> 
                     </div>
@@ -99,7 +128,7 @@ require '../connection.php';
                             <span class="fas fa-star"></span> 
                             <span class="fas fa-star"></span> 
                             <span class="far fa-star px-1 text-muted"></span> 
-                            <input type="checkbox"> 
+                            <input type="checkbox" id="chkPassports" onclick="ShowHideDivs(this)"> 
                             <span class="check"></span> 
                         </label> 
                     </div>

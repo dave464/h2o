@@ -19,6 +19,7 @@ require '../connection.php';
            <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../css/styles.css">
 
+
     <title>Store Locator</title>
 </head>
 
@@ -83,6 +84,13 @@ $saveJson["geometry"]=[
                 <i class="fas fa-times fa-lg me-3 fa-fw" style="color: black; float: right;margin-top:10px;  font-size: 27px;" ></i> </a>
                 <h2>Waterstation</h2>
             </div>
+             <input id="searchbar" onkeyup="search_animal()" type="search"
+                name="search" placeholder="Search" style="margin-left: 16px; width:70%; height: 28px;margin-top:5px"> 
+
+                  <button type="button" class="btn btn-sm btn-primary"
+                           style="margin-left: -4.5px; height:28px;width:30px;background-color:  ">
+                    <i class="fas fa-search"></i>
+                  </button>
             <ul class="list">
             </ul>
         </div>
@@ -304,6 +312,25 @@ function flyToStore(store) {
 }
 
 </script>
+
+
+  <script type="text/javascript">
+        function search_animal() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('shop-item');
+      
+    for (i = 0; i < x.length; i++) { 
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";                 
+        }
+    }
+}
+    </script>
+
 
 <style type="text/css">
 .myButton {

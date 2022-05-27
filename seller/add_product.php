@@ -54,8 +54,12 @@ require '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-tint fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" name="product_name" id="form3Example3c" class="form-control" 
-                      placeholder="Product Name" required = "required"/>
+                      <select name="product_name" class="form-select" required = "required"  >
+                         <option value = "">Choose an option</option>
+                         <option>Slim Container</option>
+                         <option>Rounded Container</option>
+                         <option>Plastic Bottle</option>
+                      </select>  
                     </div>
                   </div>
 
@@ -73,12 +77,28 @@ require '../connection.php';
                     </div>
                 </div>
 
+                <label class="labels" style=" font-size: 11px; margin-left:50px;">Volume</label>
+                <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fa-solid fa-hand-holding-droplet fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <select name="volume" class="form-select" required = "required"  >
+                         <option value = "">Choose an option</option>
+                         <option>350 mL</option>
+                         <option>500 mL</option>
+                         <option>1 Liter</option>
+                         <option>6 Liters</option>
+                         <option>10 Liters</option>
+                         <option>20 Liters</option>
+                      </select>   
+                    </div>
+                </div>
+
                 <label class="labels" style=" font-size: 11px; margin-left:50px;">Price</label>
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fa-solid fa-tags fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="number" name="price" id="form3Example3c" class="form-control" 
-                      placeholder="Price" required = "required"/>
+                      placeholder="₱" required = "required"/>
                     </div>
                   </div>
 

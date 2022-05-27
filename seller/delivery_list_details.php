@@ -134,7 +134,7 @@ require_once '../connection.php';
                           onclick="window.location='../photo/<?php echo $fetch['photo']?>'" />
                     
                     <div class = "form-group">
-                        <div id = "preview" style = "width:400px; height :400px; ">
+                        <div id = "preview" style = "width:100%; height :400px; ">
                             <img src = "../receipt/<?php echo $fetch['receipt']?>" id = "lbl" width = "100%" height = "100%"
                             onclick="window.location='../receipt/<?php echo $fetch['receipt']?>'" />
                        </div>     

@@ -218,7 +218,7 @@
       <!-- Modal body -->
       <div class="modal-body">
         
-        <form action ="add_query_inspection.php" method = "POST"> 
+        <form action ="add_query_inspection.php" method = "POST"  enctype="multipart/form-data"> 
             <div class = "form-group">
               <label>Name </label>
               <select  class = "form-control" required = required name = "merchant_id">              
@@ -233,11 +233,12 @@
                    }
                 }
                 else{
-                    echo '<option value="">Country not available</option>';
+                    echo '<option value=""></option>';
                   }
                ?>
               </select>
             </div>
+
             <div class = "form-group">
               <label>Status</label>
               <select class = "form-control" required = required name = "status">
@@ -246,6 +247,13 @@
                 <option value = "Failed">Failed</option>
               </select>
             </div>
+
+             <div class="d-flex flex-row align-items-center mb-2">  
+                      <label class="labels" style=" font-size: 15px; "></label>
+                    <input type="file" name="file" class="email" required = "required">
+                  </div>
+
+
             <br />
             <div class = "form-group">
               <button name = "add_inspection" class = "btn btn-info form-control" style="background:dodgerBlue;"><i class = ""></i> Saved</button>
@@ -285,6 +293,7 @@
                                                 <th class="border-top-0">ID</th>
                                                 <th class="border-top-0">NAME</th>
                                                 <th class="border-top-0">DATE</th>
+                                                <th class="border-top-0">FILE</th>
                                                 <th class="border-top-0">STATUS</th>
                                                 <th class="border-top-0">ACTION</th>
                                             </tr>
@@ -292,7 +301,7 @@
                                         <tbody>
                                              <?php  
                                                  $query = $conn->query("SELECT inspection.inspection_id, merchant.business_name,
-                                                          inspection.date,inspection.status 
+                                                          inspection.date,inspection.status ,inspection.file
                                                  FROM merchant RIGHT JOIN inspection
                                                  ON merchant.merchant_id = inspection.merchant_id ") or die(mysqli_error());
                                                  while($fetch = $query->fetch_array()){
@@ -301,6 +310,7 @@
                                                 <td><?php echo $fetch['inspection_id']?></td>
                                                 <td><?php echo $fetch['business_name']?></td>
                                                 <td><?php echo date("M d, Y", strtotime($fetch['date']))?></td>
+                                                <td><a href="file/<?php echo $fetch['file']?>"><?php echo $fetch['file']?></a></td>
                                                 <td><?php echo $fetch['status']?></td>
                                                 <td><a class = "btn btn-danger" href="delete_inspection.php?inspection_id=<?php echo $fetch['inspection_id']?>" onclick = "confirmationDelete(this); return false;"
                                                      style="color:white; margin-left:10px">
@@ -479,13 +489,13 @@ $.fn.dataTable.ext.search.push(
 
           
                 "createdRow": function (row, data, index) {
-                    if (data[3] == 'Passed') {
-                      $('td', row).eq(3).css({
+                    if (data[4] == 'Passed') {
+                      $('td', row).eq(4).css({
                       'color': 'green',
                       });
                     }
-                    else if (data[3] == 'Failed') {
-                      $('td', row).eq(3).css({
+                    else if (data[4] == 'Failed') {
+                      $('td', row).eq(4).css({
                        'color': 'red',
                      });
                    }

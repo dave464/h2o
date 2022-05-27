@@ -11,10 +11,15 @@ if (isset($_POST['action'])) {
             WHERE product.merchant_id = merchant.merchant_id && merchant.business_name  != '' ";
 
     //adding new price to query if changed
-    if (isset($_POST['price'])) {
+    /*if (isset($_POST['price'])) {
         $lowRange = $_POST['price'] - $_POST['price'] * 1 / 4;
         $highRange = $_POST['price'] + $_POST['price'] * 1 / 2;
         $sql .= " AND (price >=". $lowRange ." AND price <= ". $highRange .")";
+    }*/
+
+     if (isset($_POST['price'])) {
+        $price = implode(",", $_POST['price']);
+        $sql .= " AND product.price IN (". $price .")";
     }
 
 
@@ -131,7 +136,14 @@ if (isset($_POST['action'])) {
            
         }
     }else{
-        $output = '<div style="color:red;font-size:17px;">No results found</div>';
+        $output = //'<div style="color:red;font-size:17px;">No results found</div>';
+                  " <div  class='col-md-10 col-lg-6 col-xl-5 order-1 order-lg-2 '>
+                      <p class='text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4'>Opps! No Result Found</p>
+                      <p class='text-center h4 mb-3 mx-1 mx-md-4 mt-4'>We couldn't find what you're looking for</p>
+                   </div>
+                   <div class='col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2'>
+                      <img src='../img/no_result.png' class='img-fluid' alt='Sample image'>
+                  </div>";
     }
     
     //echo back filterd product to page

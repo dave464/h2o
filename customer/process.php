@@ -87,6 +87,51 @@ if(isset($_GET["page"]))
 		}
 	}
 
+	/*======================================================================
+	if(isset($_GET["star_product_filter"]))
+	{
+		$star_product_array = explode(",", trim($_GET["star_product_filter"]));
+
+		if(count($star_product_array) > 0)
+		{
+			if(count($star_product_array) > 1)
+			{
+				if($where != '')
+				{
+					$star_product_condition = '';
+					foreach($star_product_array as $star_product_type)
+					{
+						if(trim($star_product_type) != '')
+						{
+							$star_product_condition .= 'rating = "'.trim($star_product_type).'" OR ';
+						}
+					}
+					if($star_product_condition != '')
+					{
+						$where .= ' AND ('.substr($star_product_condition, 0, -4).')';
+					}
+				}
+				else
+				{
+					$star_product_condition = '';
+					foreach($star_product_array as $star_product_type)
+					{
+						if(trim($star_product_type) != '')
+						{
+							$star_product_condition .= 'rating = "'.trim($star_product_type).'" OR ';
+						}
+					}
+					if($product_condition != '')
+					{
+						$where .= substr($product_condition, 0, -4);
+					}
+				}
+			}
+			$search_query .= '&star_filter=' . trim($_GET["star_filter"]);
+		}
+	}
+//===============================================================================================*/
+
 	if($where != '')
 	{
 		$where = 'WHERE ' . $where;
@@ -94,12 +139,13 @@ if(isset($_GET["page"]))
 
 
 	$query = "
-	SELECT description, merchant_id, image, product_name, price, product_type
+	SELECT description, merchant_id, image, product_name, price, product_type, product_id
 	FROM product 
 	".$where."
 	ORDER BY product_id ASC
 	";
 
+		
 	$filter_query = $query . ' LIMIT ' . $start . ', ' . $limit . '';
 
 	$statement = $connect->prepare($query);
@@ -119,6 +165,7 @@ if(isset($_GET["page"]))
 		$img_arr = explode(" ~ ", $row['image']);
 
 		$data[] = array(
+			'product_id'				=>	$row["product_id"],
 			'product_name'				=>	$row["product_name"],
 			'product_type'				=>	$row['product_type'],
 			'merchant_id'				=>	$row['merchant_id'],

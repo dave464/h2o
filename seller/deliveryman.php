@@ -29,6 +29,7 @@ require '../connection.php';
   <!---- SECTION Start---->
       <section style="margin-top:-30px;" >
   <div class="container py-5">
+  <div class="table-responsive">
   
   <button class="btn btn-primary" style="float:left; width:200px;" 
   onclick="window.location='add_deliveryman.php'">Add Delivery man
@@ -41,13 +42,14 @@ require '../connection.php';
         <th>Name</th>
         <th>Contact Number</th>
         <th>Plate Number</th>
+        <th>Status</th>
         <th>Action</th>
       </tr>
   </thead>
   <tbody>
   <?php  
    $query = $conn->query("SELECT deliveryman.deliveryman_id, deliveryman.name,deliveryman.contact_number,
-   deliveryman.plate_number, merchant.merchant_id
+   deliveryman.plate_number, deliveryman.status, merchant.merchant_id
               FROM merchant RIGHT JOIN deliveryman ON merchant.merchant_id = deliveryman.merchant_id WHERE  deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
               while($fetch = $query->fetch_array()){
  ?>
@@ -56,6 +58,17 @@ require '../connection.php';
             <td><?php echo $fetch['name']?></td>
             <td><?php echo $fetch['contact_number']?></td>
             <td><?php echo $fetch['plate_number']?></td>
+            <td>
+                <?php if ($fetch['status']== 'available') {
+
+                    echo strtoupper( ' <p style="color:green"> '.$fetch['status'].'</p> ');
+                  
+                }else{
+                     echo strtoupper(' <p style="color:red"> '.$fetch['status'].'</p> ');
+                  }
+
+                ?>
+            </td>
             <td><a href="del_deliveryman.php?deliveryman_id=<?php echo $fetch['deliveryman_id']?>" onclick = "confirmationDelete(this); return false;"><input type="submit" name="del" style="background-color:red; border:none;border-radius: 25px;
             box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff; color:white; height: 25px; width:70px;"
               value="Delete"></a>
@@ -73,18 +86,48 @@ require '../connection.php';
 
 
     </div>
-  
+  </div>
 </section>
 <!--------- SECTION END-------->
   
 <script type = "text/javascript">
-	function confirmationDelete(anchor){
-		var conf = confirm("Are you sure you want to delete this record?");
-		if(conf){
-			window.location = anchor.attr("href");
-		}
-	} 
+  function confirmationDelete(anchor){
+    var conf = confirm("Are you sure you want to delete this record?");
+    if(conf){
+      window.location = anchor.attr("href");
+    }
+  } 
 </script>
+
+
+<style>
+
+  td{
+    //font-size: 10px;
+    white-space: nowrap;
+  }
+  th {
+    //font-size: 10px;
+    white-space: nowrap;
+  }
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .list {
+    display: flex; 
+    width: 100%;
+    border:2px solid #000;
+  }
+  label {
+    font-size: 12px;
+  }
+
+
+
+
+</style>
 
     </body>
 </html>
