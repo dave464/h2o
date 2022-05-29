@@ -171,7 +171,7 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
            
            <?php 
 
-              $x=$fetch['distance'];
+              $x=$fetch['distance']*1.609344;
               $y=1000;
 
              if ( $fetch['distance'] > 1 ) {

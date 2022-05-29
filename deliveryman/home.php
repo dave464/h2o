@@ -217,7 +217,7 @@ if ($count > 0) {
                       <p style="font-size:14px;margin-top:-18px;">Distance: 
                           <?php 
 
-                            $x=$fetch['distance'];
+                            $x=$fetch['distance']*1.609344;
                             $y=1000;
 
                            if ( $fetch['distance'] > 1 ) {

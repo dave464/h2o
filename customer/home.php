@@ -275,7 +275,7 @@ require '../connection.php';
             orderlist.status = 'rated' && orderlist.customer_id = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
     $f_r = $q_r->fetch_array();
    
-      $startdate = $f_r['date'] ;
+      $startdate = $f_r['MAX_DATE'] ;
       $expire = strtotime($startdate. ' + 2  days');
       $today = strtotime("today midnight");
 
