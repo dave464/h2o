@@ -3,6 +3,8 @@ include "connect.php";
 	if(ISSET($_POST['add_inspection'])){
 		$merchant_id = $_POST['merchant_id'];	
 		$status = $_POST['status'];
+		$timezone = date_default_timezone_set('Asia/Manila');
+        $datetime = date('Y-m-d H:i:s', time());
 
         $file = addslashes(file_get_contents($_FILES['file']['tmp_name']));
         $photo_name = addslashes($_FILES['file']['name']);
@@ -10,7 +12,7 @@ include "connect.php";
         move_uploaded_file($_FILES['file']['tmp_name'],"file/" . $_FILES['file']['name']);  
 
 		
-		$conn->query("INSERT INTO `inspection` (merchant_id,file,status) VALUES('$merchant_id','$photo_name','$status')") or die(mysqli_error());
+		$conn->query("INSERT INTO `inspection` (merchant_id,file,status,date) VALUES('$merchant_id','$photo_name','$status','$datetime')") or die(mysqli_error());
 			echo
 			"<script>
 			alert('Data Added Successfully');
