@@ -1,35 +1,36 @@
 <?php
 require 'validate.php';
 require '../connection.php';
-
-$loadFun="";
-if(isset($_SESSION['lat']) && isset($_SESSION['lon'])){
-  $lat=$_SESSION['lat'];
-  $lon=$_SESSION['lon'];
-  
-  $res=mysqli_query($conn,"SELECT
-    merchant_id, business_name, address, contact_number,barangay, image, (
-      3959 * acos (
-      cos ( radians($lat) )
-      * cos( radians(latitude) )
-      * cos( radians(longitude ) - radians($lon) )
-      + sin ( radians($lat) )
-      * sin( radians(latitude) )
-    )
-) AS distance
-FROM merchant
-HAVING distance < 20
-ORDER BY distance 
-LIMIT 6 ");
-}else{
-  $res=mysqli_query($conn,"SELECT * FROM `merchant` ");
-  $loadFun="onload='getLocation()'";
-}
-
-
 ?>
 
 
+<?php
+
+
+function distance($latitudeFrom, $longitudeFrom,
+                  $latitudeTo, $longitudeTo) {
+
+   $long1 = deg2rad($longitudeFrom);
+    $long2 = deg2rad($longitudeTo);
+    $lat1 = deg2rad($latitudeFrom);
+    $lat2 = deg2rad($latitudeTo);
+      
+    //Haversine Formula
+    $dlong = $long2 - $long1;
+    $dlati = $lat2 - $lat1;
+      
+    $val = pow(sin($dlati/2),2)+cos($lat1)*cos($lat2)*pow(sin($dlong/2),2);
+      
+    $res = 2 * asin(sqrt($val));
+      
+    $radius = 3958.756;
+      
+    return ($res*$radius);
+}
+
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -43,58 +44,33 @@ LIMIT 6 ");
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         
         <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
-          <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
      
     </head>
 
 
-<body <?php echo $loadFun?> >
+<body>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>      
       <!-- Navbar-->
       <?php include 'navbar.php' ?>
        
- <script>
-    function error(err){
-      //alert(err.message);
-    }
-    function success(pos){
-      var lat=pos.coords.latitude;
-      var lon=pos.coords.longitude;
-      jQuery.ajax({
-        url:'#',
-        data:'lat='+lat+'&lon='+lon,
-        type:'post',
-        success:function(result){
-          window.location.href='list_of_merchantss.php'
-        }
-        
-      });
-    }
-    function getLocation(){
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(success,error);
-      }else{
-        
-      }
-    }
-    </script>
 
-<?php
-
-if(isset($_POST['lat']) && isset($_POST['lon'])){
-  $_SESSION['lat']=$_POST['lat'];
-  $_SESSION['lon']=$_POST['lon'];
-}
-?>
 
 
 <div  >
 
 
- <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#004aad;text-shadow: 1px 1px #03a9f4;">NEAREST WATER REFILLING STATION</p>
+ <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  style="color:#004aad;text-shadow: 1px 1px #03a9f4;">FIND THE BEST WATER REFILLING STATION NEAR YOU</p>
 
 <div class="container">
-   
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+            <div class="search"> 
+              <i class="fa fa-search"></i>
+               <input type="text" class="form-control"  id="searchbar"  onkeyup="search_store()" placeholder="Search" >
+                <button class="btn btn-primary" >Search</button>  
+            </div>
+        </div>
+    </div>
     <br>
 
         <div class="d-flex justify-content-start mb-3">         
@@ -144,7 +120,21 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
 
     <div class="row">
 
- <?php while($fetch=mysqli_fetch_assoc($res)){?>
+ <?php
+   $query = $conn->query("SELECT * FROM `merchant` WHERE status ='approved' ORDER BY business_name asc ") or die(mysqli_error());
+
+   $queryy = $conn->query("SELECT *from customer WHERE `customer_id` = '".$_SESSION['customer_id']."' ") or die(mysqli_error());
+
+        while ($fetch2= $queryy->fetch_array()) {
+          $lt=$fetch2['c_latitude'];
+          $lg=$fetch2['c_longitude'];
+        }
+
+    while($fetch = $query->fetch_array()){
+    $closes=distance($lt, $lg,$fetch['latitude'], $fetch['longitude']);
+
+
+ ?>  
     
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
@@ -164,30 +154,15 @@ if(isset($_POST['lat']) && isset($_POST['lon'])){
        
           <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
           <h5 style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
-          <?php echo $fetch['contact_number']?></h5>  
+          <?php echo $fetch['contact_number']?></h5>
+        
+         <?php echo "Approximately ".round($closes,2)." miles away on you";?><br>
 
-           <i class=" fas fa-route fa-lg me-3 fa-fw" ></i>
-          <h5 class="BN" style="color:#000;margin:5px;margin-left:35px;margin-top: -21px; font-size: 15px">
-           
-           <?php 
 
-              $x=$fetch['distance']*1.609344;
-              $y=1000;
 
-             if ( $fetch['distance'] > 1 ) {
-                echo round('  '.$fetch['distance'].' ) ',2);
-                echo " KM";
-
-             }elseif ($fetch['distance'] < 1) {
-                echo  round($x * $y,2);
-                echo " M";
-             }
-         
-         ?>
-           
-         </h5>               
-      
         </div>
+
+
 
         </div><br>
       </div>

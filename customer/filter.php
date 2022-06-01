@@ -71,6 +71,18 @@ if (isset($_POST['action'])) {
                   $average = 0;
 
                 }
+                
+                $merchantId = $data['merchant_id'];
+                             $query3 = $conn->query("SELECT inspection.inspection_id, inspection.date, 
+                                              inspection.date,inspection.status,inspection.merchant_id
+                                                FROM inspection                                                
+                                                 WHERE inspection.merchant_id = $merchantId ");
+
+                            while($fetch3 = $query3->fetch_array()){
+                              $bad=$merchantId;
+                              $dav=$fetch3['status'];
+                  
+                            }
 
 
             $output .= "   
@@ -81,7 +93,9 @@ if (isset($_POST['action'])) {
                                 <a >
                                   <div class='mask'>
                                     <div class='d-flex justify-content-start align-items-end h-100'>
-                                      <h2><span class='badge bg-warning ms-2'>Sale</span></h2>
+                                        ".(($data['merchant_id']==$bad && $dav=='Passed')?
+                                          '<img src="../img/badge.png " style="height:93px; width:93px;
+                                           float:right; margin-right: -18px"/>': '')."
                                     </div>
                                   </div>
                                   <div class='hover-overlay'>
