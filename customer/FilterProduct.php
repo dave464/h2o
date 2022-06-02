@@ -349,10 +349,10 @@ require_once '../connection.php';
                                    class="card-img-top" />
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
-                                      <p class="small"><?php echo $data['product_type']?> <?php echo $data['volume']?></p>
+                                      <p class="small"><?php echo $data['product_type']?> </p>
                                     </div>
                                     <div class="d-flex justify-content-between mb-3">
-                                      <h5 class="mb-0"><?php echo $data['product_name']?></h5>
+                                      <h5 class="mb-0"><?php echo $data['product_name']?>  <?php echo $data['volume']?></h5>
                                       <h5 class="text-dark mb-0">&#8369; <?php echo $data['price']?>.00</h5>
                                     </div>
                                     <svg style="display:none;">

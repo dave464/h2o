@@ -33,7 +33,7 @@ include '../connection.php';
 
       <?php
        $query = $conn->query("SELECT product.product_id,product.image,product.product_name,
-        product.price,product.product_type, merchant.merchant_id, merchant.business_name
+        product.price,product.product_type, merchant.merchant_id, merchant.business_name, product.volume
           FROM merchant RIGHT JOIN product ON merchant.merchant_id = product.merchant_id WHERE  product.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
 
               while($fetch = $query->fetch_array()){
@@ -55,7 +55,18 @@ include '../connection.php';
                 else {
                   $average = 0;
                 }
-
+                
+                $merchantId = $fetch['merchant_id'];
+                $query3 = $conn->query("SELECT inspection.inspection_id, inspection.date, 
+                                               inspection.date,inspection.status,inspection.merchant_id
+                                                 FROM inspection                                                
+                                                  WHERE inspection.merchant_id = $merchantId ");
+ 
+                 while($fetch3 = $query3->fetch_array()){
+                   $bad=$merchantId;
+                   $dav=$fetch3['status'];
+                   
+                 }
       ?>
 
             <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -65,7 +76,14 @@ include '../connection.php';
             <a href="#!">
               <div class="mask">
                 <div class="d-flex justify-content-start align-items-end h-100">
-                  <h2><span class="badge bg-warning ms-2">Sale</span></h2>
+                  <?php 
+                        if ($fetch['merchant_id']==$bad && $dav=='Passed') {
+                                  echo '<img src="../img/badge.png " style="height:93px; width:93px;
+                                        float:right; margin-right: -18px"/>';
+                              }else{
+                                echo '';
+                              }
+                        ?>
                 </div>
               </div>
               <div class="hover-overlay">
@@ -90,7 +108,7 @@ include '../connection.php';
 
 
             <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0"><?php echo $fetch['product_name']?></h5>
+              <h5 class="mb-0"><?php echo $fetch['product_name']?>  <?php echo $fetch['volume']?></h5>
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
             <div class="d-flex justify-content-between mb-2">
@@ -164,9 +182,19 @@ include '../connection.php';
 
         </div>
 
-          <a onclick="window.location='review.php?product_id=<?php echo $fetch['product_id']?>'"   
-          style="width: 65%; margin-top: 50px"
+        <a onclick="window.location='review.php?product_id=<?php echo $fetch['product_id']?>'"   
+          style="width: 65%; margin-top: 50px; float: left;"
           class="btn btn-primary">Ratings and Reviews</a>
+
+          <a onclick="window.location='update_product.php?product_id=<?php echo $fetch['product_id']?>'"   
+          style="  float: right;width:50px; margin-right: 60px; margin-top:50px"
+          class="btn btn-warning"><i class="fas fa-edit" style="color:white"></i></a>
+
+          <a href="delete_product.php?product_id=<?php echo $fetch['product_id']?>"
+           onclick = "confirmationDelete(this); return false;"   
+          style="  float: right;width:50px; margin-top:-59px"
+          class="btn btn-danger"><i class="fas fa-trash"></i></a>
+
 
           </div>
         </div>
@@ -194,3 +222,12 @@ include '../connection.php';
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
 </style>
+
+<script type = "text/javascript">
+    function confirmationDelete(anchor){
+        var conf = confirm("Are you sure you want to delete this product?");
+        if(conf){
+            window.location = anchor.attr("href");
+        }
+    } 
+</script>

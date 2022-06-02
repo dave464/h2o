@@ -101,13 +101,13 @@ require '../connection.php';
           <div class="card-body">
 
             <div class="d-flex justify-content-between">
-              <p class="small"><?php echo $fetch['product_type']?> <?php echo $fetch['volume']?></p>
+              <p class="small"><?php echo $fetch['product_type']?> </p>
 
             </div>
 
 
             <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0"><?php echo $fetch['product_name']?></h5>
+              <h5 class="mb-0"><?php echo $fetch['product_name']?> <?php echo $fetch['volume']?></h5>
               <h5 class="text-dark mb-0">&#8369; <?php echo $fetch['price']?>.00</h5>
             </div>
             <div class="d-flex justify-content-between mb-2">

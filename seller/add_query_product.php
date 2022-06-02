@@ -19,4 +19,23 @@ require '../connection.php';
 		document.location.href = 'product_list.php';
 		</script>");
 	}
+
+	
+	if(ISSET($_POST['Update'])){
+		
+		$product_name = $_POST['product_name'];
+		$product_type = $_POST['product_type'];
+		$volume = $_POST['volume'];
+		$price = $_POST['price'];
+		$description= $_POST['description'];
+		
+
+		$conn->query("UPDATE `product` SET `product_name` = '$product_name', `product_type` = '$product_type', `volume` = '$volume', `price` = '$price', `description` = '$description'
+     	WHERE `product_id` = '".$_REQUEST['product_id']."'") or die(mysqli_error());
+
+		echo ("<script>
+		alert('Product Updated Successfully');
+		document.location.href = 'product_list.php';
+		</script>");
+	}
 ?>

@@ -111,10 +111,10 @@ if (isset($_POST['action'])) {
                                    class='card-img-top' />
                                 <div class='card-body'>
                                     <div class='d-flex justify-content-between'>
-                                      <p class='small'>". $data['product_type']." ". $data['volume']." </p>
+                                      <p class='small'>". $data['product_type']."  </p>
                                     </div>
                                     <div class='d-flex justify-content-between mb-3'>
-                                      <h5 class='mb-0'>". $data['product_name']." </h5>
+                                      <h5 class='mb-0'>". $data['product_name']."  ". $data['volume']."</h5>
                                       <h5 class='text-dark mb-0'>&#8369; ".$data['price'].".00</h5>
                                     </div>
                                     <svg style='display:none;'>
