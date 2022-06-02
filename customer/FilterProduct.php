@@ -26,18 +26,18 @@ require_once '../connection.php';
 </head>
 
 <body>
-  
+<?php include 'navbar.php' ?>
     <!--    Simple navigation  -->
-    <nav class="navbar">
-        <span class="navbar-brand mb-0 h1">Product filter</span>
-    </nav>
+    <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+      style="color:#004aad;text-shadow: 1px 1px #03a9f4;">PRODUCT LIST
+      </p>
     <main>
         <div class="main-container">
             <div class="container-element filter-section">
                 
 
 
-    <div class="filters"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fa fa-filter"></span></button> </div>
+    <div class="filters"> <button class="btn btn-success btn-sm" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Filter<span class="px-1 fa fa-filter"></span></button> </div>
     <div id="mobile-filter">
 <!---====================== MOBILE VIEW ============================= -->
         
@@ -402,6 +402,12 @@ require_once '../connection.php';
 <style type="text/css">
 .card{
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.btn{
+  margin:2px;
+  padding:4px;
+  width: 110px;
 }
 
 .rating {

@@ -15,22 +15,8 @@ body {
     margin: 0;
     padding: 0;
 }
-.navbar{
-    height: 70px;
-    /* Remove this */
-   
-    /* Remove this */
-    box-shadow: 0 1px 5px rgba(05, 100, 255, .2);
-    justify-content: center;
-}
-.navbar .navbar-brand{
-    
-    font-size: 25px;
-    font-weight: 500;
-    text-transform: uppercase;
-    /* Remove this */
-    color: black;
-}
+
+
 .main-container {
     width: 100%;
     padding: 40px 0px;
