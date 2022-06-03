@@ -2,6 +2,24 @@
 <?php
     require_once 'validate.php';
     require 'name.php';
+
+
+if (count($_POST) > 0) {
+  $np= $_POST['np'];
+  $result = mysqli_query($conn, "SELECT *from admin WHERE `admin_id` = '".$_SESSION['admin_id']."'");
+  $row = mysqli_fetch_array($result);
+  if ($_POST["op"] == $row["password"]) {
+      $conn->query("UPDATE `admin` SET `password` = '$np' WHERE `admin_id` = '".$_SESSION['admin_id']."'" ) or die(mysqli_error());
+                  echo ("<script>
+                    alert('Your password has been changed successfully');
+                    </script>");
+  } else
+          echo ("<script>
+                alert('Current Password is not correct');
+                </script>");
+      //$message = "Current Password is not correct";
+}
+
 ?>
 
 <html dir="ltr" lang="en">
@@ -195,9 +213,41 @@
                                     
                                         <div class="form-group" style="margin-top: 27px; margin-left: 80px">
                                             <div class="col-sm-12 d-flex ">
-                                                <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "" >Update photo</button>
+                                                <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "" data-bs-toggle="modal" data-bs-target="#myModal">Update photo</button>
                                             </div>
                                         </div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+          <form class="mx-1 mx-md-4" action="update_photo.php?admin_id=<?php echo $fetch['admin_id']?>"
+                 method="POST" enctype="multipart/form-data">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <i class="fas fa-cloud-upload-alt fa-lg me-3 fa-fw"></i>
+        <h4 class="modal-title">Upload Image</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+     
+        <input type="file" class="form-control" id="customFile" name="photo" />
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" name="UpdatePhoto" class="btn btn-primary btn-sm" 
+            style="padding:5px; width: 80px;margin-left:372px">Save
+        </button>
+      </div>
+          </form>
+    </div>
+  </div>
+</div>
 
                                     
                                 </center>
@@ -209,41 +259,82 @@
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material mx-2"  method = "POST" enctype = "multipart/form-data"
+
+                              <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+                                    style="color:#004aad;text-shadow: 1px 1px #03a9f4;">EDIT PROFILE
+                                    </p>
+                                <form class="mx-1 mx-md-4"  method = "POST" enctype = "multipart/form-data"
                                         action = "edit_query_profile.php?admin_id=<?php echo $fetch['admin_id']?>" >
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Full Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Fullname"
-                                                class="form-control ps-0 form-control-line"
-                                                value = "<?php echo $fetch['name']?>" name = "name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Username</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Username"
-                                                class="form-control ps-0 form-control-line"
-                                                value = "<?php echo $fetch['username']?>" name = "username">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12 mb-0">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" 
-                                                class="form-control ps-0 form-control-line"
-                                                    value = "<?php echo $fetch['password']?>" name = "password">
-                                        </div>
-                                    </div>
                                     
-                                    
-                                    <div class="form-group">
+
+                              <label class="labels" style=" font-size: 11px; margin-left:50px;">Full name</label>
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                  <input type="text" name="name" value="<?php echo $fetch['name']?>" id="form3Example1c" class="form-control" placeholder="Fullname" />
+              
+                                </div>
+                              </div>
+
+                                    <label class="labels" style=" font-size: 11px; margin-left:50px;">Username</label>
+                                <div class="d-flex flex-row align-items-center mb-2">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                      <input type="text" name="username" value="<?php echo $fetch['username']?>" id="form3Example1c" class="form-control" placeholder="Username" />
+                  
+                                    </div>
+                                  </div>
+                                                                                                                                            
+                                   <div class="form-group" style="margin-left: 40px; margin-top:20px">
                                         <div class="col-sm-12 d-flex">
-                                            <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "edit_account" >Update
-                                                Profile</button>
+                                            <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "edit_account" >Save Changes
+                                                </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> 
+
+
+
+                <p class="text-center h2 fw-bold mb-3 mx-1 mx-md-4 mt-4"  
+                    style="color:#004aad;text-shadow: 1px 1px #03a9f4;">CHANGE PASSWORD
+                </p>
+
+<form name="frmChange" class="mx-1 mx-md-4" method="POST" onSubmit="return validatePassword()" enctype="multipart/form-data">
+            <div class="message" style="color: red;"><?php if(isset($message)) { echo $message; } ?></div>
+                  <label class="labels" style=" font-size: 11px; margin-left:50px;">Current Password</label>
+                  <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input required type="password" name="op" class="form-control " placeholder="Current Password"/>
+                      <span id="currentPassword"  id="op" class="required"></span>
+                    </div>
+                  </div>
+
+                  <label class="labels" style=" font-size: 11px; margin-left:50px;">New Password</label>
+                  <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input required type="password" name="np"  class="form-control" placeholder="New Password"/>
+                      <span id="currentPassword" id="np" class="required"></span>
+                    </div>
+                  </div>
+
+                  <label class="labels" style=" font-size: 11px; margin-left:50px;">Confirm Password</label>
+                  <div class="d-flex flex-row align-items-center mb-2">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input required type="password"  id="c_np" class="form-control" placeholder="Confirm Password"/>
+                      <span id="currentPassword" name="c_np" class="required"></span>
+                    </div>
+                  </div>
+
+                   <div class="form-group" style="margin-left: 40px; margin-top:20px">
+                        <div class="col-sm-12 d-flex">
+                         <button class="btn btn-success mx-auto mx-md-0 text-white"  name = "submit" >Update Password
+                            </button>
+                        </div>
+                  </div>
+                </form>
                             </div>
                         </div>
                     </div>
@@ -293,6 +384,43 @@
     <script src="js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
+
+
+<script>
+    function validatePassword() {
+    var currentPassword,newPassword,confirmPassword,output = true;
+
+    currentPassword = document.frmChange.op;
+    newPassword = document.frmChange.np;
+    confirmPassword = document.frmChange.c_np;
+
+    if(!currentPassword.value) {
+    currentPassword.focus();
+    document.getElementById("op").innerHTML = "required";
+    output = false;
+    }
+    else if(!newPassword.value) {
+    newPassword.focus();
+    document.getElementById("np").innerHTML = "required";
+    output = false;
+    }
+    else if(!confirmPassword.value) {
+    confirmPassword.focus();
+    document.getElementById("c_np").innerHTML = "required";
+    output = false;
+    }
+    if(newPassword.value != confirmPassword.value) {
+    newPassword.value="";
+    confirmPassword.value="";
+    newPassword.focus();
+    document.getElementById("c_np").innerHTML = "not same";
+    output = false;
+    alert('The confirmation password does not match');
+    }   
+    return output;
+    }
+</script>
+
 </body>
 
 </html>
