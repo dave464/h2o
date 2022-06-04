@@ -271,7 +271,7 @@ require_once '../connection.php';
             <div class="container-element product-section">
                 <?php
                 $sql = "SELECT product.product_id,product.image,product.product_name,product.volume,
-                product.price,product.product_type,  merchant.merchant_id, merchant.business_name
+                product.price,product.product_type,  merchant.merchant_id, merchant.business_name,merchant.address,merchant.barangay
                 FROM  merchant
                 RIGHT JOIN product ON merchant.merchant_id = product.merchant_id 
                 WHERE product.merchant_id = merchant.merchant_id ";
@@ -354,6 +354,12 @@ require_once '../connection.php';
                                     <div class="d-flex justify-content-between mb-3">
                                       <h5 class="mb-0"><?php echo $data['product_name']?>  <?php echo $data['volume']?></h5>
                                       <h5 class="text-dark mb-0">&#8369; <?php echo $data['price']?>.00</h5>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                      <p class="small"><i class="fas fa-map-marker" style="color:red"></i>
+                                        <?php echo $data['address']?> <?php echo $data['barangay']?>
+                                          Nasugbu,Batangas
+                                      </p>
                                     </div>
                                     <svg style="display:none;">
                                       <defs>

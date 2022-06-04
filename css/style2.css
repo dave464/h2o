@@ -31,11 +31,11 @@ body {
 }
 
 .filter-section {
-    flex-basis: 20%;
+    flex-basis: 18%;
 }
 
 .product-section {
-    flex-basis: 80%;
+    flex-basis: 95%;
 }
 
 .container-element h4 {
