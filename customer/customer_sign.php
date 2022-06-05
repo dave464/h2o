@@ -41,7 +41,7 @@ require_once '../connection.php';
                       <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" value="<?php echo $_GET['username']; ?>" required = "required"/>
                          <?php }else{ ?>
                      <input type="text" name="username" id="form3Example1c" class="form-control"
-                      placeholder="Username">
+                      placeholder="Username"  required = "required">
                       <?php }?>
                     </div>
                   </div>
@@ -50,7 +50,9 @@ require_once '../connection.php';
                 <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Password" required = "required"/>
+                      <input type="password" name="password" id="form3Example4c" class="form-control" placeholder="Password" required = "required"
+                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                      title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
 
                     </div>
                   </div>
@@ -58,7 +60,9 @@ require_once '../connection.php';
                  <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" name="c_password" id="form3Example4c" class="form-control" placeholder="Confirm Password" required = "required"/>
+                      <input type="password" name="c_password" id="form3Example4c" class="form-control" placeholder="Confirm Password" required = "required"
+                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                      title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"/>
 
                     </div>
                   </div>
@@ -79,10 +83,11 @@ require_once '../connection.php';
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                         <?php if (isset($_GET['firstname'])) { ?>
-                      <input type="text" name="firstname" id="form3Example3c" class="form-control" placeholder="First Name" pattern="^[a-zA-Z]+$"  value="<?php echo $_GET['firstname']; ?>" required = "required"/>
+                      <input type="text" name="firstname" id="form3Example3c" class="form-control" placeholder="First Name" pattern="^[a-zA-Z][a-zA-Z- ]+$" title="Please Enter on Alphabets only"  value="<?php echo $_GET['firstname']; ?>" required = "required"
+                      />
                          <?php }else{ ?>
                       <input type="text" name="firstname" id="form3Example1c" class="form-control"
-                      placeholder="First Name">
+                      placeholder="First Name" pattern="^[a-zA-Z][a-zA-Z- ]+$" title="Please Enter on Alphabets only"  required = "required"  />
                       <?php }?>
                     </div>
                   </div>
@@ -91,11 +96,12 @@ require_once '../connection.php';
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                        <?php if (isset($_GET['firstname'])) { ?>
-                      <input type="text" name="lastname" id="form3Example3c" class="form-control" placeholder="Last Name" pattern="^[a-zA-Z]+$" value="<?php echo $_GET['lastname']; ?>"required="required"/>
+                        <?php if (isset($_GET['lastname'])) { ?>
+                      <input type="text" name="lastname" id="form3Example3c" class="form-control" placeholder="Last Name" pattern="^[a-zA-Z][a-zA-Z- ]+$" title="Please Enter on Alphabets only" value="<?php echo $_GET['lastname']; ?>" required="required"
+                      />
                        <?php }else{ ?>
                       <input type="text" name="lastname" id="form3Example1c" class="form-control"
-                      placeholder="Last Name">
+                      placeholder="Last Name" pattern="^[a-zA-Z][a-zA-Z- ]+$" title="Please Enter on Alphabets only" required="required"  />
                       <?php }?>
                     </div>
                   </div>
@@ -190,10 +196,10 @@ require_once '../connection.php';
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                         <?php if (isset($_GET['contact_number'])) { ?>
-                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" pattern="[0-9]{11}" maxlength="11" minlength="11" value="<?php echo $_GET['contact_number']; ?>" required = "required"/>
+                      <input type="text" name="contact_number" id="form3Example4cd" class="form-control" pattern="^[0-9]+$" maxlength="11" minlength="11" value="<?php echo $_GET['contact_number']; ?>" required = "required"/>
                        <?php }else{ ?>
                       <input type="text" name="contact_number" id="form3Example1c" class="form-control"
-                      placeholder="Phone">
+                      placeholder="Contact Number" pattern="^[0-9]+$" maxlength="11" minlength="11"  required = "required"/>
                       <?php }?>
                     </div>
                   </div>

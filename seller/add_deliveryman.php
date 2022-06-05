@@ -53,7 +53,7 @@ require '../connection.php';
                         <?php if (isset($_GET['name'])) { ?>
                       <input type="text" name="name" id="form3Example3c" class="form-control" placeholder="Fullname" value="<?php echo $_GET['name']; ?>" required = "required"/>
                       <?php }else{ ?>
-                     <input type="text" name="name" id="form3Example1c" class="form-control" placeholder="Fullname">
+                     <input type="text" name="name" id="form3Example1c" class="form-control" placeholder="Fullname" required = "required" >
                       <?php }?>
                     </div>
                   </div>
@@ -63,10 +63,10 @@ require '../connection.php';
                     <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                        <?php if (isset($_GET['contact_number'])) { ?>
-                      <input type="number" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Phone" value="<?php echo $_GET['contact_number']; ?>" pattern="[0-9]{11}" maxlength="11" minlength="11"  required = "required" />
+                      <input type="type" name="contact_number" id="form3Example4cd" class="form-control" placeholder="Contact Number" value="<?php echo $_GET['contact_number']; ?>" pattern="^[0-9]+$" maxlength="11" minlength="11" title="Please Enter on Number only"  required = "required" />
                        <?php }else{ ?>
-                      <input type="number" name="contact_number" id="form3Example1c" class="form-control" placeholder="Phone"
-                      pattern="[0-9]{11}" maxlength="11" minlength="11">
+                      <input type="type" name="contact_number" id="form3Example1c" class="form-control" placeholder="Contact Number"
+                      pattern="^[0-9]+$" maxlength="11" minlength="11" title="Please Enter on Number only" required = "required">
                       <?php }?>    
                     </div>
                 </div>
@@ -77,7 +77,7 @@ require '../connection.php';
                        <?php if (isset($_GET['plate_number'])) { ?>
                       <input type="text" name="plate_number" id="form3Example3c" class="form-control" placeholder="Plate Number" value="<?php echo $_GET['plate_number']; ?>" required = "required"/>
                         <?php }else{ ?>
-                      <input type="text" name="plate_number" id="form3Example1c" class="form-control" placeholder="Plate Number">
+                      <input type="text" name="plate_number" id="form3Example1c" class="form-control" placeholder="Plate Number" required = "required">
                       <?php }?>  
                     </div>
                   </div>
@@ -89,7 +89,7 @@ require '../connection.php';
                         <?php if (isset($_GET['username'])) { ?>
                       <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" value="<?php echo $_GET['username']; ?>" required = "required"/> 
                        <?php }else{ ?>
-                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username">
+                      <input type="text" name="username" id="form3Example1c" class="form-control" placeholder="Username" required = "required">
                       <?php }?>
                     </div>
                   </div>

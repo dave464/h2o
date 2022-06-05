@@ -73,7 +73,7 @@ require_once '../connection.php';
                 
 
   echo ("<script>
-    alert('The deliveryman is not in your way');
+    alert('Please Update your Pin Location');
     document.location.href = 'dispatched_order_details.php?order_id=".$fetch['order_id']."';
     </script>");
 

@@ -40,6 +40,7 @@ require '../connection.php';
   <thead class="table-dark">
   <tr>
         <th>Name</th>
+        <th>Vaccination Status</th>
         <th>Contact Number</th>
         <th>Plate Number</th>
         <th>Status</th>
@@ -49,13 +50,14 @@ require '../connection.php';
   <tbody>
   <?php  
    $query = $conn->query("SELECT deliveryman.deliveryman_id, deliveryman.name,deliveryman.contact_number,
-   deliveryman.plate_number, deliveryman.status, merchant.merchant_id
+   deliveryman.plate_number, deliveryman.status, deliveryman.vaccination_status, merchant.merchant_id
               FROM merchant RIGHT JOIN deliveryman ON merchant.merchant_id = deliveryman.merchant_id WHERE  deliveryman.merchant_id = '".$_SESSION['merchant_id']."'") or die(mysqli_error());
               while($fetch = $query->fetch_array()){
  ?>
 
         <tr>  
             <td><?php echo $fetch['name']?></td>
+            <td><?php echo $fetch['vaccination_status']?></td>
             <td><?php echo $fetch['contact_number']?></td>
             <td><?php echo $fetch['plate_number']?></td>
             <td>
