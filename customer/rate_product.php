@@ -61,15 +61,15 @@ require_once '../connection.php';
   <div class="feedback">
      <p class="lead mb-0" style="margin-top:30px;font-size:15px">How satisfied are you with this product?</p>
     <div class="rating" style="margin-top:10px">
-      <input type="radio" name="rating" value="5" id="rating-5">
+      <input type="radio" name="rating" value="5" id="rating-5" required="required">
       <label for="rating-5"></label>
-      <input type="radio" name="rating" value="4" id="rating-4">
+      <input type="radio" name="rating" value="4" id="rating-4" required="required">
       <label for="rating-4"></label>
-      <input type="radio" name="rating" value="3" id="rating-3">
+      <input type="radio" name="rating" value="3" id="rating-3" required="required">
       <label for="rating-3"></label>
-      <input type="radio" name="rating" value="2" id="rating-2">
+      <input type="radio" name="rating" value="2" id="rating-2" required="required">
       <label for="rating-2"></label>
-      <input type="radio" name="rating" value="1" id="rating-1">
+      <input type="radio" name="rating" value="1" id="rating-1" required="required">
       <label for="rating-1"></label>
       <div class="emoji-wrapper">
         <div class="emoji">
@@ -163,7 +163,7 @@ require_once '../connection.php';
 
 
 <div class="form-floating">
-  <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required="required"></textarea>
   <label for="floatingTextarea2">Describe your experience.</label>
 </div> 
   
@@ -181,12 +181,12 @@ require_once '../connection.php';
   Wearing facemask?
 </div>
 <div class="form-check form-check-inline" >
-  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio1" value="Yes" />
+  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio1" value="Yes" required="required"/>
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio2" value="No" />
+  <input class="form-check-input" type="radio" name="w_facemask" id="inlineRadio2" value="No" required="required"/>
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
 
@@ -195,12 +195,12 @@ require_once '../connection.php';
 </div>
 
 <div class="form-check form-check-inline" >
-  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio1" value="Yes" />
+  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio1" value="Yes" required="required" />
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio2" value="No" />
+  <input class="form-check-input" type="radio" name="c_uniform" id="inlineRadio2" value="No" required="required"/>
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
 
@@ -208,12 +208,12 @@ require_once '../connection.php';
  Arrived on time?
 <br>
 <div class="form-check form-check-inline" >
-  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio1" value="Yes" />
+  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio1" value="Yes" required="required"/>
   <label class="form-check-label" for="inlineRadio1">Yes</label>
 </div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio2" value="No" />
+  <input class="form-check-input" type="radio" name="on_time" id="inlineRadio2" value="No" required="required"/>
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
 </div>
