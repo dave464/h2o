@@ -35,7 +35,7 @@ require '../connection.php';
 		$photo_size = getimagesize($_FILES['photos']['tmp_name']);
 		move_uploaded_file($_FILES['photos']['tmp_name'],"../photo/" . $_FILES['photos']['name']);
 
-        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo,receipt,date 
+        $conn->query("INSERT INTO `orderlist`(customer_id, product_id, merchant_id, status, quantity, total,type, photo,receipt,date) 
         VALUES('$customer_id','$product_id','$merchant_id','pending','$quantity','$total','$type','$photo_name','$receipt','$datetime' )") 
         or die(mysqli_error());
 
