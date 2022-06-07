@@ -379,40 +379,27 @@ $.fn.dataTable.ext.search.push(
                         extend: 'copy',  
                         className: 'btn btn-info rounded-0',  
                         text: '<i class="far fa-file-excel"></i> Copy',
-                        title:'Alpha Lab Test',
-                        exportOptions: {
-                            columns: ':visible:not(:last-child)'
-                        }  
+                        title:'Alpha Lab Test'
                     }, 
                     {  
                         extend: 'excel',  
                         className: 'btn btn-info rounded-0',  
                         text: '<i class="far fa-file-excel"></i> Excel',
-                        title:'Alpha Lab Test',
-                        exportOptions: {
-                            columns: ':visible:not(:last-child)'
-                        }  
+                        title:'Alpha Lab Test'
                     },  
                    
                     {  
                         extend: 'pdf',  
                         className: 'btn btn-info rounded-0',  
                         text: '<i class="far fa-file-pdf"></i> Pdf',
-                        title:'Alpha Lab Test',
-                        exportOptions: {
-                            columns: ':visible:not(:last-child)'
-                        }  
+                        title:'Alpha Lab Test'
                     },  
                     
                     {  
                         extend: 'print',  
                         className: 'btn btn-info rounded-0',  
                         text: '<i class="fas fa-print"></i> Print' ,
-                        title:'Alpha Lab Test',
-                        exportOptions: {
-                            columns: ':visible:not(:last-child)'
-                            
-                        } 
+                        title:'Alpha Lab Test'
                     },
                    
                 ]  ,
