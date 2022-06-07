@@ -163,7 +163,7 @@ require_once '../connection.php';
 
 
 <div class="form-floating">
-  <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required="required"></textarea>
+  <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" ></textarea>
   <label for="floatingTextarea2">Describe your experience.</label>
 </div> 
   
