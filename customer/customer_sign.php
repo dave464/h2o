@@ -225,13 +225,55 @@ require_once '../connection.php';
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Terms and Conditions</h4>
+          <h4 class="modal-title">Terms and Conditions &nbsp<i class="fa fa-pencil-square-o" style="font-size: 1em;"></i></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        Modal body..
+       
+      <h5>End User Terms & Conditions </h5>
+            <p style="font-size:14px;margin-top:15px">Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using <a href="https://h2order.infinityfreeapp.com/">https://h2order.infinityfreeapp.com/</a> and the H2order mobile application ("Service"). You ("Customer") agree to be bound by the terms and conditions listed below. If you don't agree to all of the rules in this agreement, you can't use the Website or any of the services. </p>
+
+         <h5 style="margin-top:20px">Private Policy</h5>
+            <p  style="font-size:14px;margin-top:15px">
+              The H2order ("we," "us," or "our") is committed to protecting the privacy of all of its users and maintaining the confidentiality of their personal information.
+            </p>
+             <p  style="font-size:14px;">
+              We must adhere to the policy that is set forth below in order to provide you with information on how we collect and process your personal data through your use of our Website and the H2order mobile app (collectively referred to as the "Service").
+            </p>
+            <p  style="font-size:14px;">
+              Please take the time to read this Policy, as well as any other privacy policies or notices regarding fair processing that we may provide to you, so that you can gain an understanding of how and why we handle the data that we have collected about you.
+            </p>
+
+          <h5 style="margin-top:20px">1. User Account</h5>
+             <p  style="font-size:14px;margin-top:15px">
+              &#10148; You must create an account to use the Services. We will collect and process your personal information, such as your name, electronic mail (e-mail) address,  mobile phone number and location when you register to set up an account. You must provide us with an accurate, complete, and latest information and agree to provide us with any proof of identity that we may reasonably request. We will collect, use, disclose and process your personal information in accordance with our Privacy Policy.
+            </p>
+
+          <h5 style="margin-top:20px">2. Hygiene and Refills</h5>
+             <p  style="font-size:14px;margin-top:15px">
+              &#10148; The H2order is not responsible for the health effects of refilling at their business, and they can't or won't be held responsible for the possible or alleged spread of illness outside of the normal rules and guidelines that affect their business, such as hygiene regulations and health and safety laws.
+            </p>
+            <p  style="font-size:14px;">
+              &#10148; The User will keep their reusable bottle as hygienic as possible to avoid any chances of infection or illnesses.
+            </p>
+
+          <h5 style="margin-top:20px">3. Product Information & Orders</h5>
+             <p  style="font-size:14px;margin-top:15px">
+              &#10148; Product defects observed prior to dispatch.
+            </p>
+            <p  style="font-size:14px;">
+              &#10148; We reserve the right to change the pricing of any product at any time without assigning any reason and without any prior notice.
+            </p>
+            <p  style="font-size:14px;">
+              &#10148; You confirm that the product(s) ordered by you are purchased for your personal purpose and not for re-sale.
+            </p>
+        
+          <h5 style="margin-top:20px">4. Ratings and Reviews</h5>
+             <p  style="font-size:14px;margin-top:15px">
+              &#10148; Ratings and Reviews shown on the app and website are only provided for the information of users only, and existing ratings and reviews are based on information given by customer. We do not verify the rating given and are therefore not responsible for the accuracy of the existing rating, nor do the ratings constitute any endorsement (or otherwise) by us. In no event shall Traveloka be responsible or liable for any claims, losses or liability with respect to the ratings shown on the app and website.
+            </p>
 
 
       </div>
