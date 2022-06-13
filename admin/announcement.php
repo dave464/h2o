@@ -189,7 +189,8 @@
                     <div class="card-body p-md-5">
                       <div class="row justify-content-center">
                         <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                          <form action="add_announcement.php" method="POST" >  
+                          <form action="add_announcement.php?admin_id=<?php echo $fetch['admin_id']?>" method="POST" >  
+                          <input type="hidden" value="<?php echo $fetch['admin_id']?>" name="admin_id">
                           <div class="form-floating" style=" border:.5px solid dodgerBlue;box-shadow: 0 0 8px 0 dodgerBlue">
                             <textarea class="form-control" name="message" placeholder="Leave a comment here"
                                id="floatingTextarea2" style="height: 300px">

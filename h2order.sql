@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2022 at 12:04 PM
+-- Generation Time: Jun 13, 2022 at 07:26 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`, `photo`) VALUES
-(63, 'Dave Bryan Sevilla', 'admin', 'admin', 'admin.jfif');
+(63, 'Dave Bryan Sevilla', 'admin', 'admin', 'admin.jfif'),
+(64, 'Dave Bryan Sevilla', 'admin2', 'admin2', 'admin.jfif');
 
 -- --------------------------------------------------------
 
@@ -51,6 +52,7 @@ INSERT INTO `admin` (`admin_id`, `name`, `username`, `password`, `photo`) VALUES
 
 CREATE TABLE `announcement` (
   `announcement_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
   `message` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -59,32 +61,17 @@ CREATE TABLE `announcement` (
 -- Dumping data for table `announcement`
 --
 
-INSERT INTO `announcement` (`announcement_id`, `message`, `date`) VALUES
-(1, 'sadasdhua dahsdhasdas dashudhasuda bdhasdhas dbshadbhsa dsahduhas dhsahdsad sbdhasbdha dhabdhas bdhsabhdsabhdsa bsahdbhabdhsabd bdhasbdhasbhda bdhasbdhabdhabdhas bdhsabdhasbhdasbdsa bdhasbdhasbdhasbdhsa dbhsabdhasbdhasb bdhsabdhsabdhsabhda bdhsabdhabdhas ', '2022-03-01 14:19:04'),
-(2, '  dasYes, I am not sure how to build the link string that would pass the prop_id=[current_id_value] variable. I typed the prop_id=5 as an example, technically it could be any number. I am guessing there is a way to get the variable from the MySQL database, but once I get it, how do it build the link. Thanks again :)vsadsabdhsabhdashdvasvdgavda dgashsdghag dgashgdha d ghasgdhaj d', '2022-03-02 10:37:10'),
-(3, '  hi', '2022-03-01 12:26:57'),
-(7, '      dasdas                      ', '2022-03-18 12:52:51');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `badge`
---
-
-CREATE TABLE `badge` (
-  `badge_id` int(11) NOT NULL,
-  `merchant_id` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `badge`
---
-
-INSERT INTO `badge` (`badge_id`, `merchant_id`, `status`, `date`) VALUES
-(1, 1, 'Passed', '2022-04-09 22:30:44'),
-(2, 2, 'Passed', '2022-03-19 02:05:12');
+INSERT INTO `announcement` (`announcement_id`, `admin_id`, `message`, `date`) VALUES
+(1, 0, 'sadasdhua dahsdhasdas dashudhasuda bdhasdhas dbshadbhsa dsahduhas dhsahdsad sbdhasbdha dhabdhas bdhsabhdsabhdsa bsahdbhabdhsabd bdhasbdhasbhda bdhasbdhabdhabdhas bdhsabdhasbhdasbdsa bdhasbdhasbdhasbdhsa dbhsabdhasbdhasb bdhsabdhsabdhsabhda bdhsabdhabdhas ', '2022-03-01 14:19:04'),
+(2, 0, '  dasYes, I am not sure how to build the link string that would pass the prop_id=[current_id_value] variable. I typed the prop_id=5 as an example, technically it could be any number. I am guessing there is a way to get the variable from the MySQL database, but once I get it, how do it build the link. Thanks again :)vsadsabdhsabhdashdvasvdgavda dgashsdghag dgashgdha d ghasgdhaj d', '2022-03-02 10:37:10'),
+(3, 0, '  hi', '2022-03-01 12:26:57'),
+(7, 0, '      dasdas                      ', '2022-03-18 12:52:51'),
+(8, 0, '                            ', '2022-06-07 05:22:01'),
+(9, 63, 'hello', '2022-06-13 04:59:39'),
+(10, 63, '                            dada', '2022-06-13 05:02:57'),
+(11, 63, '     dsandasdjanjd                       ', '2022-06-13 05:03:30'),
+(12, 64, 'sandnasjdsa                            ', '2022-06-13 05:04:01'),
+(13, 64, 'announcement                ', '2022-06-13 05:22:58');
 
 -- --------------------------------------------------------
 
@@ -124,10 +111,12 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `barangay`, `email`, `contact_number`, `c_latitude`, `c_longitude`) VALUES
-(1, 'qwerty', 'qwerty', 'Dave Bryan', 'Sevilla', '', 'Brgy.4', 'davebryan.sevilla@gmail.com', '09557350551', '14.073360911642', '120.63532887761305'),
+(1, 'qwerty', 'qwerty', 'Dave Bryan', 'Sevilla', '', 'Brgy.4', 'davebryan.sevilla@gmail.com', '095573505515', '14.073360911642', '120.63532887761305'),
 (2, 'dave', '111', 'Dave', 'Sevilla ', '', 'Brgy.4', 'davebryansevilla@gmail.com', '09051934015', '14.077771243464303', '120.62597990254564'),
 (3, 'dave', '111', 'Dave', 'Sevilla ', '', 'Brgy.4', 'davebryansevilla@gmail.com', '09051934015', '', ''),
-(5, 'devs', '1', 'Dave Bryan', 'Sevilla', '120 C. Alvarez St.', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '14.3842', '120.884');
+(5, 'devs', '1', 'Dave Bryan', 'Sevilla', '120 C. Alvarez St.', 'Brgy.4', 'davebryan.sevilla@g.batstate-u.edu.ph', '09051934015', '14.3842', '120.884'),
+(6, 'dave2312', 'Dave1212', 'Dave Bryan', 'Sevilla', '', 'Brgy.8', 'davebryan.sevilla@yahoo.com', '09051934015', '14.2990183', '120.9589699'),
+(7, 'dssda', 'Dave1212', 'Dave', 'Sevilla', 'Brgy.4 Nasugbu, Batangas', 'Brgy.11', 'davebryan.sevilla@g.batstate-u.edu.ph', '9051934013', '14.3114', '121.0554');
 
 -- --------------------------------------------------------
 
@@ -155,28 +144,10 @@ CREATE TABLE `deliveryman` (
 --
 
 INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, `password`, `plate_number`, `contact_number`, `status`, `vaccination_status`, `photo`, `d_latitude`, `d_longitude`) VALUES
-(1, 23, 'Alvin Hila', 'del1', 'del1', 'ALV213', '09554395551', 'unavailable', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884'),
-(2, 23, 'Rod Sevilla', 'rod', '123', 'KMR442', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `feedback_id` int(11) NOT NULL,
-  `merchant_id` int(11) NOT NULL,
-  `date` date DEFAULT NULL,
-  `critea_1` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`feedback_id`, `merchant_id`, `date`, `critea_1`) VALUES
-(1, 1, '2022-02-28', '3');
+(1, 23, 'Alvin Hila', 'del1', 'del1', 'ALV213', '09554395551', 'unavailable', 'Unvaccinated', 'vcard.jpeg', '14.072639750957997', '120.63198957481873'),
+(2, 23, 'Rod Sevilla', 'rod', '123', 'KMR442', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884'),
+(3, 1, 'Ivane Kielle Rangel', 'dave', 'Dave1212', 'KSDS23', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.2990183', '120.9589699'),
+(4, 23, 'da', 'ds', '1', 'sda', '34342343534', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3114', '121.0554');
 
 -- --------------------------------------------------------
 
@@ -186,9 +157,10 @@ INSERT INTO `feedback` (`feedback_id`, `merchant_id`, `date`, `critea_1`) VALUES
 
 CREATE TABLE `inspection` (
   `inspection_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
   `merchant_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `file` varchar(255) NOT NULL,
+  `file` varchar(255) DEFAULT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -196,14 +168,19 @@ CREATE TABLE `inspection` (
 -- Dumping data for table `inspection`
 --
 
-INSERT INTO `inspection` (`inspection_id`, `merchant_id`, `date`, `file`, `status`) VALUES
-(1, 1, '2022-02-28 03:15:52', '', 'Passed'),
-(2, 1, '2022-03-19 07:22:11', '', 'Passed'),
-(3, 5, '2021-10-04 06:53:28', '', 'Passed'),
-(19, 1, '2022-05-13 13:54:25', 'Minutes-of-the-Preoral-Defense.docx', 'Passed'),
-(20, 2, '2022-05-13 14:11:14', 'Certificate of Participation.pdf', 'Passed'),
-(21, 23, '2022-05-13 15:27:35', 'Minutes-of-the-Preoral-Defense.docx', 'Passed'),
-(23, 23, '2022-05-16 23:36:09', 'Extended_Abstract-Choosing_the_Future_of_Lightweight_Encryption_Algorithms.pdf', 'Passed');
+INSERT INTO `inspection` (`inspection_id`, `admin_id`, `merchant_id`, `date`, `file`, `status`) VALUES
+(1, 63, 5, '2022-06-13 04:20:47', 'merchants_and_admin.docx', 'Passed'),
+(2, 63, 2, '2022-06-13 04:21:19', 'merchants_and_admin.docx', 'Passed'),
+(3, 63, 2, '2022-06-13 04:23:56', 'merchants_and_admin.docx', 'Passed'),
+(4, 63, 23, '2022-06-13 04:24:16', 'merchants_and_admin.docx', 'Passed'),
+(5, 63, 1, '2022-06-13 04:24:38', 'merchants_and_admin.docx', 'Passed'),
+(6, 63, 5, '2022-06-13 04:52:32', 'merchants_and_admin.docx', 'Passed'),
+(7, 63, 5, '2022-06-13 04:53:30', 'merchants_and_admin.docx', 'Passed'),
+(8, 63, 1, '2022-06-13 04:53:46', 'merchants_and_admin.docx', 'Passed'),
+(9, 64, 16, '2022-06-13 05:01:26', 'merchants_and_admin.docx', 'Passed'),
+(10, 0, 1, '2022-06-13 05:02:25', 'merchants_and_admin.docx', 'Passed'),
+(11, 64, 8, '2022-06-13 05:09:24', 'merchants_and_admin.docx', 'Passed'),
+(12, 64, 1, '2022-06-13 05:12:29', 'merchants_and_admin.docx', 'Passed');
 
 -- --------------------------------------------------------
 
@@ -349,20 +326,27 @@ CREATE TABLE `orderlist` (
 --
 
 INSERT INTO `orderlist` (`order_id`, `product_id`, `customer_id`, `merchant_id`, `deliveryman_id`, `status`, `quantity`, `total`, `type`, `photo`, `receipt`, `receipt_status`, `date`) VALUES
-(1, 8, 1, 23, 1, 'rated', '1', 25, 'cod', NULL, '', '', '2022-04-19 08:18:08'),
-(2, 8, 1, 23, 1, 'dispatched', '3', 75, 'cod', NULL, '', '', '2022-03-29 12:21:06'),
-(3, 8, 1, 23, 1, 'dispatched', '2', 100, 'cod', NULL, '', '', '2022-03-30 12:21:12'),
+(1, 8, 1, 23, 1, 'dispatched', '1', 25, 'cod', NULL, '', '', '2022-04-19 08:18:08'),
+(2, 8, 1, 23, 1, 'dispatched', '3', 75, 'cod', NULL, '', '', '2022-05-26 16:00:00'),
+(3, 8, 1, 23, 1, 'dispatched', '2', 100, 'cod', NULL, '', '', '2022-05-25 16:00:00'),
 (7, 8, 1, 23, 1, 'rated', '8', 200, 'cod', NULL, '', '', '2022-04-03 12:26:50'),
 (8, 8, 1, 23, 1, 'rated', '6', 150, 'cod', NULL, '', '', '2022-04-04 12:26:50'),
 (10, 7, 1, 23, 1, 'rated', '4', 120, 'cod', NULL, '', '', '2022-04-04 12:32:14'),
-(11, 7, 1, 23, NULL, 'cancelled', '2', 60, 'cod', NULL, '', '', '2022-04-05 02:44:35'),
-(14, 7, 1, 23, NULL, 'accepted', '14', 420, 'cod', NULL, '', 'complete', '2022-04-12 15:09:12'),
-(15, 7, 1, 23, 1, 'delivered', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 04:12:42'),
-(16, 7, 1, 23, NULL, 'accepted', '4', 120, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-20 16:11:06'),
-(17, 7, 1, 23, NULL, 'accepted', '1', 30, 'gcash', 'gcash-mc-pay2.jpg', '', 'complete', '2022-04-21 04:05:59'),
-(18, 7, 1, 23, NULL, 'accepted', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-04-21 04:11:34'),
-(19, 7, 1, 23, NULL, 'accepted', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-04-21 04:12:57'),
-(20, 7, 2, 23, 1, 'delivered', '7', 210, 'cod', NULL, '', 'complete', '2022-05-18 01:57:05');
+(11, 7, 1, 23, 1, 'delivered', '2', 60, 'cod', NULL, '', '', '2022-04-05 02:44:35'),
+(14, 7, 1, 23, 1, 'rated', '14', 420, 'cod', NULL, '', 'complete', '2022-05-21 15:09:12'),
+(15, 7, 1, 23, 1, 'delivered', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-05-23 04:12:42'),
+(16, 7, 1, 23, 1, 'delivered', '4', 120, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-05-21 16:11:06'),
+(17, 7, 1, 23, 1, 'delivered', '1', 30, 'gcash', 'gcash-mc-pay2.jpg', '', 'complete', '2022-05-23 04:05:59'),
+(18, 7, 1, 23, 1, 'rated', '3', 90, 'gcash', 'gcash-mc-pay2.jpg', '', 'Complete', '2022-05-24 04:11:34'),
+(19, 7, 1, 23, 1, 'rated', '5', 150, 'gcash', 'gcash-mc-pay2.jpg', 'gcash-mc-pay2.jpg', 'complete', '2022-05-25 04:12:57'),
+(20, 7, 2, 23, 1, 'delivered', '7', 210, 'cod', NULL, '', 'complete', '2022-05-18 01:57:05'),
+(21, 9, 1, 23, 1, 'delivered', '4', 40, 'cod', NULL, '', 'complete', '2022-05-24 16:02:41'),
+(22, 8, 1, 23, 1, 'delivered', '5', 125, 'cod', NULL, '', 'complete', '2022-05-24 16:02:57'),
+(23, 9, 1, 23, NULL, 'pending', '3', 30, 'gcash', 'gcash-mc-pay2.jpg', 'fff.png', '', '2022-06-01 23:16:22'),
+(24, 1, 1, 1, NULL, 'pending', '9', 225, 'gcash', 'MET.jpg', 'fff.png', '', '2022-06-06 10:36:49'),
+(25, 1, 1, 1, NULL, 'pending', '5', 125, 'gcash', 'template_3.jpg', 'fff.png', '', '2022-06-06 11:00:18'),
+(26, 1, 1, 23, 1, 'dispatched', '4', 100, 'cod', NULL, '', 'complete', '2022-06-07 04:17:28'),
+(27, 7, 1, 23, NULL, 'cancelled', '5', 150, 'cod', NULL, '', '', '2022-06-09 01:40:58');
 
 -- --------------------------------------------------------
 
@@ -393,9 +377,7 @@ INSERT INTO `product` (`product_id`, `merchant_id`, `product_name`, `product_typ
 (5, 3, 'Slim Container', 'Purified Water', '25 Liters', 25, 'images (4).jpeg', '25 Liters'),
 (6, 4, 'Slim Container', 'Purified Water', '25 Liters', 25, 'images (4).jpeg', '25 liters'),
 (7, 23, 'Slim Container', 'Purified Water', '25 Liters', 30, 'images (4).jpeg', '25 liters of purified water                    '),
-(8, 23, 'Round Container', 'Mineral Water', '25 Liters', 25, 'roundgal.jpg', '20 liters of mineral water                 '),
-(9, 23, 'Bottle water ', 'Mineral Water', '350 mL', 10, 'bottle.jpg', 'Bottle Mineral Water 350 ml           '),
-(10, 23, 'Slim Container', 'Purified Water', '20 Liters', 30, 'images (4).jpeg', 'Recharge Your Body With Electrolytes                    ');
+(8, 23, 'Round Container', 'Mineral Water', '25 Liters', 25, 'roundgal.jpg', '20 liters of mineral water                 ');
 
 -- --------------------------------------------------------
 
@@ -428,7 +410,10 @@ INSERT INTO `product_rating` (`rate_id`, `customer_id`, `merchant_id`, `product_
 (5, 1, 23, 8, '5', 'Nice', 'Yes', 'Yes', 'Yes', '2022-04-08 01:32:52'),
 (6, 1, 23, 8, '3', 'nice', 'Yes', 'Yes', '', '2022-04-08 00:10:18'),
 (7, 1, 23, 8, '3', 'nice', 'Yes', 'Yes', 'Yes', '2022-04-08 00:11:32'),
-(8, 1, 23, 8, '3', 'nice', 'Yes', 'Yes', 'Yes', '2022-04-08 00:12:30');
+(8, 1, 23, 8, '3', 'nice', 'Yes', 'Yes', 'Yes', '2022-04-08 00:12:30'),
+(9, 1, 23, 7, '2', 'dasdas', 'Yes', 'No', 'Yes', '2022-06-06 23:54:59'),
+(10, 1, 23, 7, '4', '', 'Yes', 'Yes', 'Yes', '2022-06-07 00:40:20'),
+(11, 1, 23, 7, '4', '', 'Yes', 'Yes', 'Yes', '2022-06-07 04:15:15');
 
 -- --------------------------------------------------------
 
@@ -465,7 +450,17 @@ INSERT INTO `transactions` (`transaction_id`, `product_id`, `customer_id`, `merc
 (11, 8, 1, 23, 1, 6, 150, '2022-04-10 01:52:01'),
 (12, 7, 1, 23, 1, 5, 150, '2022-04-22 03:45:59'),
 (13, 7, 1, 23, 1, 3, 90, '2022-04-22 03:46:10'),
-(14, 7, 1, 23, 1, 7, 210, '2022-05-24 06:17:08');
+(14, 7, 1, 23, 1, 7, 210, '2022-05-24 06:17:08'),
+(15, 8, 1, 23, 1, 3, 75, '2022-05-24 10:09:27'),
+(16, 8, 1, 23, 1, 2, 50, '2022-05-24 10:09:34'),
+(17, 7, 0, 23, 1, 14, 420, '2022-05-24 16:07:13'),
+(18, 7, 0, 23, 1, 4, 120, '2022-05-24 16:07:21'),
+(19, 7, 0, 23, 1, 1, 30, '2022-05-24 16:08:15'),
+(20, 7, 1, 23, 1, 3, 90, '2022-05-26 03:45:45'),
+(21, 7, 1, 23, 1, 5, 150, '2022-05-26 03:46:00'),
+(22, 9, 1, 23, 1, 4, 40, '2022-05-26 03:47:45'),
+(23, 8, 0, 23, 1, 5, 125, '2022-05-28 01:39:47'),
+(24, 7, 1, 23, 1, 2, 60, '2022-05-28 01:49:48');
 
 --
 -- Indexes for dumped tables
@@ -484,12 +479,6 @@ ALTER TABLE `announcement`
   ADD PRIMARY KEY (`announcement_id`);
 
 --
--- Indexes for table `badge`
---
-ALTER TABLE `badge`
-  ADD PRIMARY KEY (`badge_id`);
-
---
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
@@ -506,12 +495,6 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `deliveryman`
   ADD PRIMARY KEY (`deliveryman_id`);
-
---
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`feedback_id`);
 
 --
 -- Indexes for table `inspection`
@@ -557,19 +540,13 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `badge`
---
-ALTER TABLE `badge`
-  MODIFY `badge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -581,25 +558,19 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `deliveryman`
 --
 ALTER TABLE `deliveryman`
-  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inspection`
 --
 ALTER TABLE `inspection`
-  MODIFY `inspection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `inspection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `merchant`
@@ -611,25 +582,25 @@ ALTER TABLE `merchant`
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_rating`
 --
 ALTER TABLE `product_rating`
-  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

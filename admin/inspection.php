@@ -218,7 +218,8 @@
       <!-- Modal body -->
       <div class="modal-body">
         
-        <form action ="add_query_inspection.php" method = "POST"  enctype="multipart/form-data"> 
+        <form action ="add_query_inspection.php?admin_id=<?php echo $fetch['admin_id']?>" method = "POST"  enctype="multipart/form-data"> 
+                <input type="hidden" value="<?php echo $fetch['admin_id']?>" name="admin_id">
             <div class = "form-group">
               <label>Name </label>
               <select  class = "form-control" required = required name = "merchant_id">              
