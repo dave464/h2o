@@ -25,9 +25,15 @@
                                 href="inspection.php" aria-expanded="false"><i class="fa-solid fa-flask"  style="margin-top:-3px"></i>
                                  <span class="hide-menu" style="margin-left: 5px">Alpha Lab Test</span></a>
                         </li>
+                       
                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="badge.php" aria-expanded="false"><i class="fa-solid fa-certificate" style="margin-top:-1px"></i>
                                  <span class="hide-menu" style="margin-left: 5px">Badge</span></a>
+                        </li>
+                      
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="feedback.php" aria-expanded="false"><i  class = "fa fa-search" style="margin-top:-3px"></i>
+                                 <span class="hide-menu" style="margin-left: 5px">Inspection</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="profile.php" aria-expanded="false"><i class="fa-solid fa-user"  style="margin-top:-3px"></i>

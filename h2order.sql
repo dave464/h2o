@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 07:26 AM
+-- Generation Time: Jul 14, 2022 at 04:36 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -148,6 +148,34 @@ INSERT INTO `deliveryman` (`deliveryman_id`, `merchant_id`, `name`, `username`, 
 (2, 23, 'Rod Sevilla', 'rod', '123', 'KMR442', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3842', '120.884'),
 (3, 1, 'Ivane Kielle Rangel', 'dave', 'Dave1212', 'KSDS23', '09051934015', 'available', 'Unvaccinated', 'vcard.jpeg', '14.2990183', '120.9589699'),
 (4, 23, 'da', 'ds', '1', 'sda', '34342343534', 'available', 'Unvaccinated', 'vcard.jpeg', '14.3114', '121.0554');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `feedback_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `merchant_id` int(11) NOT NULL,
+  `criteria1` int(11) NOT NULL,
+  `criteria2` int(11) NOT NULL,
+  `criteria3` int(11) NOT NULL,
+  `criteria4` int(11) NOT NULL,
+  `criteria5` int(11) NOT NULL,
+  `criteria6` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`feedback_id`, `admin_id`, `merchant_id`, `criteria1`, `criteria2`, `criteria3`, `criteria4`, `criteria5`, `criteria6`, `date`) VALUES
+(1, 63, 1, 5, 0, 5, 5, 0, 0, '2022-07-07'),
+(2, 63, 1, 5, 0, 5, 0, 5, 0, '2022-07-07'),
+(3, 63, 23, 5, 5, 5, 5, 5, 5, '2022-07-14');
 
 -- --------------------------------------------------------
 
@@ -497,6 +525,12 @@ ALTER TABLE `deliveryman`
   ADD PRIMARY KEY (`deliveryman_id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedback_id`);
+
+--
 -- Indexes for table `inspection`
 --
 ALTER TABLE `inspection`
@@ -565,6 +599,12 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `deliveryman`
   MODIFY `deliveryman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `inspection`
